@@ -141,7 +141,7 @@ class UADETRAC1ON10_b(data.Dataset):
     def clear_ignrs_from_results(self, all_bboxes):
         # if all_bboxes is None:
         #     return all_bboxes
-        ignrs_dir = '/store/datasets/UA-Detrac/DETRAC-Test-Det/evaluation/igrs'
+        ignrs_dir = '/Store/datasets/UA-Detrac/DETRAC-Test-Det/evaluation/igrs'
         anno = json.load(open(self.annot_path))
         id_to_seq = {}
         id_to_file = {}

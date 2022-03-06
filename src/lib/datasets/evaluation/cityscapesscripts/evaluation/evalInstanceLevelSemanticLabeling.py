@@ -141,7 +141,7 @@ args.csv                = False
 args.colorized          = True
 args.instLabels         = []
 
-# store some parameters for finding predictions in the args variable
+# Store some parameters for finding predictions in the args variable
 # the values are filled when the method getPrediction is first called
 args.predictionPath = None
 args.predictionWalk = None

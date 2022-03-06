@@ -27,11 +27,11 @@ class UAV(data.Dataset):
         self.img_dir = os.path.join(self.data_dir, '{}2017'.format(split))
 
         if split == 'test':
-            self.annot_path = '/store/datasets/UAV/val-1-on-30.json'
+            self.annot_path = '/Store/datasets/UAV/val-1-on-30.json'
         elif split == 'val':
-            self.annot_path = '/store/datasets/UAV/val-sub.json'
+            self.annot_path = '/Store/datasets/UAV/val-sub.json'
         else:
-            self.annot_path = '/store/datasets/UAV/train-1-on-10.json'
+            self.annot_path = '/Store/datasets/UAV/train-1-on-10.json'
 
         self.max_objs = 128
         self.class_name = [

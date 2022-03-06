@@ -104,11 +104,11 @@ class PolydetLoss(torch.nn.Module):
         # # print(write_depth.shape)
         # write_depth = (((write_depth - np.min(write_depth)) / np.max(write_depth)) * 255).astype(np.uint8)
         # count = 0
-        # write_name = '/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
+        # write_name = '/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
         # while os.path.exists(write_name):
         #     count += 1
-        #     write_name = '/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
-        # cv2.imwrite('/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg', write_depth)
+        #     write_name = '/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
+        # cv2.imwrite('/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg', write_depth)
         # exit()
 
         # loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss + opt.depth_weight * depth_loss

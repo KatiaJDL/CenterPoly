@@ -181,7 +181,7 @@ def main():
                         help="path to the output folder.",
                         default=None,
                         type=str)
-    parser.add_argument("--use-train-id", action="store_true", dest="useTrainId")
+    parser.add_argument("--use-train-id", action="Store_true", dest="useTrainId")
     args = parser.parse_args()
 
     convert2panoptic(args.cityscapesPath, args.outputFolder, args.useTrainId)

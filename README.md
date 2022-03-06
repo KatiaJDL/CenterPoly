@@ -28,7 +28,7 @@ An overview of the CenterPoly architecture. The image first passes through a CNN
 
 ## Folder organization:
 - experiments/: scripts used to launch our various experiments.
-- Data path expected usually is /store/datasets/DATASET_NAME (changeable in code)
+- Data path expected usually is /Store/datasets/DATASET_NAME (changeable in code)
 - DATASET_NAMEStuff/ are scripts related to each specific dataset, as well as our GT files
 - src/lib/trains/polydet.py is our training file
 - src/lib/datasets/sample/polydet.py is our sampling file

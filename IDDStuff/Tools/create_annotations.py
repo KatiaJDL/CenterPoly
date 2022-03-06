@@ -97,7 +97,7 @@ for method in METHODS:
                 spamwriter = csv.writer(open('../BBoxes/' + data_set + '.csv', 'w'), delimiter=',',quotechar='', quoting=csv.QUOTE_NONE)
             else:
                 spamwriter = csv.writer(open('../BBoxes/' + data_set + str(NBR_POINTS) + '_' + method +'.csv', 'w'), delimiter=',', quotechar='', quoting=csv.QUOTE_NONE)
-            for filename in sorted(glob.glob('/store/datasets/IDD/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
+            for filename in sorted(glob.glob('/Store/datasets/IDD/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
                 if data_set == 'test':
                     spamwriter.writerow((os.path.abspath(filename), 0, 0, 1, 1, 'car', 0))
                     continue

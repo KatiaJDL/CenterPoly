@@ -273,7 +273,7 @@ class CITYSCAPES(data.Dataset):
             for f in files:
                 os.remove(f)
             self.format_and_write_to_cityscapes(results, res_dir)
-            os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
+            os.environ['CITYSCAPES_DATASET'] = '/Store/datasets/cityscapes'
             os.environ['CITYSCAPES_RESULTS'] = res_dir
             from datasets.evaluation.cityscapesscripts.evaluation import evalInstanceLevelSemanticLabeling
             AP = evalInstanceLevelSemanticLabeling.getAP()

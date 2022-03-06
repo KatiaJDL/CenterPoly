@@ -132,7 +132,7 @@ for method in METHODS:
                 spamwriter = csv.writer(open('../BBoxes/' + data_set + '.csv', 'w'), delimiter=',',quotechar='', quoting=csv.QUOTE_NONE)
             else:
                 spamwriter = csv.writer(open('../BBoxes/' + data_set + str(NBR_POINTS) + '_' + method +'.csv', 'w'), delimiter=',', quotechar='', quoting=csv.QUOTE_NONE)
-            for filename in sorted(glob.glob('/store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
+            for filename in sorted(glob.glob('/Store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
                 if COARSE:
                     gt_path = filename.replace('leftImg8bit', 'gtCoarse').replace('.png', '_polygons.json')
                 else:

@@ -14,7 +14,7 @@ print("eval-coco-hp")
 
 this_dir = os.path.dirname(__file__)
 # ANN_PATH = this_dir + '../../data/coco/annotations/instances_val2017.json'
-ANN_PATH = this_dir + '/store/datasets/UA-Detrac/COCO-format/test.json'
+ANN_PATH = this_dir + '/Store/datasets/UA-Detrac/COCO-format/test.json'
 print(ANN_PATH)
 if __name__ == '__main__':
   pred_path = sys.argv[1]
