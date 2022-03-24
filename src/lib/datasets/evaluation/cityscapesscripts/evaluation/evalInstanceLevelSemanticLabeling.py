@@ -279,9 +279,7 @@ def matchGtWithPredsMultiProcess(predictionList,groundTruthList,gtInstances,args
     if not args.quiet:
         print("Matching {} pairs of images...".format(len(predictionList)))
     param_list = []
-    print(gtInstances.keys())
     for (pred,gt) in zip(predictionList,groundTruthList):
-        print(gt)
         param_list.append((matches, pred, gt, gtInstances[os.path.abspath(gt)]))
 
     with Pool(processes=4) as pool:
