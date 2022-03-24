@@ -194,6 +194,7 @@ def getGtInstances(groundTruthList,args):
         if not args.quiet:
             print("Loading ground truth instances from JSON.")
         with open(args.gtInstancesFile) as json_file:
+            print(args.gtInstancesFile)
             gtInstances = json.load(json_file)
     # otherwise create it
     else:
