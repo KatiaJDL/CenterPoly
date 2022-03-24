@@ -67,7 +67,8 @@ class PolydetDataset(data.Dataset):
     img_path = os.path.join(self.img_dir, file_name)
     if 'Detrac' in img_path:
       instance_path = img_path.replace('images', 'mask')
-    elif 'cityscapes' in img_path:
+    #elif 'cityscapes' in img_path:
+    else:
       instance_path = img_path.replace('leftImg8bit', 'fg').replace('_fg', '_polygons')
     DRAW = False
     ann_ids = self.coco.getAnnIds(imgIds=[img_id])

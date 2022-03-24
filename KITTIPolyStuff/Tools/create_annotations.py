@@ -104,7 +104,7 @@ for NBR_POINTS in NBR_POINTSS:
             valwriter = csv.writer(open('../BBoxes/' + 'val' + str(NBR_POINTS) + '.csv', 'w'), delimiter=',',
                                     quotechar='', quoting=csv.QUOTE_NONE)
         image_count = 0
-        for filename in sorted(glob.glob('/store/datasets/KITTIPoly/' + ('training' if data_set == 'train' else 'testing') + '/image_2/*.png', recursive=True)):
+        for filename in sorted(glob.glob('/Store/datasets/KITTIPoly/' + ('training' if data_set == 'train' else 'testing') + '/image_2/*.png', recursive=True)):
             image_count += 1
             if data_set == 'test':
                 spamwriter.writerow((os.path.abspath(filename), 0, 0, 1, 1, 'car', 0))
