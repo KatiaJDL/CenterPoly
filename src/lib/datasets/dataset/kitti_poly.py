@@ -41,6 +41,7 @@ class KITTIPOLY(data.Dataset):
             '__background__', 'person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle', 'bicycle']
         self.label_to_id = {'person': 24, 'rider': 25, 'car': 26, 'truck': 27, 'bus': 28, 'train': 31, 'motorcycle': 32,
                             'bicycle': 33}
+        self.class_frequencies = {'person': 0.15, 'rider': 0.03, 'car': 0.20, 'truck': 0.03, 'bus': 0.03, 'train': 0.03, 'motorcycle': 0.03, 'bicycle': 0.03}
         self._valid_ids = [1, 2, 3, 4, 5, 6, 7, 8]
         self.cat_ids = {v: i for i, v in enumerate(self._valid_ids)}
         self.voc_color = [(v // 32 * 64 + 64, (v // 8) % 4 * 64, v % 8 * 32) \

@@ -152,6 +152,8 @@ class opts(object):
     self.parser.add_argument('--mse_loss', action='store_true',
                              help='use mse loss or focal loss to train '
                                   'keypoint heatmaps.')
+    self.parser.add_argument('--poly_loss', default='l1',
+                             help='polygon regression loss')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
                              help='use elliptical gaussians to train '

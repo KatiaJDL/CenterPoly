@@ -44,6 +44,10 @@ class IDD(data.Dataset):
         self.class_name = [
             '__background__', 'person', 'rider', 'motorcycle', 'bicycle', 'autorickshaw', 'car', 'truck', 'bus', 'vehicle fallback']
         self.label_to_id = {'person':6, 'rider':8, 'motorcycle':9, 'bicycle':10, 'autorickshaw':11, 'car':12, 'truck':13, 'bus':14, 'vehicle fallback':18}
+
+        # to customize
+        self.class_frequencies = {'person': 0.15, 'rider': 0.03, 'car': 0.20, 'truck': 0.03, 'bus': 0.03, 'motorcycle': 0.03, 'bicycle': 0.03, 'autorickshaw': 0.33, 'vehicle fallback': 0.18,}
+
         self._valid_ids = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.cat_ids = {v: i for i, v in enumerate(self._valid_ids)}
         self.voc_color = [(v // 32 * 64 + 64, (v // 8) % 4 * 64, v % 8 * 32) \

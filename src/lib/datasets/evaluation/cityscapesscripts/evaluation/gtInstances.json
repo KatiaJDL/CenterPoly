@@ -1,5 +1,5 @@
 {
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_000294_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_000294_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -183,7 +183,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_000576_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_000576_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -481,7 +481,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001016_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001016_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -665,7 +665,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001236_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001236_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -1057,7 +1057,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001751_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_001751_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -1385,7 +1385,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_002196_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_002196_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -1682,7 +1682,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_002963_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_002963_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -1953,7 +1953,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003025_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003025_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -2237,7 +2237,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003357_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003357_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -2506,7 +2506,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003920_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_003920_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -2707,7 +2707,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_004617_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_004617_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -2950,7 +2950,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_005543_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_005543_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -3247,7 +3247,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_005898_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_005898_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -3500,7 +3500,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_006589_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_006589_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -3730,7 +3730,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_007365_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_007365_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -3930,7 +3930,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_008206_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_008206_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -4207,7 +4207,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_008451_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_008451_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -4487,7 +4487,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009291_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009291_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -4736,7 +4736,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009561_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009561_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -5032,7 +5032,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009688_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009688_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -5252,7 +5252,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009969_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_009969_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -5548,7 +5548,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_010351_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_010351_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -5727,7 +5727,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_010763_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_010763_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -5947,7 +5947,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011007_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011007_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -6179,7 +6179,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011074_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011074_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -6388,7 +6388,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011461_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011461_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -6602,7 +6602,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011810_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_011810_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -6905,7 +6905,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012009_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012009_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -7141,7 +7141,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012121_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012121_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -7438,7 +7438,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012868_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_012868_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -7739,7 +7739,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013067_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013067_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -7999,7 +7999,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013240_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013240_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -8243,7 +8243,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013382_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013382_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -8522,7 +8522,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013942_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_013942_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -8731,7 +8731,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_014480_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_014480_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -8931,7 +8931,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_015389_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_015389_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -9155,7 +9155,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_015676_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_015676_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -9406,7 +9406,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_016005_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_016005_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -9693,7 +9693,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_016286_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_016286_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -9981,7 +9981,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_017228_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_017228_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -10254,7 +10254,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_017476_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_017476_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -10555,7 +10555,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_018797_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_018797_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -10827,7 +10827,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_019607_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_019607_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -11141,7 +11141,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020215_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020215_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -11434,7 +11434,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020321_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020321_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -11796,7 +11796,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020880_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_020880_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -12146,7 +12146,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_021667_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_021667_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -12412,7 +12412,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_021879_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_021879_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -12713,7 +12713,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_022254_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_022254_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -12971,7 +12971,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_022797_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000000_022797_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -13306,7 +13306,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_000538_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_000538_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -13556,7 +13556,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_001464_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_001464_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -13751,7 +13751,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002512_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002512_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -13995,7 +13995,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002646_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002646_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -14429,7 +14429,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002759_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_002759_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -14764,7 +14764,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_003056_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_003056_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -15008,7 +15008,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_003588_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_003588_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -15330,7 +15330,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004327_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004327_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -15550,7 +15550,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004736_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004736_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -15825,7 +15825,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004859_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_004859_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -16079,7 +16079,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005184_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005184_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -16402,7 +16402,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005410_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005410_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -16758,7 +16758,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005703_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005703_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -17060,7 +17060,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005898_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_005898_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -17292,7 +17292,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007285_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007285_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -17550,7 +17550,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007407_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007407_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -17752,7 +17752,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007622_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007622_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -18001,7 +18001,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007857_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007857_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -18238,7 +18238,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007973_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_007973_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -18547,7 +18547,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_008200_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_008200_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -18817,7 +18817,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_008688_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_008688_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -19068,7 +19068,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009058_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009058_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -19319,7 +19319,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009504_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009504_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -19653,7 +19653,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009854_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_009854_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -19966,7 +19966,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010156_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010156_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -20267,7 +20267,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010444_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010444_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -20537,7 +20537,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010600_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010600_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -20832,7 +20832,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010830_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_010830_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -21109,7 +21109,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011162_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011162_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -21478,7 +21478,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011715_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011715_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -21827,7 +21827,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011835_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_011835_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -22146,7 +22146,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012038_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012038_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -22468,7 +22468,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012519_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012519_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -22817,7 +22817,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012699_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012699_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -23192,7 +23192,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012738_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012738_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -23548,7 +23548,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012870_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_012870_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -24008,7 +24008,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013016_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013016_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -24399,7 +24399,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013496_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013496_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -24924,7 +24924,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013710_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_013710_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -25309,7 +25309,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014221_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014221_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -25868,7 +25868,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014406_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014406_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -26245,7 +26245,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014565_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014565_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -26541,7 +26541,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014741_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_014741_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -26878,7 +26878,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015091_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015091_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -27140,7 +27140,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015328_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015328_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -27566,7 +27566,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015768_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_015768_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -27845,7 +27845,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016029_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016029_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -28159,7 +28159,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016273_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016273_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -28451,7 +28451,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016462_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_016462_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -28786,7 +28786,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017101_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017101_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -29401,7 +29401,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017459_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017459_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -29786,7 +29786,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017842_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_017842_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -30167,7 +30167,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_018113_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_018113_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -30413,7 +30413,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019698_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019698_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -30620,7 +30620,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019854_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019854_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -30923,7 +30923,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019969_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_019969_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -31202,7 +31202,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020046_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020046_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -31480,7 +31480,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020287_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020287_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -31809,7 +31809,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020693_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_020693_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -32139,7 +32139,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_021406_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_021406_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -32416,7 +32416,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_021825_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_021825_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -32704,7 +32704,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023235_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023235_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -32905,7 +32905,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023369_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023369_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -33117,7 +33117,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023769_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_023769_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -33380,7 +33380,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_024927_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_024927_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -33701,7 +33701,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025512_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025512_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -34025,7 +34025,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025713_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025713_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -34314,7 +34314,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025921_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_025921_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -34557,7 +34557,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_027325_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_027325_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -34772,7 +34772,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028232_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028232_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -35052,7 +35052,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028335_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028335_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -35387,7 +35387,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028590_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028590_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -35742,7 +35742,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028854_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_028854_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -36027,7 +36027,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029086_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029086_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -36329,7 +36329,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029236_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029236_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -36615,7 +36615,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029600_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_029600_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -36895,7 +36895,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030067_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030067_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -37232,7 +37232,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030310_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030310_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -37564,7 +37564,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030669_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_030669_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -37799,7 +37799,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_031266_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_031266_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -38155,7 +38155,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_031416_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_031416_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -38519,7 +38519,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032018_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032018_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -38943,7 +38943,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032556_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032556_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -39350,7 +39350,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032711_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032711_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -39717,7 +39717,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032942_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_032942_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -40071,7 +40071,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_033655_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_033655_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -40545,7 +40545,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_034047_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_034047_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -40887,7 +40887,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_034816_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_034816_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -41133,7 +41133,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_035144_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_035144_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -41562,7 +41562,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_035864_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_035864_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -41797,7 +41797,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_037705_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_037705_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -42190,7 +42190,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038245_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038245_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -42708,7 +42708,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038418_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038418_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -42987,7 +42987,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038645_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038645_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -43514,7 +43514,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038844_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_038844_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -43816,7 +43816,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_039895_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_039895_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -44035,7 +44035,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_040575_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_040575_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -44388,7 +44388,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_040732_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_040732_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -44706,7 +44706,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041074_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041074_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -44974,7 +44974,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041354_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041354_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -45145,7 +45145,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041517_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041517_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -45324,7 +45324,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041664_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_041664_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -45526,7 +45526,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042098_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042098_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -45808,7 +45808,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042384_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042384_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -46053,7 +46053,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042733_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_042733_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -46304,7 +46304,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_043395_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_043395_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -46576,7 +46576,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_043564_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_043564_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -46792,7 +46792,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044227_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044227_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -47016,7 +47016,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044413_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044413_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -47252,7 +47252,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044525_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044525_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -47577,7 +47577,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044658_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044658_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -47944,7 +47944,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044787_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_044787_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -48303,7 +48303,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046126_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046126_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -48591,7 +48591,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046272_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046272_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -48954,7 +48954,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046504_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046504_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -49280,7 +49280,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046779_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_046779_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -49637,7 +49637,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_047178_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_047178_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -49907,7 +49907,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_047552_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_047552_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -50239,7 +50239,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048196_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048196_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -50517,7 +50517,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048355_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048355_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -50723,7 +50723,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048654_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_048654_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -51037,7 +51037,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049078_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049078_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -51308,7 +51308,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049209_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049209_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -51666,7 +51666,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049298_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049298_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -51981,7 +51981,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049698_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049698_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -52302,7 +52302,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049770_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_049770_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -52688,7 +52688,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_050149_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_050149_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -53088,7 +53088,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_050686_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_050686_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -53352,7 +53352,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051516_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051516_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -53500,7 +53500,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051737_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051737_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -53846,7 +53846,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051807_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_051807_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -54260,7 +54260,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_052120_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_052120_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -54568,7 +54568,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_052594_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_052594_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -55021,7 +55021,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_053102_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_053102_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -55460,7 +55460,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054077_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054077_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -55664,7 +55664,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054219_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054219_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -55997,7 +55997,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054415_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054415_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -56444,7 +56444,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054640_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054640_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -56954,7 +56954,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054884_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_054884_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -57309,7 +57309,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055062_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055062_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -57795,7 +57795,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055172_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055172_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -58040,7 +58040,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055306_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055306_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -58418,7 +58418,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055387_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055387_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -58865,7 +58865,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055538_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055538_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -59201,7 +59201,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055603_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055603_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -59690,7 +59690,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055709_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_055709_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -60208,7 +60208,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_056580_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_056580_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -60572,7 +60572,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057181_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057181_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -61005,7 +61005,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057478_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057478_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -61515,7 +61515,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057954_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_057954_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -62018,7 +62018,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058057_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058057_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -62321,7 +62321,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058176_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058176_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -62739,7 +62739,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058504_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058504_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -63014,7 +63014,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058914_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_058914_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -63390,7 +63390,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059119_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059119_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -63801,7 +63801,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059642_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059642_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -64114,7 +64114,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059789_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_059789_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -64460,7 +64460,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060135_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060135_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -64682,7 +64682,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060422_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060422_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -65093,7 +65093,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060545_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060545_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -65514,7 +65514,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060906_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_060906_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -65823,7 +65823,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_061682_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_061682_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -66104,7 +66104,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_061763_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_061763_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -66347,7 +66347,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062016_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062016_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -66612,7 +66612,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062250_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062250_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -66920,7 +66920,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062396_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062396_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -67256,7 +67256,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062509_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062509_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -67562,7 +67562,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062653_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062653_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -67855,7 +67855,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062793_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_062793_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -68228,7 +68228,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_063045_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_063045_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -68614,7 +68614,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064130_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064130_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -68933,7 +68933,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064305_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064305_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -69254,7 +69254,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064651_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064651_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -69614,7 +69614,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064798_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064798_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -70032,7 +70032,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064925_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_064925_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -70393,7 +70393,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065160_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065160_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -70671,7 +70671,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065617_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065617_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -70994,7 +70994,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065850_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_065850_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -71293,7 +71293,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066092_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066092_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -71488,7 +71488,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066438_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066438_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -71732,7 +71732,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066574_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066574_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -72062,7 +72062,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066832_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_066832_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -72314,7 +72314,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067092_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067092_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -72709,7 +72709,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067178_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067178_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -73065,7 +73065,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067295_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067295_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -73543,7 +73543,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067474_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067474_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -73839,7 +73839,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067735_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_067735_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -74131,7 +74131,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068063_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068063_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -74523,7 +74523,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068208_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068208_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -74839,7 +74839,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068682_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068682_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -75138,7 +75138,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068772_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_068772_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -75588,7 +75588,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_069633_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_069633_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -76001,7 +76001,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_070099_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_070099_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -76284,7 +76284,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_071288_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_071288_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -76547,7 +76547,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_071781_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_071781_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -76783,7 +76783,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_072155_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_072155_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -77049,7 +77049,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_072295_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_072295_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -77306,7 +77306,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073088_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073088_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -77557,7 +77557,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073243_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073243_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -77996,7 +77996,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073464_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073464_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -78359,7 +78359,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073911_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_073911_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -78715,7 +78715,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_075296_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_075296_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -79129,7 +79129,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_075984_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_075984_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -79452,7 +79452,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_076502_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_076502_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -79852,7 +79852,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077092_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077092_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -80279,7 +80279,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077233_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077233_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -80593,7 +80593,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077434_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_077434_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -80902,7 +80902,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_078803_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_078803_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -81174,7 +81174,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_079206_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_079206_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -81442,7 +81442,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080091_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080091_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -81705,7 +81705,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080391_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080391_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -82062,7 +82062,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080830_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_080830_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -82314,7 +82314,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_082087_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_082087_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -82681,7 +82681,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_082466_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_082466_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -82907,7 +82907,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083029_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083029_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -83194,7 +83194,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083199_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083199_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -83568,7 +83568,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083852_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/frankfurt/frankfurt_000001_083852_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -83869,7 +83869,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000000_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000000_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -84133,7 +84133,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000001_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000001_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -84294,7 +84294,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000002_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000002_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -84507,7 +84507,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000003_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000003_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -84692,7 +84692,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000004_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000004_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -84921,7 +84921,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000005_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000005_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -85283,7 +85283,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000006_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000006_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -85519,7 +85519,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000007_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000007_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -85770,7 +85770,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000008_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000008_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -85926,7 +85926,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000009_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000009_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -86170,7 +86170,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000010_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000010_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -86399,7 +86399,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000011_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000011_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -86579,7 +86579,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000012_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000012_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -86749,7 +86749,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000013_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000013_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87017,7 +87017,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000014_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000014_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87172,7 +87172,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000015_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000015_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87341,7 +87341,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000016_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000016_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87532,7 +87532,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000017_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000017_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87649,7 +87649,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000018_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000018_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87758,7 +87758,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000019_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000019_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87859,7 +87859,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000020_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000020_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -87992,7 +87992,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000021_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000021_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -88101,7 +88101,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000022_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000022_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -88249,7 +88249,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000023_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000023_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -88442,7 +88442,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000024_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000024_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -88678,7 +88678,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000025_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000025_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -88875,7 +88875,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000026_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000026_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -89057,7 +89057,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000027_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000027_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -89209,7 +89209,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000028_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000028_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -89354,7 +89354,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000029_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000029_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -89537,7 +89537,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000030_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000030_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -89662,7 +89662,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000031_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000031_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -89794,7 +89794,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000032_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000032_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -89887,7 +89887,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000033_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000033_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90075,7 +90075,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000034_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000034_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90221,7 +90221,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000035_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000035_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90366,7 +90366,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000036_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000036_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90506,7 +90506,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000037_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000037_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90666,7 +90666,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000038_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000038_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -90897,7 +90897,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000039_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000039_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91049,7 +91049,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000040_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000040_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91142,7 +91142,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000041_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000041_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91347,7 +91347,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000042_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000042_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91533,7 +91533,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000043_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000043_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91703,7 +91703,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000044_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000044_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91803,7 +91803,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000045_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000045_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -91920,7 +91920,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000046_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000046_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92061,7 +92061,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000047_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000047_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92178,7 +92178,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000048_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000048_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92287,7 +92287,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000049_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000049_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92404,7 +92404,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000050_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000050_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92528,7 +92528,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000051_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000051_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -92689,7 +92689,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000052_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000052_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -92830,7 +92830,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000053_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000053_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -92977,7 +92977,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000054_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000054_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -93110,7 +93110,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000055_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000055_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -93301,7 +93301,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000056_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000056_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -93534,7 +93534,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000057_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000057_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -93800,7 +93800,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/lindau/lindau_000058_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/lindau/lindau_000058_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -93954,7 +93954,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000000_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000000_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -94310,7 +94310,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000001_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000001_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -94558,7 +94558,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000002_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000002_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -94809,7 +94809,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000003_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000003_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -95129,7 +95129,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000004_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000004_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -95372,7 +95372,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000005_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000005_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -95580,7 +95580,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000006_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000006_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -95795,7 +95795,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000007_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000007_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -96126,7 +96126,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000008_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000008_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -96458,7 +96458,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000009_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000009_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -96727,7 +96727,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000010_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000010_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -97123,7 +97123,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000011_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000011_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -97500,7 +97500,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000012_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000012_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -97790,7 +97790,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000013_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000013_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -98195,7 +98195,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000014_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000014_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -98604,7 +98604,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000015_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000015_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -99015,7 +99015,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000016_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000016_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -99314,7 +99314,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000017_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000017_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -99611,7 +99611,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000018_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000018_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -99839,7 +99839,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000019_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000019_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -100130,7 +100130,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000020_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000020_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -100431,7 +100431,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000021_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000021_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -100702,7 +100702,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000022_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000022_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -101031,7 +101031,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000023_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000023_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -101317,7 +101317,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000024_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000024_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -101625,7 +101625,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000025_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000025_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -101960,7 +101960,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000026_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000026_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -102302,7 +102302,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000027_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000027_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -102668,7 +102668,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000028_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000028_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -103005,7 +103005,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000029_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000029_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -103326,7 +103326,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000030_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000030_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -103549,7 +103549,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000031_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000031_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -103926,7 +103926,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000032_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000032_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -104281,7 +104281,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000033_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000033_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -104522,7 +104522,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000034_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000034_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -104783,7 +104783,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000035_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000035_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -105010,7 +105010,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000036_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000036_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -105265,7 +105265,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000037_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000037_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -105485,7 +105485,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000038_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000038_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -105889,7 +105889,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000039_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000039_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -106174,7 +106174,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000040_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000040_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -106496,7 +106496,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000041_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000041_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -106830,7 +106830,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000042_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000042_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -107227,7 +107227,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000043_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000043_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -107468,7 +107468,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000044_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000044_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -107806,7 +107806,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000045_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000045_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -108104,7 +108104,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000046_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000046_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -108424,7 +108424,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000047_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000047_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -108802,7 +108802,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000048_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000048_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -109202,7 +109202,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000049_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000049_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -109557,7 +109557,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000050_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000050_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -109829,7 +109829,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000051_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000051_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -110116,7 +110116,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000052_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000052_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -110589,7 +110589,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000053_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000053_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -110882,7 +110882,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000054_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000054_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -111188,7 +111188,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000055_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000055_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -111459,7 +111459,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000056_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000056_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -111855,7 +111855,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000057_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000057_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -112237,7 +112237,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000058_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000058_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -112477,7 +112477,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000059_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000059_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -112842,7 +112842,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000060_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000060_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -113247,7 +113247,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000061_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000061_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -113580,7 +113580,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000062_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000062_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -113954,7 +113954,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000063_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000063_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -114331,7 +114331,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000064_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000064_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -114595,7 +114595,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000065_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000065_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -114873,7 +114873,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000066_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000066_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -115263,7 +115263,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000067_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000067_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -115503,7 +115503,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000068_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000068_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -115874,7 +115874,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000069_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000069_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -116279,7 +116279,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000070_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000070_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -116686,7 +116686,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000071_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000071_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -117056,7 +117056,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000072_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000072_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -117434,7 +117434,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000073_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000073_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -117721,7 +117721,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000074_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000074_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -118054,7 +118054,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000075_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000075_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -118328,7 +118328,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000076_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000076_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -118521,7 +118521,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000077_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000077_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -118762,7 +118762,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000078_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000078_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -119132,7 +119132,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000079_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000079_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -119438,7 +119438,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000080_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000080_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -119740,7 +119740,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000081_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000081_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -120029,7 +120029,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000082_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000082_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -120239,7 +120239,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000083_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000083_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -120485,7 +120485,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000084_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000084_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -120751,7 +120751,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000085_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000085_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -121056,7 +121056,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000086_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000086_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -121390,7 +121390,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000087_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000087_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -121650,7 +121650,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000088_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000088_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -121940,7 +121940,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000089_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000089_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -122309,7 +122309,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000090_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000090_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -122667,7 +122667,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000091_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000091_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -123003,7 +123003,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000092_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000092_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -123374,7 +123374,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000093_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000093_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -123673,7 +123673,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000094_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000094_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -124124,7 +124124,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000095_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000095_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -124379,7 +124379,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000096_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000096_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -124684,7 +124684,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000097_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000097_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -125022,7 +125022,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000098_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000098_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -125355,7 +125355,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000099_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000099_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -125623,7 +125623,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000100_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000100_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -125755,7 +125755,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000101_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000101_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -126005,7 +126005,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000102_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000102_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -126271,7 +126271,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000103_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000103_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -126554,7 +126554,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000104_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000104_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -126926,7 +126926,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000105_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000105_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -127283,7 +127283,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000106_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000106_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -127588,7 +127588,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000107_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000107_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -127823,7 +127823,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000108_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000108_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -128111,7 +128111,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000109_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000109_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -128354,7 +128354,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000110_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000110_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -128666,7 +128666,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000111_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000111_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -129016,7 +129016,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000112_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000112_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -129331,7 +129331,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000113_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000113_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -129555,7 +129555,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000114_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000114_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -129825,7 +129825,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000115_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000115_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -130083,7 +130083,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000116_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000116_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -130312,7 +130312,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000117_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000117_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -130527,7 +130527,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000118_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000118_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -130749,7 +130749,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000119_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000119_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -131013,7 +131013,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000120_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000120_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -131240,7 +131240,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000121_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000121_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -131489,7 +131489,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000122_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000122_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -131689,7 +131689,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000123_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000123_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -131982,7 +131982,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000124_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000124_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -132262,7 +132262,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000125_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000125_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -132530,7 +132530,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000126_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000126_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -132797,7 +132797,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000127_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000127_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -133049,7 +133049,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000128_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000128_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -133357,7 +133357,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000129_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000129_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -133729,7 +133729,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000130_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000130_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -133957,7 +133957,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000131_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000131_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -134215,7 +134215,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000132_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000132_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -134477,7 +134477,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000133_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000133_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -134683,7 +134683,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000134_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000134_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -135026,7 +135026,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000135_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000135_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -135249,7 +135249,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000136_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000136_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -135448,7 +135448,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000137_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000137_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -135661,7 +135661,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000138_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000138_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -136064,7 +136064,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000139_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000139_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -136515,7 +136515,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000140_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000140_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -136903,7 +136903,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000141_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000141_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -137310,7 +137310,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000142_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000142_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -137698,7 +137698,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000143_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000143_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -138064,7 +138064,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000144_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000144_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -138472,7 +138472,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000145_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000145_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -138937,7 +138937,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000146_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000146_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -139379,7 +139379,7 @@
         "vegetation": [],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000147_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000147_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -139717,7 +139717,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000148_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000148_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -140176,7 +140176,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000149_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000149_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -140500,7 +140500,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000150_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000150_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -140832,7 +140832,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000151_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000151_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -141122,7 +141122,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000152_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000152_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -141395,7 +141395,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000153_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000153_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -141760,7 +141760,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000154_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000154_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -142052,7 +142052,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000155_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000155_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -142416,7 +142416,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000156_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000156_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -142722,7 +142722,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000157_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000157_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -142957,7 +142957,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000158_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000158_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -143256,7 +143256,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000159_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000159_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -143500,7 +143500,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000160_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000160_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -143873,7 +143873,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000161_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000161_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -144049,7 +144049,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000162_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000162_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -144285,7 +144285,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000163_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000163_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -144479,7 +144479,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000164_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000164_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -144665,7 +144665,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000165_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000165_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -145006,7 +145006,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000166_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000166_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -145320,7 +145320,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000167_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000167_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -145662,7 +145662,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000168_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000168_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -145905,7 +145905,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000169_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000169_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -146338,7 +146338,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000170_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000170_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -146551,7 +146551,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000171_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000171_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -146791,7 +146791,7 @@
         ],
         "wall": []
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000172_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000172_000019_gtFine_instanceIds.png": {
         "bicycle": [
             {
                 "distConf": 0.0,
@@ -147111,7 +147111,7 @@
             }
         ]
     },
-    "/store/datasets/cityscapes/gtFine/val/munster/munster_000173_000019_gtFine_instanceIds.png": {
+    "/Store/datasets/cityscapes/gtFine/val/munster/munster_000173_000019_gtFine_instanceIds.png": {
         "bicycle": [],
         "bridge": [],
         "building": [

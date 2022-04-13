@@ -6,7 +6,7 @@ import torch
 import numpy as np
 
 from models.losses import FocalLoss
-from models.losses import RegL1Loss, RegLoss, RegL1PolyLoss, AreaPolyLoss, NormRegL1Loss, RegWeightedL1Loss
+from models.losses import RegL1Loss, RegLoss, RegL1PolyLoss, AreaPolyLoss, IoUPolyLoss, NormRegL1Loss, RegWeightedL1Loss
 from models.decode import polydet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger
@@ -22,7 +22,8 @@ class PolydetLoss(torch.nn.Module):
         self.crit = torch.nn.MSELoss() if opt.mse_loss else FocalLoss()
         self.crit_reg = RegL1Loss() if opt.reg_loss == 'l1' else \
             RegLoss() if opt.reg_loss == 'sl1' else None
-        self.crit_poly = RegL1PolyLoss()
+        self.crit_poly = IoUPolyLoss() if opt.poly_loss == 'iou' else \
+            RegL1PolyLoss()
         self.crit_dense_poly = torch.nn.L1Loss(reduction='sum')
         self.crit_wh = torch.nn.L1Loss(reduction='sum') if opt.dense_wh else \
             NormRegL1Loss() if opt.norm_wh else \
@@ -31,6 +32,7 @@ class PolydetLoss(torch.nn.Module):
         self.opt = opt
 
     def forward(self, outputs, batch):
+        # print(batch.keys())
         opt = self.opt
         hm_loss, off_loss, poly_loss, depth_loss, wh_loss, fg_loss = 0, 0, 0, 0, 0, 0
         # hm_loss, off_loss, poly_loss, depth_loss, border_hm_loss = 0, 0, 0, 0, 0
