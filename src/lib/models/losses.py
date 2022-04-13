@@ -203,6 +203,19 @@ class IoUPolyLoss(nn.Module):
         super(IoUPolyLoss, self).__init__()
 
     def forward(self, output, mask, ind, target, freq_mask = None):
+        """
+        Parameters:
+            output: output of polygon head
+              [batch_size, 2*nb_vertices, nb_max_objects, nb_heads]
+            mask: selected objects
+              [batch_size, nb_max_objects]
+            ind:
+              [batch_size, nb_max_objects]
+            target: ground-truth for the polygons
+              [batch_size, 2*nb_vertices, nb_max_objects
+        Returns:
+            loss: scalar
+        """
         #print(output.shape) #[batch_size, 32, nb_objects (=128), head_conv]
         #print(mask) #[batch_size, nb_objects]
         #print(ind.shape) #[batch_size, nb_objects]
@@ -217,22 +230,21 @@ class IoUPolyLoss(nn.Module):
 
         OFFSET = 100
 
+        predictions = False
+
         for batch in range(output.shape[0]):
-
-            polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
-            poly_points_pred = []
-
-            polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
-            poly_points_gt = []
-
-            predictions = False
-
 
             for i in range(0, pred[batch].shape[0]):  # nbr objects
 
-
                 if mask[batch][i]:
+                    polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_pred = []
+
+                    polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_gt = []
+
                     predictions = True
+
                     for j in range(0, pred[batch].shape[1] - 1, 2):  # points
                         #print(j)
                         poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
@@ -240,30 +252,29 @@ class IoUPolyLoss(nn.Module):
                         poly_points_gt.append((int(target[batch][i][j])+OFFSET,
                                             int(target[batch][i][j+1])+OFFSET))
 
-            if predictions :
-                print(len(poly_points_pred))
-                #print(poly_points_pred)
-                #print(poly_points_gt)
-                ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
-                #polygon_mask_pred.show()
-                polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
+                    print(len(poly_points_pred))
+                    #print(poly_points_pred)
+                    #print(poly_points_gt)
+                    ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+                    #polygon_mask_pred.show()
+                    polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
 
-                ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
-                #polygon_mask_gt.show()
-                polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+                    ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+                    #polygon_mask_gt.show()
+                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
 
 
-                #print(polygon_mask_pred[0])
-                #print(polygon_mask_gt[0])
-                #loss += nn.MSELoss()(polygon_mask, target[batch])
-                intersection = torch.sum((polygon_mask_pred@polygon_mask_gt.transpose(-2,-1)) != 0)
-                #print(intersection)
-                union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
-                #print(union)
-                loss += intersection.float()/union.float()
-                print(loss.shape)
+                    #print(polygon_mask_pred[0])
+                    #print(polygon_mask_gt[0])
+                    #loss += nn.MSELoss()(polygon_mask, target[batch])
+                    intersection = torch.sum((polygon_mask_pred@polygon_mask_gt.transpose(-2,-1)) != 0)
+                    #print(intersection)
+                    union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                    #print(union)
+                    loss += intersection.float()/union.float()
+                    #print(loss.shape)
 
-            else: #no centers predicted
+            if not predictions: #no centers predicted
                 loss = 0.0
 
         #loss = loss.float()
@@ -272,7 +283,7 @@ class IoUPolyLoss(nn.Module):
         #loss = F.l1_loss(pred * mask, target * mask, reduction='sum')
 
         #loss = loss / (mask.sum() + 1e-4)
-        loss = 1 - loss
+        loss = 1 - loss / (mask.sum() + 1e-4)
         return loss
 
 class NormRegL1Loss(nn.Module):
