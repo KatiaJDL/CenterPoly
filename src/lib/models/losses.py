@@ -232,11 +232,14 @@ class IoUPolyLoss(nn.Module):
 
         predictions = False
 
+        #print(mask.sum())
+
         for batch in range(output.shape[0]):
 
             for i in range(0, pred[batch].shape[0]):  # nbr objects
 
                 if mask[batch][i]:
+                    #print("object")
                     polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
                     poly_points_pred = []
 
@@ -252,7 +255,7 @@ class IoUPolyLoss(nn.Module):
                         poly_points_gt.append((int(target[batch][i][j])+OFFSET,
                                             int(target[batch][i][j+1])+OFFSET))
 
-                    print(len(poly_points_pred))
+                    #print(len(poly_points_pred))
                     #print(poly_points_pred)
                     #print(poly_points_gt)
                     ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
@@ -263,16 +266,16 @@ class IoUPolyLoss(nn.Module):
                     #polygon_mask_gt.show()
                     polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
 
-
-                    #print(polygon_mask_pred[0])
-                    #print(polygon_mask_gt[0])
                     #loss += nn.MSELoss()(polygon_mask, target[batch])
-                    intersection = torch.sum((polygon_mask_pred@polygon_mask_gt.transpose(-2,-1)) != 0)
+                    intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
                     #print(intersection)
                     union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                    #print("aire pred ", torch.sum(polygon_mask_pred != 0))
+                    #print("aire gt ", torch.sum(polygon_mask_gt != 0))
                     #print(union)
-                    loss += intersection.float()/union.float()
+                    loss += intersection/(union+ 1e-4)
                     #print(loss.shape)
+                    #print(loss)
 
             if not predictions: #no centers predicted
                 loss = 0.0
@@ -284,6 +287,7 @@ class IoUPolyLoss(nn.Module):
 
         #loss = loss / (mask.sum() + 1e-4)
         loss = 1 - loss / (mask.sum() + 1e-4)
+        #print("final loss ", loss)
         return loss
 
 class NormRegL1Loss(nn.Module):
