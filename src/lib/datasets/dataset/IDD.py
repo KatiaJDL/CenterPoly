@@ -182,14 +182,35 @@ class IDD(data.Dataset):
                       open('{}/results.json'.format(save_dir), 'w'))
 
     def run_eval(self, results, save_dir):
-        self.save_results(results, save_dir)
-        res_dir = os.path.join(save_dir, 'results_')
-        if not os.path.exists(res_dir):
-            os.mkdir(res_dir)
-        self.format_and_write_to_IDD(results, res_dir)
-        coco_dets = self.coco.loadRes('{}/results.json'.format(save_dir))
-        coco_eval = COCOeval(self.coco, coco_dets, "bbox")
-        # coco_eval.params.catIds = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13]
-        coco_eval.evaluate()
-        coco_eval.accumulate()
-        coco_eval.summarize()
+        if self.opt.task == 'ctdet':
+            self.save_results(results, save_dir)
+            res_dir = os.path.join(save_dir, 'results_')
+            if not os.path.exists(res_dir):
+                os.mkdir(res_dir)
+            self.format_and_write_to_IDD(results, res_dir)
+            coco_dets = self.coco.loadRes('{}/results.json'.format(save_dir))
+            coco_eval = COCOeval(self.coco, coco_dets, "bbox")
+            # coco_eval.params.catIds = [2, 3, 4, 6, 7, 8, 10, 11, 12, 13]
+            coco_eval.evaluate()
+            coco_eval.accumulate()
+            coco_eval.summarize()
+        else:
+            self.save_results(results, save_dir)
+            res_dir = os.path.join(save_dir, 'results')
+            if not os.path.exists(res_dir):
+                os.mkdir(res_dir)
+            to_delete = os.path.join(save_dir, 'results/*.txt')
+            files = glob.glob(to_delete)
+            for f in files:
+                os.remove(f)
+            to_delete = os.path.join(save_dir, 'results/*/*.png')
+            files = glob.glob(to_delete)
+            for f in files:
+                os.remove(f)
+            self.format_and_write_to_IDD(results, res_dir)
+            os.environ['IDD_DATASET'] = '/Store/datasets/IDD'
+            os.environ['IDD_RESULTS'] = res_dir
+            from datasets.evaluation.IDDscripts.evaluation import evalInstanceLevelSemanticLabeling
+            AP = evalInstanceLevelSemanticLabeling.getAP()
+            return AP
+            # return 0

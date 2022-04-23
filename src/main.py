@@ -75,7 +75,7 @@ def main(opt):
   for epoch in range(start_epoch + 1, opt.num_epochs + 1):
     mark = epoch if opt.save_all else 'last'
     log_dict_train, _ = trainer.train(epoch, train_loader)
-    logger.write('epoch: {} |'.format(epoch))
+    logger.write('epoch: {} | '.format(epoch))
     for k, v in log_dict_train.items():
       logger.scalar_summary('train_{}'.format(k), v, epoch)
       logger.write('{} {:8f} | '.format(k, v))
@@ -87,6 +87,8 @@ def main(opt):
         if True and opt.dataset == 'cityscapes' and opt.task == 'polydet':
             AP = val_loader.dataset.run_eval(preds, opt.save_dir)
             print('AP: ', AP)
+      logger.write('\n')
+      logger.write('AP: {} | '.format(AP))
       for k, v in log_dict_val.items():
         logger.scalar_summary('val_{}'.format(k), v, epoch)
         logger.write('{} {:8f} | '.format(k, v))

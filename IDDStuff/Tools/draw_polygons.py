@@ -6,8 +6,8 @@ from PIL import Image, ImageDraw
 import cv2
 import numpy as np
 
-# from cityscapes scripts, thee labels have instances:
-have_instances = ['person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle', 'bicycle']
+# from cityscapes scripts, these labels have instances:
+have_instances = ['person', 'rider', 'motorcycle', 'bicycle', 'autorickshaw', 'car', 'truck', 'bus', 'vehicle fallback']
 sets = 'train', 'val'
 for data_set in sets:
     for filename in sorted(glob.glob('/Store/datasets/IDD/gtFine/' + data_set + '/*/*.json', recursive=True)):
