@@ -69,6 +69,9 @@ class opts(object):
                                   '64 for resnets and 256 for dla.')
     self.parser.add_argument('--down_ratio', type=int, default=4,
                              help='output stride. Currently only supports 4.')
+    self.parser.add_argument('--rep', default='cartesian',
+                             help='representation of the polygon vertices'
+                                  'cartesian | polar')
 
     # input
     self.parser.add_argument('--input_res', type=int, default=-1,
