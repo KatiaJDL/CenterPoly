@@ -612,6 +612,10 @@ def computeAverages(aps,args):
             avgDict["classes"][labelName]["ap100m"]   = np.average(aps[d100m,lI,  :])
             avgDict["classes"][labelName]["ap50%50m"] = np.average(aps[ d50m,lI,o50])
 
+    #Save AP
+    with open('metrics.json', 'w') as f:
+        json.dump(avgDict, f,  indent=4)
+
     return avgDict
 
 def printResults(avgDict, args):
