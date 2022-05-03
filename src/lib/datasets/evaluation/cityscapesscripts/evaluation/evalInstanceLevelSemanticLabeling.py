@@ -120,8 +120,14 @@ if 'CITYSCAPES_DATASET' in os.environ:
 else:
     args.cityscapesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','..')
 
+# Where to save the results
+if 'CITYSCAPES_RESULTS' in os.environ:
+    args.resultsPath = os.environ['CITYSCAPES_RESULTS']
+else:
+    args.resultsPath = args.cityscapesPath
+
 # Parameters that should be modified by user
-args.exportFile         = os.path.join( args.cityscapesPath , "evaluationResults" , "resultInstanceLevelSemanticLabeling.json" )
+args.exportFile         = os.path.join( args.resultsPath , "evaluationResults" , "resultInstanceLevelSemanticLabeling.json" )
 args.groundTruthSearch  = os.path.join( args.cityscapesPath , "gtFine" , "val" , "*", "*_gtFine_instanceIds.png" )
 
 # overlaps for evaluation
@@ -611,10 +617,6 @@ def computeAverages(aps,args):
             avgDict["classes"][labelName]["ap50m"]    = np.average(aps[ d50m,lI,  :])
             avgDict["classes"][labelName]["ap100m"]   = np.average(aps[d100m,lI,  :])
             avgDict["classes"][labelName]["ap50%50m"] = np.average(aps[ d50m,lI,o50])
-
-    #Save AP
-    with open('metrics.json', 'w') as f:
-        json.dump(avgDict, f,  indent=4)
 
     return avgDict
 
