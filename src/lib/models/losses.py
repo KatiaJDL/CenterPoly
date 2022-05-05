@@ -14,6 +14,7 @@ from .utils import _transpose_and_gather_feat
 import torch.nn.functional as F
 from PIL import Image, ImageDraw
 import numpy as np
+import math
 
 def _slow_neg_loss(pred, gt):
   '''focal loss from CornerNet'''
@@ -154,7 +155,7 @@ class RegL1PolyLoss(nn.Module):
     def __init__(self):
         super(RegL1PolyLoss, self).__init__()
 
-    def forward(self, output, mask, ind, target, freq_mask):
+    def forward(self, output, mask, ind, target, freq_mask, hm = None):
         pred = _transpose_and_gather_feat(output, ind)
         mask = mask.unsqueeze(2).expand_as(pred).float()
         # mask = mask.expand_as(pred).float()
@@ -202,7 +203,7 @@ class IoUPolyLoss(nn.Module):
     def __init__(self):
         super(IoUPolyLoss, self).__init__()
 
-    def forward(self, output, mask, ind, target, freq_mask = None):
+    def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
         """
         Parameters:
             output: output of polygon head
@@ -212,7 +213,7 @@ class IoUPolyLoss(nn.Module):
             ind:
               [batch_size, nb_max_objects]
             target: ground-truth for the polygons
-              [batch_size, 2*nb_vertices, nb_max_objects
+              [batch_size, 2*nb_vertices, nb_max_objects]
         Returns:
             loss: scalar
         """
@@ -252,6 +253,101 @@ class IoUPolyLoss(nn.Module):
                         #print(j)
                         poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
                                             int(pred[batch][i][j+1])+OFFSET))
+                        poly_points_gt.append((int(target[batch][i][j])+OFFSET,
+                                            int(target[batch][i][j+1])+OFFSET))
+
+                    #print(len(poly_points_pred))
+                    #print(poly_points_pred)
+                    #print(poly_points_gt)
+                    ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+                    #polygon_mask_pred.show()
+                    polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
+
+                    ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+                    #polygon_mask_gt.show()
+                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+
+                    #loss += nn.MSELoss()(polygon_mask, target[batch])
+                    intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
+                    #print(intersection)
+                    union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                    #print("aire pred ", torch.sum(polygon_mask_pred != 0))
+                    #print("aire gt ", torch.sum(polygon_mask_gt != 0))
+                    #print(union)
+                    loss += intersection/(union+ 1e-4)
+                    #print(loss.shape)
+                    #print(loss)
+
+            if not predictions: #no centers predicted
+                loss = 0.0
+
+        #loss = loss.float()
+        #print(loss)
+
+        #loss = F.l1_loss(pred * mask, target * mask, reduction='sum')
+
+        #loss = loss / (mask.sum() + 1e-4)
+        loss = 1 - loss / (mask.sum() + 1e-4)
+        #print("final loss ", loss)
+        return loss
+
+
+class IoUPolyPolarLoss(nn.Module):
+    def __init__(self):
+        super(IoUPolyLoss, self).__init__()
+
+    def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
+        """
+        Parameters:
+            output: output of polygon head
+              [batch_size, 2*nb_vertices, nb_max_objects, nb_heads]
+            mask: selected objects
+              [batch_size, nb_max_objects]
+            ind:
+              [batch_size, nb_max_objects]
+            target: ground-truth for the polygons
+              [batch_size, 2*nb_vertices, nb_max_objects]
+            hm: output of heatmap head
+              [batch_size, nb_categories, height, width]
+        Returns:
+            loss: scalar
+        """
+        #print(output.shape) #[batch_size, 32, nb_objects (=128), head_conv]
+        #print(mask) #[batch_size, nb_objects]
+        #print(ind.shape) #[batch_size, nb_objects]
+        #print(target.shape) #[batch_size, nb_objects, 32]
+        #print(freq_mask.shape) #[batch_size]
+
+        pred = _transpose_and_gather_feat(output, ind) #[batch_size, nb_objects, 32]
+        #mask = mask.unsqueeze(2).expand_as(pred).float() #[batch_size, nb_objects, 32]
+        #print(pred.shape)
+        #print(mask.shape)
+        loss = 0
+
+        OFFSET = 100
+
+        predictions = False
+
+        #print(mask.sum())
+
+        for batch in range(output.shape[0]):
+
+            for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                if mask[batch][i]:
+                    #print("object")
+                    polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_pred = []
+
+                    polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_gt = []
+
+                    predictions = True
+
+                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+                        #print(j)
+                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
+                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
                         poly_points_gt.append((int(target[batch][i][j])+OFFSET,
                                             int(target[batch][i][j+1])+OFFSET))
 

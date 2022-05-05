@@ -15,6 +15,7 @@ import cv2
 import bresenham
 from shapely.geometry import Polygon
 
+# With traffic lights, poles and traffic signs
 FG = False
 
 
@@ -56,14 +57,24 @@ class CITYSCAPES(data.Dataset):
             if FG:
                 self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval_fg3.json')
             else:
-                self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval.json')
+                if opt.representation =='cartesian':
+                    self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval.json')
+                elif opt.representation == 'polar':
+                    self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval_polar.json')
+                else :
+                    return NotImplementedError
             # self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_real_points_fg3.json')
         else:
             # self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_grid_based.json')
             if FG:
                 self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval_fg3.json')
             else:
-                self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval.json')
+                if opt.representation =='cartesian':
+                    self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval.json')
+                elif opt.representation == 'polar':
+                    self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval_polar.json')
+                else :
+                    return NotImplementedError
             # self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_real_points_fg3.json')
 
         self.max_objs = 128

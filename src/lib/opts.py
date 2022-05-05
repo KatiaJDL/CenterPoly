@@ -20,7 +20,7 @@ class opts(object):
                              help='level of visualization.'
                                   '1: only show the final detection results'
                                   '2: show the network output features'
-                                  '3: use matplot to display' # useful when lunching training with ipython notebook
+                                  '3: use matplot to display' # useful when launching training with ipython notebook
                                   '4: save all visualizations to disk')
     self.parser.add_argument('--demo', default='',
                              help='path to image/ image folders/ video. '

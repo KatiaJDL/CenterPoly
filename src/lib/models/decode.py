@@ -6,6 +6,7 @@ import torch
 import torch.nn as nn
 from .utils import _gather_feat, _transpose_and_gather_feat
 import numpy as np
+import math
 
 def _nms(heat, kernel=3):
     pad = (kernel - 1) // 2
@@ -496,7 +497,7 @@ def ctdet_decode(heat, wh, reg=None, cat_spec_wh=False, K=100):
 
     return detections
 
-def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100):
+def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, polar = False):
     batch, cat, height, width = heat.size()
     nbr_points = int(polys.shape[-1])
 
@@ -564,6 +565,18 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100):
     #                     bboxes[..., 3] - 2 * y_intervals,
     #                     bboxes[..., 3] - 3 * y_intervals,
     #                    ])
+
+    if polar :
+        for batch in polys:
+            for i in range(polys.shape[1]):
+                for j in range(0, polys.shape[-1] - 1, 2):  # points
+                        #print(j)
+                        r = batch[i][j]
+                        theta = batch[i][j+1]
+
+                        batch[i][j] = r*math.cos(theta)
+                        batch[i][j+1] = r*math.sin(theta)
+
     polys[..., 0::2] += xs
     polys[..., 1::2] += ys
     # print(polys[..., 0::2].shape, x_boxes.transpose(1, 0).shape)
