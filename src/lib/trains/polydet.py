@@ -22,9 +22,9 @@ class PolydetLoss(torch.nn.Module):
         self.crit = torch.nn.MSELoss() if opt.mse_loss else FocalLoss()
         self.crit_reg = RegL1Loss() if opt.reg_loss == 'l1' else \
             RegLoss() if opt.reg_loss == 'sl1' else None
-        if opt.poly_loss == 'iou' and opt.representation == 'cartesian':
+        if opt.poly_loss == 'iou' and opt.rep == 'cartesian':
             self.crit_poly = IoUPolyLoss() 
-        elif opt.poly_loss == 'iou' and opt.representation == 'polar':
+        elif opt.poly_loss == 'iou' and opt.rep == 'polar':
             self.crit_poly = IoUPolyPolarLoss() 
         else :
             self.crit_poly = RegL1PolyLoss()
@@ -182,7 +182,7 @@ class PolydetTrainer(BaseTrainer):
         dets = polydet_decode(
             output['hm'], output['poly'], output['pseudo_depth'], reg=reg,
             cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K, 
-            polar = self.opt.representation == 'polar')
+            polar = self.opt.rep == 'polar')
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets_out = polydet_post_process(
             dets.copy(), batch['meta']['c'].cpu().numpy(),

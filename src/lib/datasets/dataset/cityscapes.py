@@ -57,9 +57,9 @@ class CITYSCAPES(data.Dataset):
             if FG:
                 self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval_fg3.json')
             else:
-                if opt.representation =='cartesian':
+                if opt.rep =='cartesian':
                     self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval.json')
-                elif opt.representation == 'polar':
+                elif opt.rep == 'polar':
                     self.annot_path = os.path.join(base_dir, 'val' + str(self.opt.nbr_points) + '_regular_interval_polar.json')
                 else :
                     return NotImplementedError
@@ -69,9 +69,9 @@ class CITYSCAPES(data.Dataset):
             if FG:
                 self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval_fg3.json')
             else:
-                if opt.representation =='cartesian':
+                if opt.rep =='cartesian':
                     self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval.json')
-                elif opt.representation == 'polar':
+                elif opt.rep == 'polar':
                     self.annot_path = os.path.join(base_dir, 'train' + str(self.opt.nbr_points) + '_regular_interval_polar.json')
                 else :
                     return NotImplementedError
