@@ -176,7 +176,7 @@ class RegL1PolyLoss(nn.Module):
 
 class RegL1PolyPolarLoss(nn.Module):
     def __init__(self):
-        super(RegL1PolyLoss, self).__init__()
+        super(RegL1PolyPolarLoss, self).__init__()
 
     def forward(self, output, mask, ind, target, freq_mask, hm = None):
 
