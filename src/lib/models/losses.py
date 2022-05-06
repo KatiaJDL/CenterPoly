@@ -181,7 +181,7 @@ class RegL1PolyPolarLoss(nn.Module):
     def forward(self, output, mask, ind, target, freq_mask, hm = None):
 
         WEIGHT_ANGLE = 10
-        mask_angles = torch.FloatTensor([1,0]*output.shape[1])
+        mask_angles = torch.FloatTensor([1,0]*output.shape[1]//2)
         
         pred = _transpose_and_gather_feat(output, ind)
         mask_angles = mask_angles.unsqueeze(0).unsqueeze(2).expand_as(pred)
