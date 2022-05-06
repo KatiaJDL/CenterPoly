@@ -174,6 +174,23 @@ class RegL1PolyLoss(nn.Module):
         # print(freq_mask)
         return loss
 
+class RegL1PolyPolarLoss(nn.Module):
+    def __init__(self):
+        super(RegL1PolyLoss, self).__init__()
+
+    def forward(self, output, mask, ind, target, freq_mask, hm = None):
+
+        WEIGHT_ANGLE = 10
+        mask_angles = torch.FloatTensor([1,0]*output.shape[1])
+        
+        pred = _transpose_and_gather_feat(output, ind)
+        mask_angles = mask_angles.unsqueeze(0).unsqueeze(2).expand_as(pred)
+        mask = mask.unsqueeze(2).expand_as(pred).float()
+        loss = F.l1_loss(pred * mask*mask_angles, target * mask*mask_angles, reduction='sum')
+        loss += F.l1_loss(pred * mask*WEIGHT_ANGLE*(1-mask_angles), target * mask*WEIGHT_ANGLE*(1-mask_angles), reduction='sum')
+        loss = loss / (mask.sum() + 1e-4)
+        return loss
+
 
 class AreaPolyLoss(nn.Module):
     def __init__(self):
@@ -348,8 +365,8 @@ class IoUPolyPolarLoss(nn.Module):
                         #print(j)
                         poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
                                             OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
-                        poly_points_gt.append((int(target[batch][i][j])+OFFSET,
-                                            int(target[batch][i][j+1])+OFFSET))
+                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
+                                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
 
                     #print(len(poly_points_pred))
                     #print(poly_points_pred)
