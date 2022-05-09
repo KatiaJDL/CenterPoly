@@ -179,16 +179,72 @@ class RegL1PolyPolarLoss(nn.Module):
         super(RegL1PolyPolarLoss, self).__init__()
 
     def forward(self, output, mask, ind, target, freq_mask, hm = None):
+        #print(output.shape)
+        #print(mask.shape)
+        device = mask.device
+        #print(device)
+        #print(output.device)
+
+        OFFSET = 100
 
         WEIGHT_ANGLE = 10
         mask_angles = torch.FloatTensor([1,0]*(output.shape[1]//2))
-        
+        mask_angles =mask_angles.to(device)
+        #print(mask_angles.device)
+
         pred = _transpose_and_gather_feat(output, ind)
-        mask_angles = mask_angles.unsqueeze(0).unsqueeze(2).expand_as(pred)
+        #print('pred')
+        #print(pred.shape)
+        #print(pred[0][0])
+
+        #print('target')
+        #print(target.shape)
+        #print(target[0][0])
+
+        """
+        for batch in range(output.shape[0]):
+
+            for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                if mask[batch][i]:
+                    #print("object")
+                    polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_pred = []
+
+                    polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_gt = []
+
+
+                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+                        #print(j)
+                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
+                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
+                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
+                                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+
+                    #print(len(poly_points_pred))
+                    #print(poly_points_pred)
+                    #print(poly_points_gt)
+                    ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+                    polygon_mask_pred.show()
+
+                    ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+                    polygon_mask_gt.show()
+        """
+
+        mask_angles = mask_angles.unsqueeze(0).unsqueeze(1).expand_as(pred)
         mask = mask.unsqueeze(2).expand_as(pred).float()
+
+        #test_mask = target * mask*mask_angles
+        #print(test_mask[0][0])
+        #test_mask = target * mask*WEIGHT_ANGLE*(1-mask_angles)
+        #print(test_mask[0][0])
+
         loss = F.l1_loss(pred * mask*mask_angles, target * mask*mask_angles, reduction='sum')
         loss += F.l1_loss(pred * mask*WEIGHT_ANGLE*(1-mask_angles), target * mask*WEIGHT_ANGLE*(1-mask_angles), reduction='sum')
         loss = loss / (mask.sum() + 1e-4)
+
+        del mask_angles
         return loss
 
 
@@ -329,11 +385,6 @@ class IoUPolyPolarLoss(nn.Module):
         Returns:
             loss: scalar
         """
-        #print(output.shape) #[batch_size, 32, nb_objects (=128), head_conv]
-        #print(mask) #[batch_size, nb_objects]
-        #print(ind.shape) #[batch_size, nb_objects]
-        #print(target.shape) #[batch_size, nb_objects, 32]
-        #print(freq_mask.shape) #[batch_size]
 
         pred = _transpose_and_gather_feat(output, ind) #[batch_size, nb_objects, 32]
         #mask = mask.unsqueeze(2).expand_as(pred).float() #[batch_size, nb_objects, 32]
@@ -342,6 +393,8 @@ class IoUPolyPolarLoss(nn.Module):
         loss = 0
 
         OFFSET = 100
+
+        WEIGHT_ANGLE = 100
 
         predictions = False
 
@@ -363,10 +416,10 @@ class IoUPolyPolarLoss(nn.Module):
 
                     for j in range(0, pred[batch].shape[1] - 1, 2):  # points
                         #print(j)
-                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
-                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
-                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
-                                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]/WEIGHT_ANGLE),
+                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1]/WEIGHT_ANGLE)))
+                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1]/WEIGHT_ANGLE)+OFFSET,
+                                            target[batch][i][j]*math.sin(target[batch][i][j+1]/WEIGHT_ANGLE)+OFFSET))
 
                     #print(len(poly_points_pred))
                     #print(poly_points_pred)

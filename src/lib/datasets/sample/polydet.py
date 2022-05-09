@@ -219,15 +219,41 @@ class PolydetDataset(data.Dataset):
         points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
         for i in range(0, len(points_on_border), 2):
           draw_umich_gaussian(border_hm[0], (int(points_on_border[i]), int(points_on_border[i+1])), radius)
-          poly[k][i] = points_on_border[i] - ct[0]
-          poly[k][i+1] = points_on_border[i+1] - ct[1]
-          # poly[k][i] = points_on_border[i] - points_on_box[int(i/2)][0]
-          # poly[k][i+1] = points_on_border[i+1] - points_on_box[int(i/2)][1]
 
-          if self.opt.cat_spec_poly:
-            cat_spec_poly[k][(cls_id * (num_points*2)) + i] = points_on_border[1] - ct[0]
-            cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = points_on_border[i+1] - ct[1]
-            cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
+          if self.opt.rep == 'cartesian' :
+
+            poly[k][i] = points_on_border[i] - ct[0]
+            poly[k][i+1] = points_on_border[i+1] - ct[1]
+            # poly[k][i] = points_on_border[i] - points_on_box[int(i/2)][0]
+            # poly[k][i+1] = points_on_border[i+1] - points_on_box[int(i/2)][1]
+
+            if self.opt.cat_spec_poly:
+              cat_spec_poly[k][(cls_id * (num_points*2)) + i] = points_on_border[i] - ct[0]
+              cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = points_on_border[i+1] - ct[1]
+              cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
+
+          elif self.opt.rep == 'polar' :
+
+            x = points_on_border[i] - ct[0]
+            y = points_on_border[i+1] - ct[1]
+
+            r = math.sqrt(x*x+y*y)
+            theta = math.atan(y/(x+1e-8))
+            if x < 0 :
+                theta = theta + math.pi
+
+            poly[k][i] = r
+            poly[k][i+1] = theta
+            # poly[k][i] = points_on_border[i] - points_on_box[int(i/2)][0]
+            # poly[k][i+1] = points_on_border[i+1] - points_on_box[int(i/2)][1]
+
+            if self.opt.cat_spec_poly:
+              cat_spec_poly[k][(cls_id * (num_points*2)) + i] = r
+              cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = theta
+              cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
+
+          else :
+            raise NotImplementedError
 
         # print('h: ', output_h, ' w: ', output_w, ' 0: ', np.max(poly[0::2]), ' 1: ', np.max(poly[1::2]), ' ct: ', ct)
         # poly[k][0::2] /= output_w

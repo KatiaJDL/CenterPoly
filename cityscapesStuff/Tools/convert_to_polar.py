@@ -20,6 +20,8 @@ for filename in sorted(glob.glob('../BBoxes/*regular_interval.json', recursive=T
 
     objects = data['annotations']
 
+    WEIGHT_ANGLE = 100
+
     for object in objects:
         center_x = object['bbox'][0]
         center_y = object['bbox'][1]
@@ -35,7 +37,7 @@ for filename in sorted(glob.glob('../BBoxes/*regular_interval.json', recursive=T
             if x < 0 : 
                 theta = theta + math.pi
             polar.append(r)
-            polar.append(theta)
+            polar.append(theta*WEIGHT_ANGLE)
 
         object['poly'] = polar
 
