@@ -456,6 +456,27 @@ class IoUPolyPolarLoss(nn.Module):
         #print("final loss ", loss)
         return loss
 
+class IoURegL1PolyLoss(nn.Module):
+    def __init__(self):
+        super(IoURegL1PolyLoss, self).__init__()
+
+        self.iou = IoUPolyLoss()
+        self.l1 = RegL1PolyLoss()
+
+    def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
+        return self.iou(output, mask, ind, target, freq_mask, hm) + self.l1(output, mask, ind, target, freq_mask, hm)
+
+
+class IoURegL1PolyPolarLoss(nn.Module):
+    def __init__(self):
+        super(IoURegL1PolarPolyLoss, self).__init__()
+
+        self.iou = IoUPolyPolarLoss()
+        self.l1 = RegL1PolyPolarLoss()
+
+    def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
+        return self.iou(output, mask, ind, target, freq_mask, hm) + self.l1(output, mask, ind, target, freq_mask, hm)
+
 class NormRegL1Loss(nn.Module):
   def __init__(self):
     super(NormRegL1Loss, self).__init__()
