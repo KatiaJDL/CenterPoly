@@ -65,7 +65,7 @@ class IDD(data.Dataset):
 
 
 
-        print('==> initializing cityscapes {} data.'.format(split))
+        print('==> initializing IDD {} data.'.format(split))
         self.coco = coco.COCO(self.annot_path)
         self.images = self.coco.getImgIds()
         self.num_samples = len(self.images)
@@ -210,7 +210,7 @@ class IDD(data.Dataset):
             self.format_and_write_to_IDD(results, res_dir)
             os.environ['IDD_DATASET'] = '/Store/datasets/IDD'
             os.environ['IDD_RESULTS'] = res_dir
-            from datasets.evaluation.IDDscripts.evaluation import evalInstanceLevelSemanticLabeling
-            AP = evalInstanceLevelSemanticLabeling.getAP()
+            from datasets.evaluation.IDDscripts.evaluation import evaluate_instance_segmentation
+            AP = evaluate_instance_segmentation.getAP()
             return AP
             # return 0
