@@ -41,8 +41,8 @@ from copy import deepcopy
 
 # Cityscapes imports
 sys.path.append( os.path.normpath( os.path.join( os.path.dirname( __file__ ) , '..' , 'helpers' ) ) )
-from datasets.evaluation.KITTIscripts.helpers.csHelpers      import *
-from datasets.evaluation.KITTIscripts.evaluation.instances2dict import instances2dict
+from datasets.evaluation.kittiscripts.helpers.csHelpers      import *
+from datasets.evaluation.kittiscripts.evaluation.instances2dict import instances2dict
 
 
 ###################################
@@ -87,9 +87,11 @@ def getPrediction( groundTruthFile , config ):
         for root, dirnames, filenames in os.walk(config.predictionPath):
             walk.append( (root,filenames) )
         config.predictionWalk = walk
+    print(config.predictionWalk)
 
     # csFile = getCsFileInfo(groundTruthFile)
     # filePattern = "{}_{}_{}*.txt".format( csFile.city , csFile.sequenceNb , csFile.frameNb )
+    print(os.path.basename(groundTruthFile).split('.')[0])
     filePattern = "{}.txt".format(os.path.basename(groundTruthFile).split('.')[0])
 
     predictionFile = None
@@ -719,3 +721,33 @@ def main(argv):
 # call the main method
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+
+def getAP():
+
+    global config
+    argv = sys.argv[1:]
+    config.quiet = False  # True
+    predictionImgList = []
+    groundTruthImgList = []
+
+    # use the ground truth search string specified above
+    initial_groundTruthImgList = glob.glob(config.groundTruthSearch)
+    #print(groundTruthImgList)
+    for gt in initial_groundTruthImgList:
+        #print((int(os.path.basename(gt).split('.')[0].split('_')[0]) +1) % 20)
+        if (int(os.path.basename(gt).split('.')[0].split('_')[0]) + 1) % 20 == 0:
+            groundTruthImgList.append(gt)
+    if not groundTruthImgList:
+        printError("Cannot find any ground truth images to use for evaluation. Searched for: {}".format(
+            config.groundTruthSearch))
+    # get the corresponding prediction for each ground truth image
+    for gt in groundTruthImgList:
+        predictionImgList.append(getPrediction(gt, config))
+    # print some info for user
+    # print("Note that this tool uses the file '{}' to cache the ground truth instances.".format(args.gtInstancesFile))
+    # print("If anything goes wrong, or if you change the ground truth, please delete the file.")
+
+    # evaluate
+    res_dict = evaluateImgLists(predictionImgList, groundTruthImgList, config)
+    return res_dict["averages"]["allAp"]

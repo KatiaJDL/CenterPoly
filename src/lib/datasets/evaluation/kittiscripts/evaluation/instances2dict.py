@@ -6,10 +6,10 @@
 from __future__ import print_function
 import os, sys
 
-# Cityscapes imports
-from instance import *
+# Kitti imports
+from datasets.evaluation.kittiscripts.evaluation.instance import *
 sys.path.append( os.path.normpath( os.path.join( os.path.dirname( __file__ ) , '..' , 'helpers' ) ) )
-from csHelpers import *
+from datasets.evaluation.kittiscripts.helpers.csHelpers import *
 
 def instances2dict(imageFileList, verbose=False):
     imgCount     = 0

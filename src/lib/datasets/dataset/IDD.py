@@ -195,7 +195,7 @@ class IDD(data.Dataset):
             coco_eval.accumulate()
             coco_eval.summarize()
         else:
-            #self.save_results(results, save_dir)
+            self.save_results(results, save_dir)
             res_dir = os.path.join(save_dir, 'results')
             if not os.path.exists(res_dir):
                 os.mkdir(res_dir)

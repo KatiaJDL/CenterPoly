@@ -1,0 +1,1950 @@
+{
+    "/Store/datasets/KITTIPoly/training/instance/000019_10.png": {
+        "bicycle": [],
+        "bridge": [
+            {
+                "distConf": 0.0,
+                "instID": 3840,
+                "labelID": 15,
+                "medDist": -1,
+                "pixelCount": 5820
+            }
+        ],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 3460
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 442
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 50
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 40
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 145
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1692
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 16425
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 2764
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [
+            {
+                "distConf": 0.0,
+                "instID": 3328,
+                "labelID": 13,
+                "medDist": -1,
+                "pixelCount": 50483
+            }
+        ],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 975
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 84297
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 367
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 42259
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 3944
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 96924
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 103
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 153478
+            }
+        ],
+        "wall": [
+            {
+                "distConf": 0.0,
+                "instID": 3072,
+                "labelID": 12,
+                "medDist": -1,
+                "pixelCount": 2082
+            }
+        ]
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000039_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 4801
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 55
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 182
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 2435
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1288
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 19
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 109
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 36
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 51
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6664,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 6557
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 5703
+            }
+        ],
+        "polegroup": [],
+        "rail track": [
+            {
+                "distConf": 0.0,
+                "instID": 2560,
+                "labelID": 10,
+                "medDist": -1,
+                "pixelCount": 16295
+            }
+        ],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 89796
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 3499
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 124462
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 8320
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 106620
+            }
+        ],
+        "traffic light": [
+            {
+                "distConf": 0.0,
+                "instID": 4864,
+                "labelID": 19,
+                "medDist": -1,
+                "pixelCount": 93
+            }
+        ],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 443
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 75
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6914,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 1776
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 93135
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000059_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 2309
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 14527
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 120
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [
+            {
+                "distConf": 0.0,
+                "instID": 3328,
+                "labelID": 13,
+                "medDist": -1,
+                "pixelCount": 5618
+            }
+        ],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [
+            {
+                "distConf": 0.0,
+                "instID": 6145,
+                "labelID": 24,
+                "medDist": -1,
+                "pixelCount": 878
+            }
+        ],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 5688
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 47948
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 24216
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 30253
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 13061
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 118542
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 420
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 202170
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000079_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 1827
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 2898
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 173
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 8291
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 146
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 933
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 9721
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 517
+            }
+        ],
+        "caravan": [],
+        "dynamic": [
+            {
+                "distConf": 0.0,
+                "instID": 1280,
+                "labelID": 5,
+                "medDist": -1,
+                "pixelCount": 872
+            }
+        ],
+        "ego vehicle": [],
+        "fence": [
+            {
+                "distConf": 0.0,
+                "instID": 3328,
+                "labelID": 13,
+                "medDist": -1,
+                "pixelCount": 271
+            }
+        ],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 2763
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 95964
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 21977
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 194159
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 627
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 58053
+            }
+        ],
+        "traffic light": [
+            {
+                "distConf": 0.0,
+                "instID": 4864,
+                "labelID": 19,
+                "medDist": -1,
+                "pixelCount": 177
+            }
+        ],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 656
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 144
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6914,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 60
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6915,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 516
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 65005
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000099_10.png": {
+        "bicycle": [],
+        "bridge": [
+            {
+                "distConf": 0.0,
+                "instID": 3840,
+                "labelID": 15,
+                "medDist": -1,
+                "pixelCount": 644
+            }
+        ],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 21
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 185
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 194
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 457
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 104
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 63
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 354
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 184
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6664,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1132
+            }
+        ],
+        "caravan": [
+            {
+                "distConf": 0.0,
+                "instID": 7425,
+                "labelID": 29,
+                "medDist": -1,
+                "pixelCount": 118
+            }
+        ],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [
+            {
+                "distConf": 0.0,
+                "instID": 3584,
+                "labelID": 14,
+                "medDist": -1,
+                "pixelCount": 10454
+            }
+        ],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 2508
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 133216
+            }
+        ],
+        "sidewalk": [],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 63712
+            }
+        ],
+        "static": [],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 54136
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 15544
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 79
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 182645
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000119_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 106957
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1172
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1046
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 9
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 47
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 75
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 42
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 80
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 38
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6664,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 44
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6665,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 41
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6666,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 4663
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6667,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 490
+            }
+        ],
+        "caravan": [],
+        "dynamic": [
+            {
+                "distConf": 0.0,
+                "instID": 1280,
+                "labelID": 5,
+                "medDist": -1,
+                "pixelCount": 331
+            }
+        ],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [
+            {
+                "distConf": 0.0,
+                "instID": 1536,
+                "labelID": 6,
+                "medDist": -1,
+                "pixelCount": 770
+            }
+        ],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [
+            {
+                "distConf": 0.0,
+                "instID": 2304,
+                "labelID": 9,
+                "medDist": -1,
+                "pixelCount": 1179
+            }
+        ],
+        "person": [
+            {
+                "distConf": 0.0,
+                "instID": 6145,
+                "labelID": 24,
+                "medDist": -1,
+                "pixelCount": 767
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6146,
+                "labelID": 24,
+                "medDist": -1,
+                "pixelCount": 1738
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6147,
+                "labelID": 24,
+                "medDist": -1,
+                "pixelCount": 611
+            }
+        ],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 19237
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 75667
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 81568
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 34195
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 16999
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 19562
+            }
+        ],
+        "traffic light": [
+            {
+                "distConf": 0.0,
+                "instID": 4864,
+                "labelID": 19,
+                "medDist": -1,
+                "pixelCount": 281
+            }
+        ],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 20719
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 5748
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 65790
+            }
+        ],
+        "wall": [
+            {
+                "distConf": 0.0,
+                "instID": 3072,
+                "labelID": 12,
+                "medDist": -1,
+                "pixelCount": 5884
+            }
+        ]
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000139_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [
+            {
+                "distConf": 0.0,
+                "instID": 2816,
+                "labelID": 11,
+                "medDist": -1,
+                "pixelCount": 109034
+            }
+        ],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 932
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 29
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1495
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1145
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 378
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 6296
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1587
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 77
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6664,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 344
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6665,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 579
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6666,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1364
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6667,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 153
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6668,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 225
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6669,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 4558
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6670,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 125
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6671,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 2856
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6672,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1320
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6673,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 4853
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [
+            {
+                "distConf": 0.0,
+                "instID": 2304,
+                "labelID": 9,
+                "medDist": -1,
+                "pixelCount": 2268
+            }
+        ],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 2583
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 142014
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 29901
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 27046
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 24810
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 4863
+            }
+        ],
+        "traffic light": [
+            {
+                "distConf": 0.0,
+                "instID": 4864,
+                "labelID": 19,
+                "medDist": -1,
+                "pixelCount": 286
+            }
+        ],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 4314
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [],
+        "tunnel": [],
+        "unlabeled": [
+            {
+                "distConf": 0.0,
+                "instID": 0,
+                "labelID": 0,
+                "medDist": -1,
+                "pixelCount": 57
+            }
+        ],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 90258
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000159_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 195
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 9900
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 144
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 35
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 682
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 870
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1179
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 3826
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 500
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 94457
+            }
+        ],
+        "sidewalk": [
+            {
+                "distConf": 0.0,
+                "instID": 2048,
+                "labelID": 8,
+                "medDist": -1,
+                "pixelCount": 13019
+            }
+        ],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 18493
+            }
+        ],
+        "static": [],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 89074
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 395
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 230243
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000179_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [],
+        "bus": [],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 22
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 219
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 403
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 324
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 4698
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1793
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [
+            {
+                "distConf": 0.0,
+                "instID": 3584,
+                "labelID": 14,
+                "medDist": -1,
+                "pixelCount": 32288
+            }
+        ],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 6360
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 100736
+            }
+        ],
+        "sidewalk": [],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 43082
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 248
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 57245
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 7020
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 212178
+            }
+        ],
+        "wall": []
+    },
+    "/Store/datasets/KITTIPoly/training/instance/000199_10.png": {
+        "bicycle": [],
+        "bridge": [],
+        "building": [],
+        "bus": [
+            {
+                "distConf": 0.0,
+                "instID": 7169,
+                "labelID": 28,
+                "medDist": -1,
+                "pixelCount": 510
+            },
+            {
+                "distConf": 0.0,
+                "instID": 7170,
+                "labelID": 28,
+                "medDist": -1,
+                "pixelCount": 2869
+            }
+        ],
+        "car": [
+            {
+                "distConf": 0.0,
+                "instID": 6656,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 100
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6657,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 255
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6658,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 891
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6659,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 96
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6660,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 76
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6661,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1220
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6662,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 4309
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6663,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 240
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6664,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 1007
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6665,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 688
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6666,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 2341
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6667,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 13675
+            },
+            {
+                "distConf": 0.0,
+                "instID": 6668,
+                "labelID": 26,
+                "medDist": -1,
+                "pixelCount": 11734
+            }
+        ],
+        "caravan": [],
+        "dynamic": [],
+        "ego vehicle": [],
+        "fence": [],
+        "ground": [],
+        "guard rail": [
+            {
+                "distConf": 0.0,
+                "instID": 3584,
+                "labelID": 14,
+                "medDist": -1,
+                "pixelCount": 2262
+            }
+        ],
+        "license plate": [],
+        "motorcycle": [],
+        "out of roi": [],
+        "parking": [],
+        "person": [],
+        "pole": [
+            {
+                "distConf": 0.0,
+                "instID": 4352,
+                "labelID": 17,
+                "medDist": -1,
+                "pixelCount": 705
+            }
+        ],
+        "polegroup": [],
+        "rail track": [],
+        "rectification border": [],
+        "rider": [],
+        "road": [
+            {
+                "distConf": 0.0,
+                "instID": 1792,
+                "labelID": 7,
+                "medDist": -1,
+                "pixelCount": 99722
+            }
+        ],
+        "sidewalk": [],
+        "sky": [
+            {
+                "distConf": 0.0,
+                "instID": 5888,
+                "labelID": 23,
+                "medDist": -1,
+                "pixelCount": 93392
+            }
+        ],
+        "static": [
+            {
+                "distConf": 0.0,
+                "instID": 1024,
+                "labelID": 4,
+                "medDist": -1,
+                "pixelCount": 400
+            }
+        ],
+        "terrain": [
+            {
+                "distConf": 0.0,
+                "instID": 5632,
+                "labelID": 22,
+                "medDist": -1,
+                "pixelCount": 16967
+            }
+        ],
+        "traffic light": [],
+        "traffic sign": [
+            {
+                "distConf": 0.0,
+                "instID": 5120,
+                "labelID": 20,
+                "medDist": -1,
+                "pixelCount": 983
+            }
+        ],
+        "trailer": [],
+        "train": [],
+        "truck": [
+            {
+                "distConf": 0.0,
+                "instID": 6913,
+                "labelID": 27,
+                "medDist": -1,
+                "pixelCount": 119
+            }
+        ],
+        "tunnel": [],
+        "unlabeled": [],
+        "vegetation": [
+            {
+                "distConf": 0.0,
+                "instID": 5376,
+                "labelID": 21,
+                "medDist": -1,
+                "pixelCount": 212055
+            }
+        ],
+        "wall": []
+    }
+}
