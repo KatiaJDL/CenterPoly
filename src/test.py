@@ -54,7 +54,7 @@ def prefetch_test(opt):
   Detector = detector_factory[opt.task]
   
   # hughes
-  if 'coco' in opt.dataset or 'cityscapes' in opt.dataset:
+  if 'coco' in opt.dataset or 'cityscapes' in opt.dataset or 'IDD' in opt.dataset or 'kitti' in opt.dataset:
     split = 'val' if not opt.trainval else 'test'
   else:
     split = 'test'
