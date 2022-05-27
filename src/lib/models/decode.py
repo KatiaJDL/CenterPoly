@@ -78,6 +78,16 @@ def _v_aggregate(heat, aggr_weight=0.1):
     return aggr_weight * _top_aggregate(heat) + \
            aggr_weight * _bottom_aggregate(heat) + heat
 
+def order_angles(polygon):
+    angles = polygon[1::2]
+    transition = False
+    for i in range(len(angles)-1):
+        if angles[i]>angles[i+1]:
+            if angles[i]<0 or angles[i+1]>0 or transition:
+                return False
+            transition = True
+    return True
+
 '''
 # Slow for large number of categories
 def _topk(scores, K=40):
@@ -565,10 +575,20 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
     #                     bboxes[..., 3] - 2 * y_intervals,
     #                     bboxes[..., 3] - 3 * y_intervals,
     #                    ])
-
+    #print('décode')
+    #print(scores.shape)
     if polar :
-        for batch in polys:
+        for k, batch in enumerate(polys):
+            #print(batch.shape)
+            #print('polaire')
+            #print(batch[0])
+            bad_order = 0
             for i in range(polys.shape[1]):
+
+                #order = order_angles(batch[i])
+                #print(order)
+                #if not order and scores[k][i][0] > 0.1:
+                #    bad_order +=1
                 for j in range(0, polys.shape[-1] - 1, 2):  # points
                         #print(j)
                         r = batch[i][j]
@@ -576,6 +596,9 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
 
                         batch[i][j] = r*math.cos(theta)
                         batch[i][j+1] = r*math.sin(theta)
+            #print('cartésien')
+            #print(batch[0])
+            #print('Bad order angles: ', bad_order, ' out of ', polys.shape[1])
 
     polys[..., 0::2] += xs
     polys[..., 1::2] += ys

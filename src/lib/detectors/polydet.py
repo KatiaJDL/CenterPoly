@@ -36,7 +36,7 @@ class PolydetDetector(BaseDetector):
         reg = reg[0:1] if reg is not None else None
       torch.cuda.synchronize()
       forward_time = time.time()
-      dets = polydet_decode(hm, polys, pseudo_depth, reg=reg, cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K)
+      dets = polydet_decode(hm, polys, pseudo_depth, reg=reg, cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K, polar = (self.opt.rep == 'polar'))
     if return_time:
       return output, dets, forward_time
     else:

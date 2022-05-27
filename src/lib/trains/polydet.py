@@ -154,7 +154,8 @@ class PolydetTrainer(BaseTrainer):
         reg = output['reg'] if opt.reg_offset else None
         dets = polydet_decode(
             output['hm'], output['wh'], reg=reg,
-            cat_spec_poly=opt.cat_spec_poly, K=opt.K)
+            cat_spec_poly=opt.cat_spec_poly, K=opt.K,
+            polar = (self.opt.rep == 'polar'))
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets[:, :, :4] *= opt.down_ratio
         dets_gt = batch['meta']['gt_det'].numpy().reshape(1, -1, dets.shape[2])

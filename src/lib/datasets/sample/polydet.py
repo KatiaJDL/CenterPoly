@@ -15,6 +15,7 @@ from utils.image import draw_dense_reg
 import math
 import bresenham
 from PIL import Image, ImageDraw
+import time
 
 
 def find_first_non_zero_pixel(points, instance_image):
@@ -252,15 +253,38 @@ class PolydetDataset(data.Dataset):
               cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = theta
               cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
 
+            #print('poly radius: ', poly[k][0::2])
+            #print('poly angle: ', poly[k][1::2])
+
           else :
             raise NotImplementedError
-
         # print('h: ', output_h, ' w: ', output_w, ' 0: ', np.max(poly[0::2]), ' 1: ', np.max(poly[1::2]), ' ct: ', ct)
         # poly[k][0::2] /= output_w
         # poly[k][1::2] /= output_h
         # poly[k] *= 1000
         # print('poly: ', poly[k])
+        '''
+        poly_cart = []
+        poly_polar = []
+        for i in range(0, len(points_on_border), 2):
+          poly_cart.append(points_on_border[i])
+          poly_cart.append(points_on_border[i+1])
 
+          poly_polar.append(poly[0][i]*math.cos(poly[0][i+1]) + ct[0])
+          poly_polar.append(poly[0][i]*math.sin(poly[0][i+1]) + ct[1])
+
+        polygon_mask_gt = Image.new('L', (2000, 2000), 0)
+
+        ImageDraw.Draw(polygon_mask_gt).polygon(poly_cart, outline=0, fill=255)
+        polygon_mask_gt.show()
+
+        polygon_mask_polar = Image.new('L', (2000, 2000), 0)
+
+        ImageDraw.Draw(polygon_mask_polar).polygon(poly_polar, outline=0, fill=255)
+        polygon_mask_polar.show()
+
+        time.sleep(90)
+        '''
         ind[k] = ct_int[1] * output_w + ct_int[0]
         reg[k] = ct - ct_int
         reg_mask[k] = 1
