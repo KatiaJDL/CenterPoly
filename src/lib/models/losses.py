@@ -174,6 +174,71 @@ class RegL1PolyLoss(nn.Module):
         # print(freq_mask)
         return loss
 
+class RegBCEPolyLoss(nn.Module):
+    def __init__(self):
+        super(RegBCEPolyLoss, self).__init__()
+
+    def forward(self, output, mask, ind, target, freq_mask, hm = None):
+
+        pred = _transpose_and_gather_feat(output, ind)
+        #mask = mask.unsqueeze(2).expand_as(pred).float()
+
+        loss = 0
+
+        OFFSET = 100
+
+        predictions = False
+
+        #print(mask.sum())
+
+        for batch in range(output.shape[0]):
+
+            for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                if mask[batch][i]:
+                    #print("object")
+                    polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_pred = []
+
+                    polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_gt = []
+
+                    predictions = True
+
+                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+                        #print(j)
+                        poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
+                                            int(pred[batch][i][j+1])+OFFSET))
+                        poly_points_gt.append((int(target[batch][i][j])+OFFSET,
+                                            int(target[batch][i][j+1])+OFFSET))
+
+                    #print(len(poly_points_pred))
+                    #print(poly_points_pred)
+                    #print(poly_points_gt)
+                    ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+                    #polygon_mask_pred.show()
+                    polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
+
+                    ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+                    #polygon_mask_gt.show()
+                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+
+        # mask = mask.expand_as(pred).float()
+        # norm_pred = pred - torch.min(pred)
+        # norm_pred /= (torch.max(pred) + 1e-4)
+        # norm_target = pred - torch.min(target)
+        # norm_target /= (torch.max(target) + 1e-4)
+        loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
+        # loss = nn.MSELoss(reduction='sum')(pred * mask, target * mask)
+        # loss = nn.SmoothL1Loss(reduction='sum')(pred * mask, target * mask)
+        # loss *= torch.max(target)
+        # loss = F.l1_loss(pred * mask, target * mask, reduction='sum')
+        # loss *= (size_norm.sum())
+        loss = loss / (mask.sum() + 1e-4)
+        # loss = loss / (freq_mask.mean() + 1e-4)
+        # print(freq_mask)
+        return loss
+
 class RegL1PolyPolarLoss(nn.Module):
     def __init__(self):
         super(RegL1PolyPolarLoss, self).__init__()
@@ -241,7 +306,9 @@ class RegL1PolyPolarLoss(nn.Module):
         #print(test_mask[0][0])
 
         loss = F.l1_loss(pred * mask*mask_angles, target * mask*mask_angles, reduction='sum')
-        loss += F.l1_loss(pred * mask*WEIGHT_ANGLE*(1-mask_angles), target * mask*WEIGHT_ANGLE*(1-mask_angles), reduction='sum')
+        #loss +=  WEIGHT_ANGLE * F.l1_loss(pred * mask*(1-mask_angles), target * mask*WEIGHT_ANGLE*(1-mask_angles), reduction='sum')
+        loss +=  torch.sum(1 - torch.cos(pred * mask*(1-mask_angles) - target * mask*(1-mask_angles)))
+
         loss = loss / (mask.sum() + 1e-4)
 
         del mask_angles

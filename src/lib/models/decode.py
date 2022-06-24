@@ -511,6 +511,8 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
     batch, cat, height, width = heat.size()
     nbr_points = int(polys.shape[-1])
 
+    print("decode")
+
     # heat = torch.sigmoid(heat)
     # perform nms on heatmaps
     heat = _nms(heat)
@@ -584,6 +586,8 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
             #print(batch[0])
             bad_order = 0
             for i in range(polys.shape[1]):
+                #print("----")
+                #print(i)
 
                 #order = order_angles(batch[i])
                 #print(order)
@@ -591,14 +595,22 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
                 #    bad_order +=1
                 for j in range(0, polys.shape[-1] - 1, 2):  # points
                         #print(j)
-                        r = batch[i][j]
-                        theta = batch[i][j+1]
+                        r = batch[i][j].clone()
+                        theta = batch[i][j+1].clone()
+                        #print("polar")
+                        #print(r)
+                        #print(theta)
 
                         batch[i][j] = r*math.cos(theta)
                         batch[i][j+1] = r*math.sin(theta)
+
+                        #print("cartesien")
+                        #print(batch[i][j])
+                        #print(batch[i][j+1])
             #print('cartésien')
             #print(batch[0])
             #print('Bad order angles: ', bad_order, ' out of ', polys.shape[1])
+                #print("----")
 
     polys[..., 0::2] += xs
     polys[..., 1::2] += ys

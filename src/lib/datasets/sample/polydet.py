@@ -235,13 +235,36 @@ class PolydetDataset(data.Dataset):
 
           elif self.opt.rep == 'polar' :
 
+            #print(points_on_border[i])
+            #print(points_on_border[i+1])
+
             x = points_on_border[i] - ct[0]
             y = points_on_border[i+1] - ct[1]
 
             r = math.sqrt(x*x+y*y)
-            theta = math.atan(y/(x+1e-8))
+            theta = math.atan((y+1e-8)/(x+1e-8))
             if x < 0 :
                 theta = theta + math.pi
+            elif y < 0 :
+                theta = theta + 2*math.pi
+
+            #ang = math.degrees(math.atan2(y,x) - math.atan2(ct[1],ct[0]))
+            #ang = ang + 360 if ang < 0 else ang
+            #theta = ang if ang < 180 else 360 - ang
+            """"
+            print("--start--")
+            print("cartesien")
+            print(x)
+            print(y)
+            print("center")
+            print(ct[0])
+            print(ct[1])
+            print("polar")
+            print(r)
+            print(theta)
+
+            #print(r)
+            #print(theta)"""
 
             poly[k][i] = r
             poly[k][i+1] = theta
