@@ -12,6 +12,8 @@ from models.model import create_model, load_model
 from utils.image import get_affine_transform
 from utils.debugger import Debugger
 
+import json
+
 
 class BaseDetector(object):
   def __init__(self, opt):
@@ -98,7 +100,7 @@ class BaseDetector(object):
   def show_results(self, debugger, image, results):
    raise NotImplementedError
 
-  def run(self, image_or_path_or_tensor, meta=None):
+  def run(self, image_or_path_or_tensor, id, meta=None):
     load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
     merge_time, tot_time = 0, 0
     debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug==3),
@@ -132,7 +134,6 @@ class BaseDetector(object):
       pre_time += pre_process_time - scale_start_time
 
       output, dets, forward_time = self.process(images, return_time=True)
-
       torch.cuda.synchronize()
       net_time += forward_time - pre_process_time
       decode_time = time.time()
@@ -150,6 +151,28 @@ class BaseDetector(object):
       post_process_time = time.time()
       post_time += post_process_time - decode_time
       detections.append(dets)
+
+    '''
+    ret = []
+    top_preds = {1:[], 2:[], 3:[],4:[], 5:[], 6:[],7:[], 8:[]}
+    gt = json.load(open('/Store/travail/kajoda/CenterPoly/CenterPoly/cityscapesStuff/BBoxes/val32_regular_interval.json'))
+
+    for obj in gt["annotations"]:
+      if obj["image_id"] == id:
+        top_preds[obj["category_id"]].append(obj["bbox"] + [1] + obj["poly"] + [obj["pseudo_depth"]])
+    ret.append(top_preds)
+
+    length = 70  # len(dets[0][1][0])
+    for j in range(1, self.num_classes + 1):
+      ret[0][j] = np.array(ret[0][j], dtype=np.float32).reshape(-1, length)
+      ret[0][j][:, :4] /= scale
+      # dets[0][j][:, 5:-1] /= scale
+      ret[0][j][:, 5:-1] /= scale
+
+    detections = [ret[0]]
+
+    #print(detections)
+    '''
 
     results = self.merge_outputs(detections)
     torch.cuda.synchronize()
