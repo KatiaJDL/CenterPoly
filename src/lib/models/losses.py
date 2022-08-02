@@ -15,6 +15,7 @@ import torch.nn.functional as F
 from PIL import Image, ImageDraw
 import numpy as np
 import math
+import time
 
 def _slow_neg_loss(pred, gt):
   '''focal loss from CornerNet'''
@@ -113,6 +114,46 @@ def _reg_loss(regr, gt_regr, mask):
   regr_loss = regr_loss / (num + 1e-4)
   return regr_loss
 
+def create_mask(output, pred, target, batch, num_object, rep):
+
+  OFFSET = 100
+  i = num_object
+
+  #print("object")
+  polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+  poly_points_pred = []
+
+  polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+  poly_points_gt = []
+
+
+  for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+      #print(j)
+      if rep =='polar':
+        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
+                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
+        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
+                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+      elif rep=='cartesian':
+        poly_points_pred.append((pred[batch][i][j]+OFFSET,
+                            pred[batch][i][j+1]+OFFSET))
+        poly_points_gt.append((target[batch][i][j]+OFFSET,
+                            target[batch][i][j+1]+OFFSET))
+
+  #print(poly_points_pred)
+  #print(poly_points_gt)
+  ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+  #polygon_mask_pred.show()
+  polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
+
+  ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+  #polygon_mask_gt.show()
+  polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+
+  #time.sleep(30)
+
+  return polygon_mask_pred, polygon_mask_gt
+
 class FocalLoss(nn.Module):
   '''nn.Module warpper for focal loss'''
   def __init__(self):
@@ -207,10 +248,10 @@ class RegBCEPolyLoss(nn.Module):
 
                     for j in range(0, pred[batch].shape[1] - 1, 2):  # points
                         #print(j)
-                        poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
-                                            int(pred[batch][i][j+1])+OFFSET))
-                        poly_points_gt.append((int(target[batch][i][j])+OFFSET,
-                                            int(target[batch][i][j+1])+OFFSET))
+                        poly_points_pred.append((pred[batch][i][j]+OFFSET,
+                                            pred[batch][i][j+1]+OFFSET))
+                        poly_points_gt.append((target[batch][i][j]+OFFSET,
+                                            target[batch][i][j+1]+OFFSET))
 
                     #print(len(poly_points_pred))
                     #print(poly_points_pred)
@@ -221,7 +262,7 @@ class RegBCEPolyLoss(nn.Module):
 
                     ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
                     #polygon_mask_gt.show()
-                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+                    polygon_mask_pred, polygon_mask_gt = create_mask(output,pred, target, batch, i, 'cartesian')
 
         # mask = mask.expand_as(pred).float()
         # norm_pred = pred - torch.min(pred)
@@ -266,8 +307,9 @@ class RegL1PolyPolarLoss(nn.Module):
         #print(target.shape)
         #print(target[0][0])
 
-        """
         for batch in range(output.shape[0]):
+
+            OFFSET = 100
 
             for i in range(0, pred[batch].shape[0]):  # nbr objects
 
@@ -287,15 +329,26 @@ class RegL1PolyPolarLoss(nn.Module):
                         poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
                                             target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
 
-                    #print(len(poly_points_pred))
                     #print(poly_points_pred)
                     #print(poly_points_gt)
                     ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
-                    polygon_mask_pred.show()
+                    #polygon_mask_pred.show()
+                    polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
 
                     ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
-                    polygon_mask_gt.show()
-        """
+                    #polygon_mask_gt.show()
+                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+
+                    #loss += nn.MSELoss()(polygon_mask, target[batch])
+                    intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
+                    #print(intersection)
+                    union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                    #print("aire pred ", torch.sum(polygon_mask_pred != 0))
+                    #print("aire gt ", torch.sum(polygon_mask_gt != 0))
+                    #print(union)
+                    #print(intersection/(union+ 1e-6))
+
+                    #time.sleep(30)
 
         mask_angles = mask_angles.unsqueeze(0).unsqueeze(1).expand_as(pred)
         mask = mask.unsqueeze(2).expand_as(pred).float()
@@ -391,10 +444,16 @@ class IoUPolyLoss(nn.Module):
 
                     for j in range(0, pred[batch].shape[1] - 1, 2):  # points
                         #print(j)
-                        poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
-                                            int(pred[batch][i][j+1])+OFFSET))
-                        poly_points_gt.append((int(target[batch][i][j])+OFFSET,
-                                            int(target[batch][i][j+1])+OFFSET))
+                        #poly_points_pred.append((int(pred[batch][i][j])+OFFSET,
+                        #                    int(pred[batch][i][j+1])+OFFSET))
+                        #poly_points_gt.append((int(target[batch][i][j])+OFFSET,
+                        #                    int(target[batch][i][j+1])+OFFSET))
+
+                        poly_points_pred.append((pred[batch][i][j]+OFFSET,
+                                            pred[batch][i][j+1]+OFFSET))
+                        poly_points_gt.append((target[batch][i][j]+OFFSET,
+                                            target[batch][i][j+1]+OFFSET))
+
 
                     #print(len(poly_points_pred))
                     #print(poly_points_pred)
@@ -414,7 +473,8 @@ class IoUPolyLoss(nn.Module):
                     #print("aire pred ", torch.sum(polygon_mask_pred != 0))
                     #print("aire gt ", torch.sum(polygon_mask_gt != 0))
                     #print(union)
-                    loss += intersection/(union+ 1e-4)
+                    #print(intersection/(union+ 1e-6))
+                    loss += intersection/(union+ 1e-6)
                     #print(loss.shape)
                     #print(loss)
 
@@ -427,14 +487,14 @@ class IoUPolyLoss(nn.Module):
         #loss = F.l1_loss(pred * mask, target * mask, reduction='sum')
 
         #loss = loss / (mask.sum() + 1e-4)
-        loss = 1 - loss / (mask.sum() + 1e-4)
+        loss = 1 - loss / (mask.sum() + 1e-6)
         #print("final loss ", loss)
         return loss
 
 
 class IoUPolyPolarLoss(nn.Module):
     def __init__(self):
-        super(IoUPolyLoss, self).__init__()
+        super(IoUPolyPolarLoss, self).__init__()
 
     def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
         """
@@ -454,25 +514,18 @@ class IoUPolyPolarLoss(nn.Module):
         """
 
         pred = _transpose_and_gather_feat(output, ind) #[batch_size, nb_objects, 32]
-        #mask = mask.unsqueeze(2).expand_as(pred).float() #[batch_size, nb_objects, 32]
-        #print(pred.shape)
-        #print(mask.shape)
         loss = 0
+        loss_ordre = 0
 
         OFFSET = 100
 
-        WEIGHT_ANGLE = 100
-
         predictions = False
-
-        #print(mask.sum())
 
         for batch in range(output.shape[0]):
 
             for i in range(0, pred[batch].shape[0]):  # nbr objects
 
                 if mask[batch][i]:
-                    #print("object")
                     polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
                     poly_points_pred = []
 
@@ -481,16 +534,23 @@ class IoUPolyPolarLoss(nn.Module):
 
                     predictions = True
 
-                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
-                        #print(j)
-                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]/WEIGHT_ANGLE),
-                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1]/WEIGHT_ANGLE)))
-                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1]/WEIGHT_ANGLE)+OFFSET,
-                                            target[batch][i][j]*math.sin(target[batch][i][j+1]/WEIGHT_ANGLE)+OFFSET))
+                    angles = pred[batch][i][1::2]
+                    #print("angles")
+                    #print(angles)
 
-                    #print(len(poly_points_pred))
-                    #print(poly_points_pred)
-                    #print(poly_points_gt)
+                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
+                                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
+                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
+                                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+
+                        if pred[batch][i][j+1] > pred[batch][i][1]:
+                          angles[j//2] -= 6.14
+
+                    for k, elem in enumerate(angles):
+                      loss_ordre += sum(p for p in (angles[k+1:] - elem) if p>0)
+                    #print(loss_ordre)
+
                     ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
                     #polygon_mask_pred.show()
                     polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
@@ -499,28 +559,18 @@ class IoUPolyPolarLoss(nn.Module):
                     #polygon_mask_gt.show()
                     polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
 
-                    #loss += nn.MSELoss()(polygon_mask, target[batch])
                     intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
-                    #print(intersection)
                     union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
-                    #print("aire pred ", torch.sum(polygon_mask_pred != 0))
-                    #print("aire gt ", torch.sum(polygon_mask_gt != 0))
-                    #print(union)
+
                     loss += intersection/(union+ 1e-4)
-                    #print(loss.shape)
-                    #print(loss)
+                    #print(intersection/(union + 1e-4))
+
+                    #time.sleep(10)
 
             if not predictions: #no centers predicted
                 loss = 0.0
 
-        #loss = loss.float()
-        #print(loss)
-
-        #loss = F.l1_loss(pred * mask, target * mask, reduction='sum')
-
-        #loss = loss / (mask.sum() + 1e-4)
-        loss = 1 - loss / (mask.sum() + 1e-4)
-        #print("final loss ", loss)
+        loss = 1 - loss / (mask.sum() + 1e-4)#+ loss_ordre/(mask.sum() + 1e-4)
         return loss
 
 class IoURegL1PolyLoss(nn.Module):
