@@ -6,6 +6,8 @@ import numpy as np
 from .image import transform_preds
 from .ddd_utils import ddd2locrot
 
+import json
+
 
 def get_pred_depth(depth):
   return depth
@@ -103,7 +105,7 @@ def ctdet_post_process(dets, c, s, h, w, num_classes):
 def polydet_post_process(dets, c, s, h, w, num_classes):
   ret = []
   for i in range(dets.shape[0]):
-    top_preds = {}
+    top_preds = {} #dic of results for each class
     dets[i, :, :2] = transform_preds(dets[i, :, 0:2], c[i], s[i], (w, h))
     dets[i, :, 2:4] = transform_preds(dets[i, :, 2:4], c[i], s[i], (w, h))
 
@@ -113,9 +115,9 @@ def polydet_post_process(dets, c, s, h, w, num_classes):
     for j in range(num_classes):
       inds = (classes == j)
       top_preds[j + 1] = np.concatenate([
-        dets[i, inds, :4].astype(np.float32),
-        dets[i, inds, 4:5].astype(np.float32),
-        dets[i, inds, 6:].astype(np.float32)], axis=1).tolist()
+        dets[i, inds, :4].astype(np.float32), #bounding boxes
+        dets[i, inds, 4:5].astype(np.float32), #score (removing class)
+        dets[i, inds, 6:].astype(np.float32)], axis=1).tolist() #polys, depth
     ret.append(top_preds)
   return ret
 
