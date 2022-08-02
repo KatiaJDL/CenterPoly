@@ -71,7 +71,7 @@ class opts(object):
                              help='output stride. Currently only supports 4.')
     self.parser.add_argument('--rep', default='cartesian',
                              help='representation of the polygon vertices'
-                                  'cartesian | polar')
+                                  'cartesian | polar | polar_fixed | polar_confined')
 
     # input
     self.parser.add_argument('--input_res', type=int, default=-1,
@@ -120,6 +120,8 @@ class opts(object):
                                   ' during validation.')
 
     # dataset
+    self.parser.add_argument('--data_dir', default='/Store/datasets/',
+                             help='localisation of the dataset')
     self.parser.add_argument('--not_rand_crop', action='store_true',
                              help='not use the random crop data augmentation'
                                   'from CornerNet.')
