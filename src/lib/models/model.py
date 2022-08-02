@@ -116,7 +116,7 @@ def load_model(model, model_path, optimizer=None, resume=False,
   FREEZE_LAYERS = False
   if FREEZE_LAYERS:
     for name, param in model.named_parameters():
-      if name in loaded_state_dict and (not 'hm' in name):
+      if name in loaded_state_dict and (not 'poly' in name) and (not 'poly' in name) and (not 'hm' in name):
         # print('Freeze: ', name)
         param.requires_grad = False
         param.freeze = True
