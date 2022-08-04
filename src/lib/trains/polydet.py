@@ -7,7 +7,7 @@ import numpy as np
 
 from models.losses import FocalLoss
 from models.losses import RegL1Loss, RegLoss, RegL1PolyLoss, RegBCEPolyLoss, RegL1PolyPolarLoss, AreaPolyLoss, IoUPolyLoss, \
-    IoUPolyPolarLoss, NormRegL1Loss, RegWeightedL1Loss, IoURegL1PolyLoss, IoURegL1PolyPolarLoss
+    IoUPolyPolarLoss, IoUPolyPolarFixedLoss, NormRegL1Loss, RegWeightedL1Loss, IoURegL1PolyLoss, IoURegL1PolyPolarLoss
 from models.decode import polydet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger
@@ -32,13 +32,16 @@ class PolydetLoss(torch.nn.Module):
                 self.crit_poly = IoURegL1PolyLoss()
             elif opt.poly_loss == 'bce':
                 self.crit_poly = RegBCEPolyLoss()
-        if opt.rep == 'polar':
+        elif opt.rep == 'polar':
             if opt.poly_loss == 'iou':
                 self.crit_poly = IoUPolyPolarLoss()
             elif opt.poly_loss == 'l1':
                 self.crit_poly = RegL1PolyPolarLoss()
             elif opt.poly_loss == 'l1+iou':
                 self.crit_poly = IoURegL1PolyPolarLoss()
+        elif opt.rep == 'polar_fixed':
+            if opt.poly_loss == 'iou':
+                self.crit_poly = IoUPolyPolarFixedLoss()
         self.crit_dense_poly = torch.nn.L1Loss(reduction='sum')
         self.crit_wh = torch.nn.L1Loss(reduction='sum') if opt.dense_wh else \
             NormRegL1Loss() if opt.norm_wh else \
@@ -157,7 +160,7 @@ class PolydetTrainer(BaseTrainer):
         dets = polydet_decode(
             output['hm'], output['wh'], reg=reg,
             cat_spec_poly=opt.cat_spec_poly, K=opt.K,
-            polar = (self.opt.rep == 'polar'))
+            rep = opt.rep)
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets[:, :, :4] *= opt.down_ratio
         dets_gt = batch['meta']['gt_det'].numpy().reshape(1, -1, dets.shape[2])
@@ -194,7 +197,7 @@ class PolydetTrainer(BaseTrainer):
         dets = polydet_decode(
             output['hm'], output['poly'], output['pseudo_depth'], reg=reg,
             cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K, 
-            polar = self.opt.rep == 'polar')
+            rep = self.opt.rep)
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets_out = polydet_post_process(
             dets.copy(), batch['meta']['c'].cpu().numpy(),

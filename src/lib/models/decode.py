@@ -507,11 +507,9 @@ def ctdet_decode(heat, wh, reg=None, cat_spec_wh=False, K=100):
 
     return detections
 
-def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, polar = False):
+def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep = 'cartesian'):
     batch, cat, height, width = heat.size()
     nbr_points = int(polys.shape[-1])
-
-    print("decode")
 
     # heat = torch.sigmoid(heat)
     # perform nms on heatmaps
@@ -579,7 +577,7 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
     #                    ])
     #print('décode')
     #print(scores.shape)
-    if polar :
+    if rep == 'polar' or 'polar_fixed' :
         for k, batch in enumerate(polys):
             #print(batch.shape)
             #print('polaire')
@@ -601,8 +599,17 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
                         #print(r)
                         #print(theta)
 
-                        batch[i][j] = r*math.cos(theta)
-                        batch[i][j+1] = r*math.sin(theta)
+                        if rep == 'polar_fixed':
+
+                            fixed_angle = 2*3.14 - 2*3.14/polys.shape[-1]*j
+
+                            batch[i][j] = r*math.cos(fixed_angle)
+                            batch[i][j+1] = r*math.sin(fixed_angle)
+
+                        else:
+
+                            batch[i][j] = r*math.cos(theta)
+                            batch[i][j+1] = r*math.sin(theta)
 
                         #print("cartesien")
                         #print(batch[i][j])

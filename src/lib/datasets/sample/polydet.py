@@ -215,7 +215,6 @@ class PolydetDataset(data.Dataset):
         wh[k] = 1. * w, 1. * h
 
         # points_on_border = np.array(points_on_border).astype(np.float32)
-        # print(points_on_border)
         #exp
         points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
         for i in range(0, len(points_on_border), 2):
@@ -233,7 +232,7 @@ class PolydetDataset(data.Dataset):
               cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = points_on_border[i+1] - ct[1]
               cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
 
-          elif self.opt.rep == 'polar' :
+          elif self.opt.rep == 'polar' or 'polar_fixed' :
 
             #print(points_on_border[i])
             #print(points_on_border[i+1])

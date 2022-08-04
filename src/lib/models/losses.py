@@ -472,6 +472,94 @@ class IoUPolyPolarLoss(nn.Module):
         loss = 1 - loss / (mask.sum() + 1e-4)#+ loss_ordre/(mask.sum() + 1e-4)
         return loss
 
+class IoUPolyPolarFixedLoss(nn.Module):
+    def __init__(self):
+        super(IoUPolyPolarFixedLoss, self).__init__()
+
+    def forward(self, output, mask, ind, target, freq_mask = None, hm = None):
+        """
+        Parameters:
+            output: output of polygon head
+              [batch_size, 2*nb_vertices, nb_max_objects, nb_heads]
+            mask: selected objects
+              [batch_size, nb_max_objects]
+            ind:
+              [batch_size, nb_max_objects]
+            target: ground-truth for the polygons
+              [batch_size, 2*nb_vertices, nb_max_objects]
+            hm: output of heatmap head
+              [batch_size, nb_categories, height, width]
+        Returns:
+            loss: scalar
+        """
+
+
+        pred = _transpose_and_gather_feat(output, ind) #[batch_size, nb_objects, 32]
+        loss = 0
+        loss_ordre = 0
+
+        OFFSET = 100
+
+        predictions = False
+
+        for batch in range(output.shape[0]):
+
+            for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                if mask[batch][i]:
+
+                    predictions = True
+
+                    OFFSET = 100
+
+                    #print("object")
+                    polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_pred = []
+
+                    polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+                    poly_points_gt = []
+
+                    #print("new")
+
+
+                    for j in range(0, pred[batch].shape[1] - 1, 2):  # points
+                        #print(j)
+
+                        fixed_angle = 2*3.14 - 2*3.14/pred[batch].shape[1]*j
+
+                        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(fixed_angle),
+                                            OFFSET+pred[batch][i][j]*math.sin(fixed_angle)))
+                        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
+                                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+
+                        #print(fixed_angle)
+                        #print(target[batch][i][j+1])
+
+                    #print(poly_points_pred)
+                    #print(poly_points_gt)
+                    ImageDraw.Draw(polygon_mask_pred).polygon(poly_points_pred, outline=0, fill=255)
+                    #polygon_mask_pred.show()
+                    polygon_mask_pred = torch.Tensor(np.array(polygon_mask_pred)).cuda()
+
+                    ImageDraw.Draw(polygon_mask_gt).polygon(poly_points_gt, outline=0, fill=255)
+                    #polygon_mask_gt.show()
+                    polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
+
+                    intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
+                    union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+
+                    loss += intersection/(union+ 1e-4)
+                    #print(intersection/(union+ 1e-4))
+
+                    #time.sleep(30)
+
+        if not predictions: #no centers predicted
+            loss = 0.0
+
+        loss = 1 - loss / (mask.sum() + 1e-4)#+ loss_ordre/(mask.sum() + 1e-4)
+        return loss
+
+
 class IoURegL1PolyLoss(nn.Module):
     def __init__(self):
         super(IoURegL1PolyLoss, self).__init__()
