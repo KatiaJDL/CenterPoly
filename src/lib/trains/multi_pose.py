@@ -5,7 +5,7 @@ from __future__ import print_function
 import torch
 import numpy as np
 
-from models.losses_old import FocalLoss, RegL1Loss, RegLoss, RegWeightedL1Loss
+from models.losses import FocalLoss, RegL1Loss, RegLoss, RegWeightedL1Loss
 from models.decode import multi_pose_decode
 from models.utils import _sigmoid, flip_tensor, flip_lr_off, flip_lr
 from utils.debugger import Debugger
