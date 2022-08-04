@@ -159,6 +159,8 @@ class opts(object):
                                   'keypoint heatmaps.')
     self.parser.add_argument('--poly_loss', default='l1',
                              help='polygon regression loss: l1 | iou | l1+iou | bce')
+    self.parser.add_argument('--poly_order', type=bool, default=False,
+                             help='polygon order loss')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
                              help='use elliptical gaussians to train '

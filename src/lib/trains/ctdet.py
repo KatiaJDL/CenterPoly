@@ -5,8 +5,8 @@ from __future__ import print_function
 import torch
 import numpy as np
 
-from models.losses import FocalLoss
-from models.losses import RegL1Loss, RegLoss, NormRegL1Loss, RegWeightedL1Loss
+from models.losses_old import FocalLoss
+from models.losses_old import RegL1Loss, RegLoss, NormRegL1Loss, RegWeightedL1Loss
 from models.decode import ctdet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger

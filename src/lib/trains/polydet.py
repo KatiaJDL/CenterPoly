@@ -6,8 +6,7 @@ import torch
 import numpy as np
 
 from models.losses import FocalLoss
-from models.losses import RegL1Loss, RegLoss, RegL1PolyLoss, RegBCEPolyLoss, RegL1PolyPolarLoss, AreaPolyLoss, IoUPolyLoss, \
-    IoUPolyPolarLoss, IoUPolyPolarFixedLoss, NormRegL1Loss, RegWeightedL1Loss, IoURegL1PolyLoss, IoURegL1PolyPolarLoss
+from models.losses import RegL1Loss, RegLoss, PolyLoss, NormRegL1Loss(), RegWeightedL1Loss(), AreaPolyLoss()
 from models.decode import polydet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger
@@ -23,25 +22,9 @@ class PolydetLoss(torch.nn.Module):
         self.crit = torch.nn.MSELoss() if opt.mse_loss else FocalLoss()
         self.crit_reg = RegL1Loss() if opt.reg_loss == 'l1' else \
             RegLoss() if opt.reg_loss == 'sl1' else None
-        if opt.rep == 'cartesian':
-            if opt.poly_loss == 'iou':
-                self.crit_poly = IoUPolyLoss()
-            elif opt.poly_loss == 'l1':
-                self.crit_poly = RegL1PolyLoss()
-            elif opt.poly_loss == 'l1+iou':
-                self.crit_poly = IoURegL1PolyLoss()
-            elif opt.poly_loss == 'bce':
-                self.crit_poly = RegBCEPolyLoss()
-        elif opt.rep == 'polar':
-            if opt.poly_loss == 'iou':
-                self.crit_poly = IoUPolyPolarLoss()
-            elif opt.poly_loss == 'l1':
-                self.crit_poly = RegL1PolyPolarLoss()
-            elif opt.poly_loss == 'l1+iou':
-                self.crit_poly = IoURegL1PolyPolarLoss()
-        elif opt.rep == 'polar_fixed':
-            if opt.poly_loss == 'iou':
-                self.crit_poly = IoUPolyPolarFixedLoss()
+
+        self.crit_poly = PolyLoss(opt)
+
         self.crit_dense_poly = torch.nn.L1Loss(reduction='sum')
         self.crit_wh = torch.nn.L1Loss(reduction='sum') if opt.dense_wh else \
             NormRegL1Loss() if opt.norm_wh else \

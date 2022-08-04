@@ -5,7 +5,7 @@ from __future__ import print_function
 import torch
 import numpy as np
 
-from models.losses import FocalLoss, L1Loss, BinRotLoss
+from models.losses_old import FocalLoss, L1Loss, BinRotLoss
 from models.decode import ddd_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger

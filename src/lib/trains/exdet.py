@@ -9,7 +9,7 @@ import sys
 import time
 from utils.debugger import Debugger
 from models.data_parallel import DataParallel
-from models.losses import FocalLoss, RegL1Loss
+from models.losses_old import FocalLoss, RegL1Loss
 from models.decode import agnex_ct_decode, exct_decode
 from models.utils import _sigmoid
 from .base_trainer import BaseTrainer
