@@ -141,6 +141,9 @@ def create_mask(output, pred, target, batch, num_object, rep):
                             target[batch][i][j+1]+OFFSET))
       elif rep=='polar_fixed':
         fixed_angle = 2*3.14 - 2*3.14/pred[batch].shape[1]*j
+
+        #print(fixed_angle)
+
         poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(fixed_angle),
                             OFFSET+pred[batch][i][j]*math.sin(fixed_angle)))
         poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
@@ -156,7 +159,7 @@ def create_mask(output, pred, target, batch, num_object, rep):
   #polygon_mask_gt.show()
   polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
 
-  #time.sleep(30)
+  #time.sleep(10)
 
   return polygon_mask_pred, polygon_mask_gt
 
@@ -226,12 +229,14 @@ class PolyLoss(nn.Module):
         device = mask.device
 
         pred = _transpose_and_gather_feat(output, ind)
-        mask = mask.unsqueeze(2).expand_as(pred).float()
 
         #predictions = False
 
         loss = 0.0
+        loss_reg = 0.0
         loss_order = 0.0
+
+        sum = 0
 
         for batch in range(output.shape[0]):
 
@@ -239,27 +244,67 @@ class PolyLoss(nn.Module):
 
                 if mask[batch][i]:
 
+                    #print(pred[batch][i])
+
+                    sum+=1
+
                     #predictions = True
 
-                    polygon_mask_pred, polygon_mask_gt = create_mask(output,pred, target, batch, i, self.opt.rep)
+                    polygon_mask_pred, polygon_mask_gt = create_mask(output, pred, target, batch, i, self.opt.rep)
 
                     if self.opt.poly_loss == 'bce':
                         loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
                     elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou':
+                        #print("iou object")
                         intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
                         union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
                         loss += intersection/(union+ 1e-6)
+                        #print(intersection/(union+ 1e-6))
+                        #print(loss)
 
+                    if self.opt.poly_order:
+                        angles = pred[batch][i][1::2]
+
+                        zero = False
+                        for j in range(0, (pred[batch].shape[1] + 1) //2):
+                            if angles[j] > 0 :
+                                zero = True
+                            if angles[j] < 0 and zero:
+                                angles[j] += 2*3.14
+
+                        #print(len(angles))
+                        #print(angles)
+
+                        for j in range(0, (pred[batch].shape[1] - 1) //2):  # points
+                            for k in range(j, (pred[batch].shape[1] + 1) //2):
+                                if angles[j]-angles[k] > 0 :
+                                    loss_order += angles[j]-angles[k]
+                                    #print(j)
+                                    #print(k)
+                                    #print(angles[j]-angles[k])
+                                if angles[j]-angles[k] < -7:
+                                    loss_order += angles[k]-angles[j]
+                                    #print(j)
+                                    #print(k)
+                                    #print(angles[j]-angles[k])
+
+                    #time.sleep(10)
 
         #if not predictions: #no centers predicted
         #        loss = 0.0
 
+        #print(mask.sum())
+        loss_order /= (10*mask.sum() + 1e-4)
+
         if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' :
             loss = 1 - loss / (mask.sum() + 1e-6)
         if self.opt.poly_loss == 'l1' or self.opt.poly_loss == 'l1+iou' :
+            mask = mask.unsqueeze(2).expand_as(pred).float()
             if self.opt.rep == 'cartesian' :
+                #print("l1")
                 loss_reg = F.l1_loss(pred * mask, target * mask, reduction='sum')
             elif self.opt.rep == 'polar' :
+                #print("l1 polar")
                 mask_angles = torch.FloatTensor([1,0]*(output.shape[1]//2))
                 mask_angles =mask_angles.to(device)
                 mask_angles = mask_angles.unsqueeze(0).unsqueeze(1).expand_as(pred)
@@ -269,14 +314,29 @@ class PolyLoss(nn.Module):
                 #loss +=  WEIGHT_ANGLE * F.l1_loss(pred * mask*(1-mask_angles), target * mask*WEIGHT_ANGLE*(1-mask_angles), reduction='sum')
                 loss_reg +=  torch.sum(1 - torch.cos(pred * mask*(1-mask_angles) - target * mask*(1-mask_angles)))
                 del mask_angles
+            elif self.opt.rep == 'polar_fixed' :
+                #print("l1 polar fixed")
+                mask_angles = torch.FloatTensor([1,0]*(output.shape[1]//2))
+                mask_angles = mask_angles.to(device)
+                mask_angles = mask_angles.unsqueeze(0).unsqueeze(1).expand_as(pred)
+
+                #WEIGHT_ANGLE = 10
+                loss_reg = F.l1_loss(pred * mask*mask_angles, target * mask*mask_angles, reduction='sum')
+
             #predictions = True
             loss_reg /= (mask.sum() + 1e-6) #/ (freq_mask.mean() + 1e-4)
 
+        print("iou ", loss)
+        print("l1 ", loss_reg)
         loss += loss_reg #loss=0 if pure regression loss selected
 
         if self.opt.poly_order :
-            loss += + loss_order/(mask.sum() + 1e-4)
+            #print("------------")
+            #print("iou ", loss)
+            #print("order ", loss_order)
+            loss += loss_order
 
+        #print(loss)
 
         return loss
 

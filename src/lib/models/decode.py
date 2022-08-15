@@ -7,6 +7,8 @@ import torch.nn as nn
 from .utils import _gather_feat, _transpose_and_gather_feat
 import numpy as np
 import math
+from PIL import Image, ImageDraw
+import time
 
 def _nms(heat, kernel=3):
     pad = (kernel - 1) // 2
@@ -577,10 +579,9 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep
     #                    ])
     #print('décode')
     #print(scores.shape)
-    if rep == 'polar' or 'polar_fixed' :
+    if rep == 'polar' or rep == 'polar_fixed' :
         for k, batch in enumerate(polys):
             #print(batch.shape)
-            #print('polaire')
             #print(batch[0])
             bad_order = 0
             for i in range(polys.shape[1]):
@@ -602,6 +603,7 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep
                         if rep == 'polar_fixed':
 
                             fixed_angle = 2*3.14 - 2*3.14/polys.shape[-1]*j
+                            #print(fixed_angle)
 
                             batch[i][j] = r*math.cos(fixed_angle)
                             batch[i][j+1] = r*math.sin(fixed_angle)
@@ -621,6 +623,7 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep
 
     polys[..., 0::2] += xs
     polys[..., 1::2] += ys
+
     # print(polys[..., 0::2].shape, x_boxes.transpose(1, 0).shape)
 
     # polys[..., 0::2] += x_boxes.transpose(1, 0)
