@@ -7,6 +7,8 @@ import _init_paths
 import os
 
 import torch
+import random
+import numpy as np
 import torch.utils.data
 from opts import opts
 from models.model import create_model, load_model, save_model
@@ -17,7 +19,10 @@ from trains.train_factory import train_factory
 
 
 def main(opt):
+  random.seed(opt.seed)
+  np.random.seed(opt.seed)
   torch.manual_seed(opt.seed)
+  torch.cuda.manual_seed(opt.seed)
   torch.backends.cudnn.benchmark = not opt.not_cuda_benchmark and not opt.test
   Dataset = get_dataset(opt.dataset, opt.task)
   opt = opts().update_dataset_info_and_set_heads(opt, Dataset)
