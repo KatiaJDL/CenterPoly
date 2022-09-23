@@ -15,4 +15,5 @@ train_factory = {
   'ctdet': CtdetTrainer,
   'multi_pose': MultiPoseTrainer,
   'polydet': PolydetTrainer,
+  'diskdet': PolydetTrainer
 }

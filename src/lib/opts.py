@@ -11,7 +11,7 @@ class opts(object):
     self.parser = argparse.ArgumentParser()
     # basic experiment setting
     self.parser.add_argument('task', default='ctdet',
-                             help='ctdet | ddd | multi_pose | exdet | polydet')
+                             help='ctdet | ddd | multi_pose | exdet | polydet | diskdet')
     self.parser.add_argument('--dataset', default='uav',
                              help='coco | kitti |kitti2d | coco_hp | pascal | uadetrac | uadetrac1on10 | uadetrac1on10_b| uav | cityscapes | IDD')
     self.parser.add_argument('--exp_id', default='default')
@@ -383,6 +383,16 @@ class opts(object):
                    }
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
+    elif opt.task == 'diskdet':
+      opt.heads = {'hm': opt.num_classes,
+                   'poly': opt.nbr_points*2 if not opt.cat_spec_poly else opt.nbr_points*2 * opt.num_classes,
+                   'pseudo_depth': 1,
+                   # 'fg': 1,
+                   # 'wh': 2 ,
+                   #'border_hm': 1,
+                   }
+      if opt.reg_offset:
+        opt.heads.update({'reg': 2})
     elif opt.task == 'ctdetVid':
       # assert opt.dataset in ['pascal', 'coco']
       opt.heads = {'hm': opt.num_classes,
@@ -417,6 +427,9 @@ class opts(object):
                    'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                    'dataset': 'uadetrac1on10'},
         'polydet': {'default_resolution': [512, 1024], 'num_classes': 11,
+                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
+                          'dataset': 'cityscapes'},
+        'diskdet': {'default_resolution': [512, 1024], 'num_classes': 11,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
         'ctdetMultiSpot': {'default_resolution': [1024, 2048], 'num_classes': 1,

@@ -13,5 +13,6 @@ detector_factory = {
   'ddd': DddDetector,
   'ctdet': CtdetDetector,
   'polydet': PolydetDetector,
+  'diskdet': PolydetDetector,
   'multi_pose': MultiPoseDetector,
 }

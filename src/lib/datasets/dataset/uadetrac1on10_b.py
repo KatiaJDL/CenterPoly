@@ -115,7 +115,7 @@ class UADETRAC1ON10_b(data.Dataset):
         return detections
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet':
+        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
