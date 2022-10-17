@@ -116,38 +116,43 @@ def _reg_loss(regr, gt_regr, mask):
 
 def create_mask(output, pred, target, batch, num_object, rep):
 
-  OFFSET = 100
+
+  SUBPIXEL = 10
+  OFFSET_Y = SUBPIXEL*output.shape[-1]//4 ###
+  OFFSET_X = SUBPIXEL*output.shape[-2]//4 ###
   i = num_object
 
-  #print("object")
-  polygon_mask_pred = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
-  poly_points_pred = []
 
-  polygon_mask_gt = Image.new('L', (output.shape[-1], output.shape[-2]), 0)
+  #print("object")
+  polygon_mask_pred = Image.new('L', (SUBPIXEL*output.shape[-1], SUBPIXEL*output.shape[-2]), 0) ###
+  poly_points_pred = []
+  #print(polygon_mask_pred.size)
+
+  polygon_mask_gt = Image.new('L', (SUBPIXEL*output.shape[-1], SUBPIXEL*output.shape[-2]), 0) ###
   poly_points_gt = []
 
 
   for j in range(0, pred[batch].shape[1] - 1, 2):  # points
       #print(j)
       if rep =='polar':
-        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
-                            OFFSET+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
-        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
-                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+        poly_points_pred.append((OFFSET_X+pred[batch][i][j]*math.cos(pred[batch][i][j+1]),
+                            OFFSET_Y+pred[batch][i][j]*math.sin(pred[batch][i][j+1])))
+        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET_X,
+                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET_Y))
       elif rep=='cartesian':
-        poly_points_pred.append((pred[batch][i][j]+OFFSET,
-                            pred[batch][i][j+1]+OFFSET))
-        poly_points_gt.append((target[batch][i][j]+OFFSET,
-                            target[batch][i][j+1]+OFFSET))
+        poly_points_pred.append((SUBPIXEL*pred[batch][i][j]+OFFSET_X,
+                            SUBPIXEL*pred[batch][i][j+1]+OFFSET_Y)) ###
+        poly_points_gt.append((SUBPIXEL*target[batch][i][j]+OFFSET_X,
+                            SUBPIXEL*target[batch][i][j+1]+OFFSET_Y)) ###
       elif rep=='polar_fixed':
         fixed_angle = 2*3.14 - 2*3.14/pred[batch].shape[1]*j
 
         #print(fixed_angle)
 
-        poly_points_pred.append((OFFSET+pred[batch][i][j]*math.cos(fixed_angle),
-                            OFFSET+pred[batch][i][j]*math.sin(fixed_angle)))
-        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET,
-                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET))
+        poly_points_pred.append((OFFSET_X+pred[batch][i][j]*math.cos(fixed_angle),
+                            OFFSET_Y+pred[batch][i][j]*math.sin(fixed_angle)))
+        poly_points_gt.append((target[batch][i][j]*math.cos(target[batch][i][j+1])+OFFSET_X,
+                            target[batch][i][j]*math.sin(target[batch][i][j+1])+OFFSET_Y))
 
   #print(poly_points_pred)
   #print(poly_points_gt)
@@ -159,7 +164,7 @@ def create_mask(output, pred, target, batch, num_object, rep):
   #polygon_mask_gt.show()
   polygon_mask_gt = torch.Tensor(np.array(polygon_mask_gt)).cuda()
 
-  #time.sleep(10)
+  #time.sleep(5)
 
   return polygon_mask_pred, polygon_mask_gt
 
@@ -254,12 +259,19 @@ class PolyLoss(nn.Module):
 
                     if self.opt.poly_loss == 'bce':
                         loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
-                    elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou':
+                    elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
                         #print("iou object")
                         intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
                         union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
                         loss += intersection/(union+ 1e-6)
-                        #print(intersection/(union+ 1e-6))
+
+                        #Gradient augmentation for IoU loss ?
+                        #loss += intersection/(union+ 1e-6)*torch.sum(polygon_mask_gt != 0)
+
+                        #print(torch.sum(polygon_mask_pred != 0))
+                        #print(union)
+                        #print(torch.sum(polygon_mask_gt != 0))
+                        #print(intersection/(union+ 1e-6)*torch.sum(polygon_mask_gt != 0))
                         #print(loss)
 
                     if self.opt.poly_order:
@@ -274,6 +286,8 @@ class PolyLoss(nn.Module):
 
                         #print(len(angles))
                         #print(angles)
+                        #print(target[batch][i][1::2])
+                        #print("--------")
 
                         for j in range(0, (pred[batch].shape[1] - 1) //2):  # points
                             for k in range(j, (pred[batch].shape[1] + 1) //2):
@@ -287,8 +301,14 @@ class PolyLoss(nn.Module):
                                     #print(j)
                                     #print(k)
                                     #print(angles[j]-angles[k])
+                        #if loss_order>0.5:
+                        #  print(loss_order)
+                        #  print(pred[batch][i])
+                        #  print(target[batch][i])
+                        #  print(polygon_mask_gt)
+                        #  print("------")
 
-                    #time.sleep(10)
+                        #  time.sleep(30)
 
         #if not predictions: #no centers predicted
         #        loss = 0.0
@@ -296,11 +316,20 @@ class PolyLoss(nn.Module):
         #print(mask.sum())
         loss_order /= (10*mask.sum() + 1e-4)
 
-        if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' :
+        if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
             loss = 1 - loss / (mask.sum() + 1e-6)
-        if self.opt.poly_loss == 'l1' or self.opt.poly_loss == 'l1+iou' :
+        if self.opt.poly_loss == 'l1' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu' :
             mask = mask.unsqueeze(2).expand_as(pred).float()
-            if self.opt.rep == 'cartesian' :
+
+            if self.opt.poly_loss == 'relu' and self.opt.rep == 'cartesian':
+                alpha = 20
+                data_array = abs(pred-target)
+                data_array *= (data_array >= alpha)
+                tgt = torch.zeros_like(data_array, requires_grad=True)
+                loss_reg = F.l1_loss(data_array * mask, tgt, reduction='sum')
+                #print(loss_reg)
+
+            elif self.opt.rep == 'cartesian' :
                 #print("l1")
                 loss_reg = F.l1_loss(pred * mask, target * mask, reduction='sum')
             elif self.opt.rep == 'polar' :
@@ -326,8 +355,8 @@ class PolyLoss(nn.Module):
             #predictions = True
             loss_reg /= (mask.sum() + 1e-6) #/ (freq_mask.mean() + 1e-4)
 
-        print("iou ", loss)
-        print("l1 ", loss_reg)
+        #print("iou ", loss)
+        #print("l1 ", loss_reg)
         loss += loss_reg #loss=0 if pure regression loss selected
 
         if self.opt.poly_order :
@@ -335,6 +364,86 @@ class PolyLoss(nn.Module):
             #print("iou ", loss)
             #print("order ", loss_order)
             loss += loss_order
+
+        #print(loss)
+
+        return loss
+
+class DiskLoss(nn.Module):
+    def __init__(self, opt):
+        super(DiskLoss, self).__init__()
+        self.opt = opt
+
+    def forward(self, output, mask, ind, target, freq_mask, hm = None):
+        """
+        Parameters:
+            output: output of polygon head
+              [batch_size, 2*nb_vertices, nb_max_objects, nb_heads]
+            mask: selected objects
+              [batch_size, nb_max_objects]
+            ind:
+              [batch_size, nb_max_objects]
+            target: ground-truth for the polygons
+              [batch_size, 2*nb_vertices, nb_max_objects]
+            hm: output of heatmap head
+              [batch_size, nb_categories, height, width]
+        Returns:
+            loss: scalar
+        """
+
+
+        pred = _transpose_and_gather_feat(output, ind)
+        SUBPIXEL = 10
+        OFFSET_Y = SUBPIXEL*output.shape[-1]//4 ###
+        OFFSET_X = SUBPIXEL*output.shape[-2]//4 ###
+
+        loss = 0.0
+
+        for batch in range(output.shape[0]):
+
+              for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                  if mask[batch][i]:
+
+                      polygon_mask_pred, polygon_mask_gt = create_mask(output, pred, target, batch, i, self.opt.rep)
+
+                      pred_disks = Image.new('L', (SUBPIXEL*output.shape[-1], SUBPIXEL*output.shape[-2]), 0) ###
+
+                      #print(pred[batch][i])
+
+                      r = pred[batch][i][-1]
+                      #loss += (abs(r) - r)/2
+                      #print((abs(r) - r)/2)
+                      r = math.ceil(abs(r))
+                      #print("Le rayon est ", r)
+
+                      for j in range(0, pred[batch].shape[1] - 3, 2):  # points
+
+                          x = pred[batch][i][j]
+                          y = pred[batch][i][j+1]
+
+
+                          ImageDraw.Draw(pred_disks).ellipse([(x-r + OFFSET_X, y-r+ OFFSET_Y), (x+r+ OFFSET_X, y+r+ OFFSET_Y)], outline=255, fill=255)
+
+                      pred_disks_tensor = torch.Tensor(np.array(pred_disks)).cuda()
+                      #pred_disks.show()
+
+
+                      intersection = torch.sum((pred_disks_tensor + polygon_mask_gt) == 510)
+                      union = torch.sum(pred_disks_tensor != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+
+                      loss += intersection/(union+ 1e-6)
+
+                      #Gradient augmentation
+                      #loss += (1-intersection/(union+ 1e-6))*torch.sum(polygon_mask_gt != 0)
+
+                      #print("Aire ", torch.sum(polygon_mask_gt != 0))
+                      #print(intersection/(union+ 1e-6))#*torch.sum(polygon_mask_gt != 0))
+                      #time.sleep(5)
+
+
+        loss = loss / (mask.sum() + 1e-6)
+
 
         #print(loss)
 
