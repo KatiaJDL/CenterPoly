@@ -16,6 +16,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import cv2
 
+def initialize_weights(m):
+    if isinstance(m, nn.Conv2d):
+        nn.init.xavier_uniform_(m.weight.data, 8)
+
 
 class convolution(nn.Module):
     def __init__(self, k, inp_dim, out_dim, stride=1, with_bn=True):
@@ -412,6 +416,8 @@ class exkp(nn.Module):
             elif 'poly' in head:
                 # module = nn.ModuleList([poly_module(curr_dim, heads[head]) for _ in range(nstack)])
                 module = nn.ModuleList([make_poly_layer(cnv_dim, curr_dim, heads[head]) for _ in range(nstack)])
+                #module.apply(initialize_weights)
+                #print("initialized")
                 self.__setattr__(head, module)
             else:
                 module = nn.ModuleList([
