@@ -6,7 +6,7 @@ import torch
 import numpy as np
 
 from models.losses import FocalLoss
-from models.losses import RegL1Loss, RegLoss, PolyLoss, NormRegL1Loss, RegWeightedL1Loss, AreaPolyLoss
+from models.losses import RegL1Loss, RegLoss, PolyLoss, DiskLoss, NormRegL1Loss, RegWeightedL1Loss, AreaPolyLoss
 from models.decode import polydet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger
@@ -25,6 +25,8 @@ class PolydetLoss(torch.nn.Module):
 
         self.crit_poly = PolyLoss(opt)
 
+        self.crit_disks = DiskLoss(opt)
+
         self.crit_dense_poly = torch.nn.L1Loss(reduction='sum')
         self.crit_wh = torch.nn.L1Loss(reduction='sum') if opt.dense_wh else \
             NormRegL1Loss() if opt.norm_wh else \
@@ -33,9 +35,9 @@ class PolydetLoss(torch.nn.Module):
         self.opt = opt
 
     def forward(self, outputs, batch):
-        # print(batch.keys())
+        #print(batch.keys())
         opt = self.opt
-        hm_loss, off_loss, poly_loss, depth_loss, wh_loss, fg_loss = 0, 0, 0, 0, 0, 0
+        hm_loss, off_loss, poly_loss, depth_loss, wh_loss, fg_loss, disk_loss = 0, 0, 0, 0, 0, 0, 0.0
         # hm_loss, off_loss, poly_loss, depth_loss, border_hm_loss = 0, 0, 0, 0, 0
         for s in range(opt.num_stacks):
             output = outputs[s]
@@ -80,6 +82,11 @@ class PolydetLoss(torch.nn.Module):
 
             hm_loss += self.crit(output['hm'], batch['hm']) / opt.num_stacks
             # fg_loss += self.crit(output['fg'], batch['fg']) / opt.num_stacks
+
+            if opt.task == 'diskdet':
+                disk_loss += self.crit_disks(output['poly'], batch[
+                    'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm']) / opt.num_stacks
+
             # border_hm_loss += self.crit(output['border_hm'], batch['border_hm']) / opt.num_stacks
             # area_loss += self.area_poly(output['poly'], batch['reg_mask'], batch['ind'], batch['instance'], batch['centers']) / opt.num_stacks
             # print(output['poly'].shape)
@@ -118,11 +125,27 @@ class PolydetLoss(torch.nn.Module):
         loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss \
                + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
         # loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'off_loss': off_loss, 'poly_loss': poly_loss, 'depth_loss': depth_loss, 'border_hm_loss': border_hm_loss}
-        loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': poly_loss,
-                      'depth_l': depth_loss,
-                      #  'fg_l': fg_loss,
-                      # 'wh_l': wh_loss,
-                      }
+
+        if opt.task == 'diskdet' :
+            loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * disk_loss \
+                   + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
+
+            loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': disk_loss,
+                          'depth_l': depth_loss,
+                          #  'fg_l': fg_loss,
+                          # 'wh_l': wh_loss,
+                          }
+        else:
+            # loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss + opt.depth_weight * depth_loss
+            loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss \
+                   + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
+            # loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'off_loss': off_loss, 'poly_loss': poly_loss, 'depth_loss': depth_loss, 'border_hm_loss': border_hm_loss}
+
+            loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': poly_loss,
+                          'depth_l': depth_loss,
+                          #  'fg_l': fg_loss,
+                          # 'wh_l': wh_loss,
+                          }
         return loss, loss_stats
 
 
