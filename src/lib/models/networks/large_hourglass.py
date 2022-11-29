@@ -442,7 +442,7 @@ class exkp(nn.Module):
             #     write_image = cnv[:, channel, :, :].squeeze(0).detach()
             #     write_image = np.array(write_image)
             #     write_image = ((write_image - np.min(write_image)) / np.max(write_image) * 255).astype(np.uint8)
-            #     cv2.imwrite('/Store/datasets/UA-Detrac/exp/tensors/STD/tensor_' + str(channel) + '.jpg', write_image)
+            #     cv2.imwrite('/store/datasets/UA-Detrac/exp/tensors/STD/tensor_' + str(channel) + '.jpg', write_image)
             out = {}
             for head in self.heads:
                 layer = self.__getattr__(head)[ind]
