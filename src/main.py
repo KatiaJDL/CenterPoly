@@ -17,8 +17,13 @@ from logger import Logger
 from datasets.dataset_factory import get_dataset
 from trains.train_factory import train_factory
 
+import wandb
+
 
 def main(opt):
+
+  wandb.init(project="CenterPoly", entity="kjdl")
+
   random.seed(opt.seed)
   np.random.seed(opt.seed)
   torch.manual_seed(opt.seed)
@@ -40,6 +45,21 @@ def main(opt):
   if opt.load_model != '':
     model, optimizer, start_epoch = load_model(
       model, opt.load_model, optimizer, opt.resume, opt.lr, opt.lr_step)
+
+  wandb.config = {
+  "learning_rate": opt.lr,
+  "epochs": opt.batch_size,
+  "batch_size": 128,
+  "lr_step": opt.lr_step,
+  "repesentation": opt.rep,
+  "poly_loss": opt.poly_loss,
+  "poly_order": opt.poly_order,
+  "task": opt.task,
+  "nbr_points": opt.nbr_points,
+  "dataset": opt.dataset,
+  "backbone": opt.arch,
+  "model": opt.load_model
+}
 
   Trainer = train_factory[opt.task]
   trainer = Trainer(opt, model, optimizer)
