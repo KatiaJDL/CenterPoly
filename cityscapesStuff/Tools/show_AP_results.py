@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import seaborn as sns
 
-path = "/Store/travail/kajoda/CenterPoly/CenterPoly/exp/cityscapes/polydet/from_ctdet_smhg_1cnv_16_pw1_B/results/evaluationResults/"
+path = "/store/travail/kajoda/CenterPoly/CenterPoly/exp/cityscapes/polydet/from_ctdet_smhg_1cnv_16_pw1_B/results/evaluationResults/"
 
 with open(path + "resultInstanceLevelSemanticLabeling.json") as json_file:
             # print(json_file)
