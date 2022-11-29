@@ -120,7 +120,7 @@ class opts(object):
                                   ' during validation.')
 
     # dataset
-    self.parser.add_argument('--data_dir', default='/Store/datasets/',
+    self.parser.add_argument('--data_dir', default='/store/datasets/',
                              help='localisation of the dataset')
     self.parser.add_argument('--not_rand_crop', action='store_true',
                              help='not use the random crop data augmentation'
@@ -136,6 +136,8 @@ class opts(object):
                                   'apply rotation augmentation.')
     self.parser.add_argument('--flip', type = float, default=0.5,
                              help='probability of applying flip augmentation.')
+    self.parser.add_argument('--no_reorder_flip', action='store_true',
+                             help='not reorder vertices after flip augmentation')
     self.parser.add_argument('--no_color_aug', action='store_true',
                              help='not use the color augmenation '
                                   'from CornerNet')
@@ -159,7 +161,7 @@ class opts(object):
                                   'keypoint heatmaps.')
     self.parser.add_argument('--poly_loss', default='l1',
                              help='polygon regression loss: l1 | iou | l1+iou | bce')
-    self.parser.add_argument('--poly_order', type=bool, default=False,
+    self.parser.add_argument('--poly_order',  action='store_true',
                              help='polygon order loss')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
