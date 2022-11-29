@@ -19,15 +19,15 @@ class KITTI2D(data.Dataset):
 
     def __init__(self, opt, split):
         super(KITTI2D, self).__init__()
-        self.data_dir = '/Store/datasets/KITTI/left_image'
+        self.data_dir = '/store/datasets/KITTI/left_image'
         self.img_dir = self.data_dir
 
         if split == 'test':
-            self.annot_path = '/Store/datasets/KITTI/left_image/testval.json'
+            self.annot_path = '/store/datasets/KITTI/left_image/testval.json'
         elif split == 'val':
-            self.annot_path = '/Store/datasets/KITTI/left_image/val.json'
+            self.annot_path = '/store/datasets/KITTI/left_image/val.json'
         else:
-            self.annot_path = '/Store/datasets/KITTI/left_image/train.json'
+            self.annot_path = '/store/datasets/KITTI/left_image/train.json'
 
         self.max_objs = 50
         self.class_name = ['__background__', 'Pedestrian', 'Car', 'Cyclist']
@@ -123,6 +123,6 @@ class KITTI2D(data.Dataset):
 
     def run_eval(self, results, save_dir):
         self.save_results(results, save_dir)
-        os.system('/Store/datasets/KITTI/eval/cpp/evaluate_object_offline ' + \
-                  '/Store/datasets/KITTI/left_image/labels_testval ' + \
+        os.system('/store/datasets/KITTI/eval/cpp/evaluate_object_offline ' + \
+                  '/store/datasets/KITTI/left_image/labels_testval ' + \
                   '{}/results/'.format(save_dir))

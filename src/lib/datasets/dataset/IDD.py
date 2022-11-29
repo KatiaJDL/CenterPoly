@@ -208,7 +208,7 @@ class IDD(data.Dataset):
             for f in files:
                 os.remove(f)
             self.format_and_write_to_IDD(results, res_dir)
-            os.environ['IDD_DATASET'] = '/Store/datasets/IDD'
+            os.environ['IDD_DATASET'] = '/store/datasets/IDD'
             os.environ['IDD_RESULTS'] = res_dir
             from datasets.evaluation.IDDscripts.evaluation import evaluate_instance_segmentation
             AP = evaluate_instance_segmentation.getAP()

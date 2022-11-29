@@ -22,7 +22,7 @@ class KITTIPOLY(data.Dataset):
 
     def __init__(self, opt, split):
         super(KITTIPOLY, self).__init__()
-        self.data_dir = '/Store/datasets/KITTI/left_image'
+        self.data_dir = '/store/datasets/KITTI/left_image'
         self.img_dir = self.data_dir
         self.split = split
         self.opt = opt
@@ -199,7 +199,7 @@ class KITTIPOLY(data.Dataset):
             for f in files:
                 os.remove(f)
             self.format_and_write_to_kitti(results, res_dir)
-            os.environ['KITTI_DATASET'] = '/Store/datasets/KITTIPoly'
+            os.environ['KITTI_DATASET'] = '/store/datasets/KITTIPoly'
             os.environ['KITTI_RESULTS'] = res_dir
             from datasets.evaluation.kittiscripts.evaluation import evalInstanceLevelSemanticLabeling
             AP = evalInstanceLevelSemanticLabeling.getAP()
