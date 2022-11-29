@@ -4,7 +4,9 @@ from __future__ import print_function
 
 import pycocotools.coco as coco
 import numpy as np
+import math
 import json
+import time
 import os
 from PIL import Image, ImageDraw, ImageChops
 import torch.utils.data as data
@@ -14,6 +16,8 @@ from pycocotools.cocoeval import COCOeval
 import cv2
 import bresenham
 from shapely.geometry import Polygon
+import wandb
+
 
 # With traffic lights, poles and traffic signs
 FG = False
@@ -161,6 +165,31 @@ class CITYSCAPES(data.Dataset):
                     detections.append(detection)
         return detections
 
+    def convert_disks_eval_format(self, all_bboxes):
+        # import pdb; pdb.set_trace()
+        detections = []
+        for image_id in all_bboxes:
+            for cls_ind in all_bboxes[image_id]:
+                if cls_ind == 'fg':
+                    continue
+                category_id = self._valid_ids[cls_ind - 1]
+                for bbox in all_bboxes[image_id][cls_ind]:
+                    score = bbox[4]
+                    depth = bbox[-1]
+                    label = self.class_name[cls_ind]
+                    disks = list(map(self._to_float, bbox[5:-3]))
+                    r = self._to_float(bbox[-1])
+                    detection = {
+                        "image_id": int(image_id),
+                        "category_id": int(category_id),
+                        "disks": disks,
+                        "r": r,
+                        "score": float("{:.2f}".format(score)),
+                        "depth": float(depth),
+                    }
+                    detections.append(detection)
+        return detections
+
     def format_and_write_to_cityscapes(self, all_bboxes, save_dir):
         id_to_file = {}
         anno = json.load(open(self.annot_path))
@@ -250,12 +279,120 @@ class CITYSCAPES(data.Dataset):
         # with Pool(processes=4) as pool:
         #     pool.map(write_mask_image, param_list)
 
+    def format_and_write_to_cityscapes_disks(self, all_bboxes, save_dir):
+        #print("write disks")
+        id_to_file = {}
+        anno = json.load(open(self.annot_path))
+        for image in anno['images']:
+            id_to_file[image['id']] = image['file_name']
+
+        masks_dir = os.path.join(save_dir, 'masks')
+        if not os.path.exists(masks_dir):
+            os.mkdir(masks_dir)
+        # fg_dir = os.path.join(save_dir, 'fg')
+        # if not os.path.exists(fg_dir):
+        #     os.mkdir(fg_dir)
+
+        for image_id in all_bboxes:
+            #print(image_id)
+            image_name = id_to_file[int(image_id)]
+            text_file = open(os.path.join(save_dir, os.path.basename(image_name).replace('.png', '.txt')), 'w')
+            count = 0
+            ones = np.ones((1024, 2048))
+            to_remove_mask = np.zeros((1024, 2048))
+            param_list = []
+            # fg_path = os.path.join(fg_dir, os.path.basename(image_name))
+            # fg = all_bboxes[image_id]['fg']
+            # fg = np.array(cv2.resize(fg, (2048, 1024)))
+            # thresh = 0.5
+            # fg[fg >= thresh] = 1
+            # fg[fg < thresh] = 0
+            # fg = fg.astype(np.uint8)
+            # cv2.imwrite(fg_path, fg*255)
+            for cls_ind in all_bboxes[image_id]:
+                #print("cls ", cls_ind)
+                if cls_ind == 'fg':
+                    continue
+                for bbox in all_bboxes[image_id][cls_ind]:
+                    if bbox[4] > 0.05:
+                        depth = bbox[-1]
+                        label = self.class_name[cls_ind]
+                        disks = list(map(self._to_float, bbox[5:-3]))
+                        r= math.ceil(abs(bbox[-2]))
+                        disks = [(int(x), int(y)) for x, y in zip(disks[0::2], disks[1::2])]
+                        # if label != 'pole' and label != 'traffic sign' and label != 'traffic light':
+                        #     mask_path = os.path.join(masks_dir, os.path.basename(image_name).replace('.png', '_' + str(count) + '.png'))
+                        #     text_file.write('masks/' + os.path.basename(mask_path) + ' ' + str(self.label_to_id[label]) + ' ' + str(bbox[4]) + '\n')
+                        #     count += 1
+                        param_list.append((disks, r, bbox[4], label, depth))
+
+            for args in sorted(param_list, key=lambda x: x[-1]):
+                #print("new image")
+                centers, r, score, label, depth = args
+                disks_mask = Image.new('L', (2048, 1024), 0)
+                if label != 'pole' and label != 'traffic sign' and label != 'traffic light':
+
+                    # round edges
+                    # try:
+                    #     polygon = Polygon((points))
+                    #     polygon = polygon.buffer(10, join_style=1).buffer(-10.0, join_style=1)
+                    #     x, y = polygon.exterior.coords.xy
+                    #     points = [(int(item[0]), int(item[1])) for item in zip(x, y)]
+                    # except:
+                    #     do_nothing = True
+
+                    #print("good label")
+
+                    for pair in centers:
+                        #print("disks")
+                        ImageDraw.Draw(disks_mask).ellipse([(pair[0]-r, pair[1]-r), (pair[0]+r, pair[1]+r)], outline=255, fill=255)
+
+                    """
+
+                    # Draw contour
+                    contour = list(bresenham.bresenham(centers[-1][0], centers[-1][1], centers[0][0], centers[0][1]))
+                    for i in range(len(centers) - 1):
+                        line = bresenham.bresenham(centers[i][0], centers[i][1], centers[i + 1][0], centers[i + 1][1])
+                        contour += line
+                    radius = 2
+                    for point in set(contour):
+                        ImageDraw.Draw(disks_mask).ellipse([(point[0] - radius, point[1] - radius),
+                                                              (point[0] + radius, point[1] + radius)],
+                                                               outline=255, fill=255)
+
+                    # polygon_mask = Image.fromarray(np.array(polygon_mask) * np.array(fg))
+                    disks_mask = Image.fromarray(np.array(disks_mask) * (ones - to_remove_mask).astype(np.uint8))
+                    """
+
+                if score >= 0.5:
+                    to_remove_mask += np.array(disks_mask)
+                    to_remove_mask[to_remove_mask > 0] = 1
+                    # ImageDraw.Draw(to_remove_mask).polygon(points, outline=0, fill=0)
+                if label != 'pole' and label != 'traffic sign' and label != 'traffic light' and \
+                        np.count_nonzero(disks_mask) > 100:
+
+                    mask_path = os.path.join(masks_dir, os.path.basename(image_name).replace('.png', '_' + str(count)
+                                                                                             + '.png'))
+                    text_file.write('masks/' + os.path.basename(mask_path) + ' ' + str(self.label_to_id[label])
+                                    + ' ' + str(min(1, score*1.2)) + '\n')
+                    count += 1
+                    disks_mask.save(mask_path)
+                    #print("show")
+                    #disks_mask.show()
+                    #time.sleep(20)
+
+        # with Pool(processes=4) as pool:
+        #     pool.map(write_mask_image, param_list)
+
     def __len__(self):
         return self.num_samples
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
+        if self.opt.task == 'polydet':
             json.dump(self.convert_polygon_eval_format(results),
+                      open('{}/results.json'.format(save_dir), 'w'))
+        elif self.opt.task =='diskdet':
+            json.dump(self.convert_disks_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
             json.dump(self.convert_eval_format(results),
@@ -270,7 +407,8 @@ class CITYSCAPES(data.Dataset):
             coco_eval.evaluate()
             coco_eval.accumulate()
             coco_eval.summarize()
-        else:
+        elif self.opt.task == 'polydet':
+            print("run eval polydet")
             self.save_results(results, save_dir)
             res_dir = os.path.join(save_dir, 'results')
             if not os.path.exists(res_dir):
@@ -283,10 +421,41 @@ class CITYSCAPES(data.Dataset):
             files = glob.glob(to_delete)
             for f in files:
                 os.remove(f)
+            #print("format and write")
             self.format_and_write_to_cityscapes(results, res_dir)
-            os.environ['CITYSCAPES_DATASET'] = '/Store/datasets/cityscapes'
+            os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
             os.environ['CITYSCAPES_RESULTS'] = res_dir
             from datasets.evaluation.cityscapesscripts.evaluation import evalInstanceLevelSemanticLabeling
+            #print("get AP")
             AP = evalInstanceLevelSemanticLabeling.getAP()
+
+            #wandb.log({'AP': AP})
             return AP
             # return 0
+        elif self.opt.task == 'diskdet':
+            print('run eval diskdet')
+            self.save_results(results, save_dir)
+            #results = json.load(open('{}/results.json'.format(save_dir), 'r'))
+
+            #print('saved')
+            #print(results)
+            res_dir = os.path.join(save_dir, 'results')
+            if not os.path.exists(res_dir):
+                os.mkdir(res_dir)
+            to_delete = os.path.join(save_dir, 'results/*.txt')
+            files = glob.glob(to_delete)
+            for f in files:
+                os.remove(f)
+            to_delete = os.path.join(save_dir, 'results/*/*.png')
+            files = glob.glob(to_delete)
+            for f in files:
+                os.remove(f)
+            #print("format and write")
+            self.format_and_write_to_cityscapes_disks(results, res_dir)
+            os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
+            os.environ['CITYSCAPES_RESULTS'] = res_dir
+            #print("get AP")
+            from datasets.evaluation.cityscapesscripts.evaluation import evalInstanceLevelSemanticLabeling
+            AP = evalInstanceLevelSemanticLabeling.getAP()
+            #wandb.log({'AP': AP})
+            return AP

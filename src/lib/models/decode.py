@@ -669,6 +669,62 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep
 
     return detections
 
+def diskdet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep = 'cartesian'):
+    batch, cat, height, width = heat.size()
+    nbr_points = int(polys.shape[-1])
+
+    # heat = torch.sigmoid(heat)
+    # perform nms on heatmaps
+    heat = _nms(heat)
+    # border_heat = _nms(border_hm)
+    scores, inds, clses, ys, xs = _topk(heat, K=K)
+    # border_scores, border_inds, border_clses, border_ys, border_xs = _topk(border_heat, K=nbr_points*K)
+
+    if reg is not None:
+      reg = _transpose_and_gather_feat(reg, inds)
+      reg = reg.view(batch, K, 2)
+      xs = xs.view(batch, K, 1) + reg[:, :, 0:1]
+      ys = ys.view(batch, K, 1) + reg[:, :, 1:2]
+    else:
+      xs = xs.view(batch, K, 1) + 0.5
+      ys = ys.view(batch, K, 1) + 0.5
+    polys = _transpose_and_gather_feat(polys, inds)
+    depth = _transpose_and_gather_feat(depth, inds)
+    # wh = _transpose_and_gather_feat(wh, inds)
+    if cat_spec_poly:
+        polys = polys.view(batch, K, cat, nbr_points)
+        clses_ind = clses.view(batch, K, 1, 1).expand(batch, K, 1, nbr_points).long()
+        polys = polys.gather(2, clses_ind).view(batch, K, nbr_points)
+    else:
+        polys = polys.view(batch, K, polys.shape[-1])
+
+    depth = depth.view(batch, K, 1).float()
+    clses  = clses.view(batch, K, 1).float()
+    scores = scores.view(batch, K, 1)
+
+    polys[..., 0::2] += xs
+    polys[..., 1:-1:2] += ys
+
+
+    ###########################################
+    poly_xs = polys[..., 0::2].clone().detach()
+    poly_ys = polys[..., 1::2].clone().detach()
+
+    poly_xs_min = torch.min(poly_xs, dim=2, keepdim=True)[0]
+    poly_xs_max = torch.max(poly_xs, dim=2, keepdim=True)[0]
+    poly_ys_min = torch.min(poly_ys, dim=2, keepdim=True)[0]
+    poly_ys_max = torch.max(poly_ys, dim=2, keepdim=True)[0]
+
+    # might need that for nms
+    bboxes = torch.cat([poly_xs_min,
+                        poly_ys_min,
+                        poly_xs_max,
+                        poly_ys_max], dim=2)
+    #############################################
+
+    detections = torch.cat([bboxes, scores, clses, polys, depth], dim=2)
+
+    return detections
 
 def multi_pose_decode(
     heat, wh, kps, reg=None, hm_hp=None, hp_offset=None, K=100):
