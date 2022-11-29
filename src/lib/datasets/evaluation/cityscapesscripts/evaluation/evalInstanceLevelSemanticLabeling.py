@@ -147,7 +147,7 @@ args.csv                = False
 args.colorized          = True
 args.instLabels         = []
 
-# Store some parameters for finding predictions in the args variable
+# store some parameters for finding predictions in the args variable
 # the values are filled when the method getPrediction is first called
 args.predictionPath = None
 args.predictionWalk = None
@@ -772,6 +772,8 @@ def getAP():
 
     # use the ground truth search string specified above
     groundTruthImgList = glob.glob(args.groundTruthSearch)
+    #print('------')
+    #print(groundTruthImgList)
     if not groundTruthImgList:
         printError("Cannot find any ground truth images to use for evaluation. Searched for: {}".format(
             args.groundTruthSearch))

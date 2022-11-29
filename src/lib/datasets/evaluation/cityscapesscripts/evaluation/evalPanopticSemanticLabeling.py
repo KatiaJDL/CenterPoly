@@ -365,7 +365,7 @@ def main():
     resultFile = "resultPanopticSemanticLabeling.json"
     parser.add_argument("--results_file",
                         dest="resultsFile",
-                        help="File to Store computed panoptic quality. Default: {}".format(resultFile),
+                        help="File to store computed panoptic quality. Default: {}".format(resultFile),
                         default=resultFile,
                         type=str)
     args = parser.parse_args()
