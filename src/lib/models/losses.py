@@ -117,7 +117,7 @@ def _reg_loss(regr, gt_regr, mask):
 def create_mask(output, pred, target, batch, num_object, rep):
 
 
-  SUBPIXEL = 10
+  SUBPIXEL = 1
   OFFSET_Y = SUBPIXEL*output.shape[-1]//4 ###
   OFFSET_X = SUBPIXEL*output.shape[-2]//4 ###
   i = num_object
@@ -285,6 +285,7 @@ class PolyLoss(nn.Module):
                                 angles[j] += 2*3.14
 
                         #print(len(angles))
+                        #print(pred[batch][i][1::2])
                         #print(angles)
                         #print(target[batch][i][1::2])
                         #print("--------")
@@ -305,7 +306,6 @@ class PolyLoss(nn.Module):
                         #  print(loss_order)
                         #  print(pred[batch][i])
                         #  print(target[batch][i])
-                        #  print(polygon_mask_gt)
                         #  print("------")
 
                         #  time.sleep(30)
@@ -360,12 +360,12 @@ class PolyLoss(nn.Module):
         loss += loss_reg #loss=0 if pure regression loss selected
 
         if self.opt.poly_order :
-            #print("------------")
             #print("iou ", loss)
             #print("order ", loss_order)
-            loss += loss_order
+            return loss, loss_order
 
         #print(loss)
+        #print("------------")
 
         return loss
 
@@ -391,13 +391,15 @@ class DiskLoss(nn.Module):
             loss: scalar
         """
 
+        #print('disk loss')
 
         pred = _transpose_and_gather_feat(output, ind)
-        SUBPIXEL = 10
+        SUBPIXEL = 1
         OFFSET_Y = SUBPIXEL*output.shape[-1]//4 ###
         OFFSET_X = SUBPIXEL*output.shape[-2]//4 ###
 
         loss = 0.0
+        loss_repulsion = 0.0
 
         for batch in range(output.shape[0]):
 
@@ -417,10 +419,33 @@ class DiskLoss(nn.Module):
                       r = math.ceil(abs(r))
                       #print("Le rayon est ", r)
 
+
+
                       for j in range(0, pred[batch].shape[1] - 3, 2):  # points
+
+
+                      # Test avec 2 disques
+                      #for j in range(0, 4, 2):  # points
 
                           x = pred[batch][i][j]
                           y = pred[batch][i][j+1]
+
+                          """
+
+
+                          #Force de répulsion
+                          for p in range(j+2, pred[batch].shape[1] - 3, 2):  # points
+
+                          # Test avec 2 disques
+                          #for p in range(j+2, 4, 2):  # points
+                              dist = math.sqrt((x- pred[batch][i][p])*(x- pred[batch][i][p])+(y- pred[batch][i][p+1])*(y- pred[batch][i][p+1]))
+                              if dist < 3*r/4:
+                                loss_repulsion += 3*r/4- dist
+                                #print("r", r)
+                                #print("dist", dist)
+                                #print("repulse !", 3*r/4- dist)
+
+                          """
 
 
                           ImageDraw.Draw(pred_disks).ellipse([(x-r + OFFSET_X, y-r+ OFFSET_Y), (x+r+ OFFSET_X, y+r+ OFFSET_Y)], outline=255, fill=255)
@@ -432,7 +457,9 @@ class DiskLoss(nn.Module):
                       intersection = torch.sum((pred_disks_tensor + polygon_mask_gt) == 510)
                       union = torch.sum(pred_disks_tensor != 0) + torch.sum(polygon_mask_gt != 0) - intersection
 
-                      loss += intersection/(union+ 1e-6)
+                      loss += 1 - intersection/(union+ 1e-6)
+
+                      #print(intersection/(union+ 1e-6))
 
                       #Gradient augmentation
                       #loss += (1-intersection/(union+ 1e-6))*torch.sum(polygon_mask_gt != 0)
@@ -442,12 +469,12 @@ class DiskLoss(nn.Module):
                       #time.sleep(5)
 
 
+
         loss = loss / (mask.sum() + 1e-6)
 
+        loss_repulsion = loss_repulsion/(mask.sum() + 1e-6)
 
-        #print(loss)
-
-        return loss
+        return loss, loss_repulsion
 
 
 class AreaPolyLoss(nn.Module):

@@ -40,10 +40,10 @@ class BaseDetector(object):
     # print("pre-process")
 
     # index = 0
-    # filename = os.path.join("/Store/datasets/UA-Detrac/COCO-format/img_tests/", index + ".jpg")
+    # filename = os.path.join("/store/datasets/UA-Detrac/COCO-format/img_tests/", index + ".jpg")
     # while os.path.exists(filename):
     #     index += 1
-    #     filename = os.path.join("/Store/datasets/UA-Detrac/COCO-format/img_tests/", index + ".jpg")
+    #     filename = os.path.join("/store/datasets/UA-Detrac/COCO-format/img_tests/", index + ".jpg")
     # cv2.imwrite(filename, image)
 
     height, width = image.shape[0:2]
@@ -152,10 +152,10 @@ class BaseDetector(object):
       post_time += post_process_time - decode_time
       detections.append(dets)
 
-    '''
+    """
     ret = []
     top_preds = {1:[], 2:[], 3:[],4:[], 5:[], 6:[],7:[], 8:[]}
-    gt = json.load(open('/Store/travail/kajoda/CenterPoly/CenterPoly/cityscapesStuff/BBoxes/val32_regular_interval.json'))
+    gt = json.load(open('/store/travail/kajoda/CenterPoly/CenterPoly/cityscapesStuff/BBoxes/val32_regular_interval.json'))
 
     for obj in gt["annotations"]:
       if obj["image_id"] == id:
@@ -172,7 +172,7 @@ class BaseDetector(object):
     detections = [ret[0]]
 
     #print(detections)
-    '''
+    """
 
     results = self.merge_outputs(detections)
     torch.cuda.synchronize()
