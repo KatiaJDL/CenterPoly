@@ -55,7 +55,7 @@ def polygon_to_box(polygon):
 
 for data_set in sets:
     spamwriter = csv.writer(open('../BBoxes/' + data_set + str(NBR_POINTS) + 'pts_NoOverlap.csv', 'w'), delimiter=',', quotechar='', quoting=csv.QUOTE_NONE)
-    for filename in sorted(glob.glob('/Store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
+    for filename in sorted(glob.glob('/store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
         gt_path = filename.replace('leftImg8bit', 'gtFine').replace('.png', '_polygons.json')
         # img_path = filename.replace('gtFine', 'leftImg8bit').replace('json', 'png').replace('_polygons', '')
         data = json.load(open(gt_path))

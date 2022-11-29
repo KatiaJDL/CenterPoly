@@ -1,6 +1,6 @@
 import sys
 import os
-CENTERNET_PATH = '/Store/dev/CenterPoly/src/lib/' if os.path.exists('/Store/dev/CenterPoly/src/lib/') \
+CENTERNET_PATH = '/store/dev/CenterPoly/src/lib/' if os.path.exists('/store/dev/CenterPoly/src/lib/') \
     else '/home/travail/huper/dev/CenterPoly/src/lib/'
 sys.path.insert(0, CENTERNET_PATH)
 
@@ -17,13 +17,13 @@ class_names = ['person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle', 
 TASK = 'polydet'
 # TASK = 'ctdet'
 
-base_dir = os.path.join('/Store/dev/CenterPoly/exp/cityscapes/', TASK)
+base_dir = os.path.join('/store/dev/CenterPoly/exp/cityscapes/', TASK)
 exp_id = 'from_ctdet_smhg_1cnv_16'
 model_name = 'model_best.pth'
 MODEL_PATH = os.path.join(base_dir, exp_id, model_name)
 opt = opts().init('{} --load_model {} --arch smallhourglass --nbr_points 16 --dataset cityscapes'.format(TASK, MODEL_PATH).split(' '))
 detector = detector_factory[opt.task](opt)
-DATASET_DIR = '/Store/datasets/'
+DATASET_DIR = '/store/datasets/'
 
 SPLIT = 'test'
 
@@ -31,19 +31,19 @@ if SPLIT == 'test':
     source_lines = open(os.path.join(DATASET_DIR, 'UA-Detrac/test-tf-all.csv'), 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'ua-test.csv'), 'w')
 elif SPLIT == 'train1on10':
-    source_lines = open(os.path.join(DATASET_DIR, 'train-tf.csv'), 'r').readlines() # + open('/Store/datasets/UA-Detrac/val-tf-all.csv', 'r').readlines()
+    source_lines = open(os.path.join(DATASET_DIR, 'train-tf.csv'), 'r').readlines() # + open('/store/datasets/UA-Detrac/val-tf-all.csv', 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'ua-train1on10.csv'), 'w')
 elif SPLIT == 'trainval':
-    source_lines = open(os.path.join(DATASET_DIR, 'train-tf-all.csv'), 'r').readlines() + open('/Store/datasets/UA-Detrac/val-tf-all.csv', 'r').readlines()
+    source_lines = open(os.path.join(DATASET_DIR, 'train-tf-all.csv'), 'r').readlines() + open('/store/datasets/UA-Detrac/val-tf-all.csv', 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'ua-trainval.csv'), 'w')
 elif SPLIT == 'uav-test':
-    source_lines = open('/Store/datasets/UAV/val.csv', 'r').readlines()
+    source_lines = open('/store/datasets/UAV/val.csv', 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'uav-test.csv'), 'w')
 elif SPLIT == 'changedetection':
-    source_lines = open('/Store/datasets/changedetection/changedetection.csv', 'r').readlines()
+    source_lines = open('/store/datasets/changedetection/changedetection.csv', 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'changedetection.csv'), 'w')
 elif SPLIT == 'ped1':
-    source_lines = open('/Store/datasets/ped1/csv.csv', 'r').readlines()
+    source_lines = open('/store/datasets/ped1/csv.csv', 'r').readlines()
     target_file = open(os.path.join(base_dir, exp_id, 'results.csv'), 'w')
 elif SPLIT == 'cityscapes_val':
     source_lines = open('../cityscapesStuff/BBoxes/val.csv.csv', 'r').readlines()
