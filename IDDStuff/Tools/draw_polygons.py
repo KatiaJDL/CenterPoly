@@ -10,7 +10,7 @@ import numpy as np
 have_instances = ['person', 'rider', 'motorcycle', 'bicycle', 'autorickshaw', 'car', 'truck', 'bus', 'vehicle fallback']
 sets = 'train', 'val'
 for data_set in sets:
-    for filename in sorted(glob.glob('/Store/datasets/IDD/gtFine/' + data_set + '/*/*.json', recursive=True)):
+    for filename in sorted(glob.glob('/store/datasets/IDD/gtFine/' + data_set + '/*/*.json', recursive=True)):
         img_path = filename.replace('gtFine', 'leftImg8bit').replace('json', 'png').replace('_polygons', '')
         # print(img_path)
         w, h, c = cv2.imread(img_path).shape

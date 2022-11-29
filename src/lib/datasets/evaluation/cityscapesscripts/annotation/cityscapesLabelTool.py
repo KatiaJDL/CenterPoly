@@ -74,7 +74,7 @@ class configuration:
         # Within these city folders we expect the label with a filename matching
         # the images, except for the extension
         self.labelPath = ""
-        # The path to Store correction markings
+        # The path to store correction markings
         self.correctionPath = ""
         # The transparency of the labels over the image
         self.transp = 0.5
@@ -614,8 +614,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
     # The purpose of this method is to set these configuration attributes:
     #   - self.config.city           : path to the folder containing the images to annotate
     #   - self.config.cityName       : name of this folder, i.e. the city
-    #   - self.config.labelPath      : path to the folder to Store the polygons
-    #   - self.config.correctionPath : path to Store the correction boxes in
+    #   - self.config.labelPath      : path to the folder to store the polygons
+    #   - self.config.correctionPath : path to store the correction boxes in
     #   - self.config.gtType         : type of ground truth, e.g. gtFine or gtCoarse
     #   - self.config.split          : type of split, e.g. train, val, test
     # The current implementation uses the environment variable 'CITYSCAPES_DATASET'
@@ -628,7 +628,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
     # The gtType and split can be left empty.
     def selectCity(self):
         # Reset the status bar to this message when leaving
-        reStoreMessage = self.statusBar().currentMessage()
+        restoreMessage = self.statusBar().currentMessage()
 
         csPath = self.config.csPath
         if not csPath or not os.path.isdir(csPath):
@@ -668,8 +668,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
             # Create and wait for dialog
             (item, ok) = QtGui.QInputDialog.getItem(self, dlgTitle, question, items, default, False)
 
-            # ReStore message
-            self.statusBar().showMessage( reStoreMessage )
+            # Restore message
+            self.statusBar().showMessage( restoreMessage )
 
             if ok and item:
                 (split,gt,city) = [ str(i) for i in item.split(', ') ]
@@ -777,7 +777,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
                 self.idx = idx
                 self.imageChanged()
         else:
-            # ReStore the message
+            # Restore the message
             self.statusBar().showMessage( self.defaultStatusbar )
 
 
@@ -914,7 +914,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         # check if we really want to do this in case there are multiple changes
         if len( self.changes ) > 1:
             # Backup of status message
-            reStoreMessage = self.statusBar().currentMessage()
+            restoreMessage = self.statusBar().currentMessage()
             # Create the dialog
             dlgTitle = "Undo changes?"
             self.statusBar().showMessage(dlgTitle)
@@ -927,7 +927,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
             # If the user selected yes -> undo
             if ret == QtGui.QMessageBox.Ok:
                 proceed = True
-            self.statusBar().showMessage( reStoreMessage )
+            self.statusBar().showMessage( restoreMessage )
 
             # If we do not proceed -> return
             if not proceed:
@@ -1226,7 +1226,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
 
     # Load the labels from file
     # Only loads if they exist
-    # Otherwise the filename is Stored and that's it
+    # Otherwise the filename is stored and that's it
     def loadLabels(self):
         filename = self.getLabelFilename()
         if not filename or not os.path.isfile(filename):
@@ -1251,15 +1251,15 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         # Remember the filename loaded
         self.currentLabelFile = filename
 
-        # Remeber the status bar message to reStore it later
-        reStoreMessage = self.statusBar().currentMessage()
+        # Remeber the status bar message to restore it later
+        restoreMessage = self.statusBar().currentMessage()
 
-        # ReStore the message
-        self.statusBar().showMessage( reStoreMessage )
+        # Restore the message
+        self.statusBar().showMessage( restoreMessage )
 
     # Load the labels from file
     # Only loads if they exist
-    # Otherwise the filename is Stored and that's it
+    # Otherwise the filename is stored and that's it
     def loadCorrections(self): #TODO
         filename = self.getCorrectionFilename()
         if not filename:
@@ -1296,8 +1296,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         # Remember the filename loaded
         self.config.currentCorrectionFile = filename
 
-        # Remeber the status bar message to reStore it later
-        reStoreMessage = self.statusBar().currentMessage()
+        # Remeber the status bar message to restore it later
+        restoreMessage = self.statusBar().currentMessage()
 
         # Iterate through all objects in the XML
         root = self.correctionXML.getroot()
@@ -1312,8 +1312,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
             # Append the object to our list of labels
             self.corrections.append(obj)
 
-        # ReStore the message
-        self.statusBar().showMessage( reStoreMessage )
+        # Restore the message
+        self.statusBar().showMessage( restoreMessage )
 
 
     def modify_correction_type(self, correction_type):
@@ -1461,8 +1461,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         qp.save()
         # Draw the image
         qp.drawImage(QtCore.QRect( self.xoff, self.yoff, self.w, self.h ), self.image)
-        # ReStore the saved setting from the stack
-        qp.reStore()
+        # Restore the saved setting from the stack
+        qp.restore()
 
     def getPolygon(self, obj):
         poly = QtGui.QPolygonF()
@@ -1555,8 +1555,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         qp.setOpacity(self.config.transp)
         # Draw the overlay image
         qp.drawImage(self.xoff,self.yoff,overlay)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
         return overlay
 
@@ -1616,7 +1616,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
             qp.drawRect(rect)
 
 
-        qp.reStore()
+        qp.restore()
 
     # Draw the polygon that is drawn and edited by the user
     # Usually the polygon must be rescaled properly. However when drawing
@@ -1684,8 +1684,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         for pt in range(startDrawingPts,poly.size()):
             self.drawPoint( qp, poly[pt], False, self.drawPolyClosed and closestPt==(pt,pt) )
 
-        # ReStore QPainter settings from stack
-        qp.reStore()
+        # Restore QPainter settings from stack
+        qp.restore()
 
     # Draw the label name next to the mouse
     def drawLabelAtMouse(self, qp):
@@ -1743,8 +1743,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         qp.setOpacity(1)
         # Draw the text, horizontally centered
         qp.drawText(rect,QtCore.Qt.AlignHCenter|vAlign,mouseText)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
     # Draw the zoom
     def drawZoom(self,qp,overlay):
@@ -2026,7 +2026,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
     def keyReleaseEvent(self,e):
         # Ctrl key changes mouse cursor
         if e.key() == QtCore.Qt.Key_Control:
-            QtGui.QApplication.reStoreOverrideCursor()
+            QtGui.QApplication.restoreOverrideCursor()
         # check for zero to release temporary zero
         # somehow, for the numpad key in some machines, a check on Insert is needed aswell
         elif e.key() == QtCore.Qt.Key_0 or e.key() == QtCore.Qt.Key_Insert:
@@ -2186,7 +2186,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
     # Return is (label, ok). 'ok' is false if the user pressed Cancel
     def getLabelFromUser(self, defaultLabel = "", objID = -1):
         # Reset the status bar to this message when leaving
-        reStoreMessage = self.statusBar().currentMessage()
+        restoreMessage = self.statusBar().currentMessage()
 
         # Update defaultLabel
         if not defaultLabel:
@@ -2215,8 +2215,8 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         # Process the answer a bit
         item = str(item)
 
-        # ReStore message
-        self.statusBar().showMessage( reStoreMessage )
+        # Restore message
+        self.statusBar().showMessage( restoreMessage )
 
         # Return
         return (item, ok)
@@ -2402,7 +2402,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
             return True
 
         # Backup of status message
-        reStoreMessage = self.statusBar().currentMessage()
+        restoreMessage = self.statusBar().currentMessage()
         # Create the dialog
         dlgTitle = "Save changes?"
         self.statusBar().showMessage(dlgTitle)
@@ -2422,7 +2422,7 @@ class CityscapesLabelTool(QtGui.QMainWindow):
         # Otherwise prevent leaving the image
         else:
             proceed = False
-        self.statusBar().showMessage( reStoreMessage )
+        self.statusBar().showMessage( restoreMessage )
         return proceed
 
     # Actually save a screenshot
@@ -2757,14 +2757,14 @@ class CityscapesLabelTool(QtGui.QMainWindow):
     # Returns empty string if not possible
     # Set the createDirs to true, if you want to create needed directories
     def getCorrectionFilename( self , createDirs = False ):
-        # And we need to have a directory where corrections are Stored
+        # And we need to have a directory where corrections are stored
         if not self.config.correctionPath:
             return ""
         # Without the name of the current images, there is also nothing we can do
         if not self.config.currentFile:
             return ""
 
-        # Folder where to Store the labels
+        # Folder where to store the labels
         correctionDir = self.config.correctionPath
 
         # If the folder does not exist, create it if allowed

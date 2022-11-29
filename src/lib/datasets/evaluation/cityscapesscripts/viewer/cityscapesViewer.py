@@ -372,7 +372,7 @@ class CityscapesViewer(QtGui.QMainWindow):
                 self.idx = idx
                 self.imageChanged()
         else:
-            # ReStore the message
+            # Restore the message
             self.statusBar().showMessage( self.defaultStatusbar )
 
 
@@ -505,7 +505,7 @@ class CityscapesViewer(QtGui.QMainWindow):
 
     # Load the labels from file
     # Only loads if they exist
-    # Otherwise the filename is Stored and that's it
+    # Otherwise the filename is stored and that's it
     def loadLabels(self):
         filename = self.getLabelFilename()
         if not filename:
@@ -530,11 +530,11 @@ class CityscapesViewer(QtGui.QMainWindow):
         # Remember the filename loaded
         self.currentLabelFile = filename
 
-        # Remeber the status bar message to reStore it later
-        reStoreMessage = self.statusBar().currentMessage()
+        # Remeber the status bar message to restore it later
+        restoreMessage = self.statusBar().currentMessage()
 
-        # ReStore the message
-        self.statusBar().showMessage( reStoreMessage )
+        # Restore the message
+        self.statusBar().showMessage( restoreMessage )
 
 
     # Load the disparity map from file
@@ -586,11 +586,11 @@ class CityscapesViewer(QtGui.QMainWindow):
         # Remember the filename loaded
         self.currentDispFile = filename
 
-        # Remember the status bar message to reStore it later
-        reStoreMessage = self.statusBar().currentMessage()
+        # Remember the status bar message to restore it later
+        restoreMessage = self.statusBar().currentMessage()
 
-        # ReStore the message
-        self.statusBar().showMessage( reStoreMessage )
+        # Restore the message
+        self.statusBar().showMessage( restoreMessage )
 
     #############################
     ## Drawing
@@ -681,8 +681,8 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.save()
         # Draw the image
         qp.drawImage(QtCore.QRect( self.xoff, self.yoff, self.w, self.h ), self.image)
-        # ReStore the saved setting from the stack
-        qp.reStore()
+        # Restore the saved setting from the stack
+        qp.restore()
 
     def getPolygon(self, obj):
         poly = QtGui.QPolygonF()
@@ -766,8 +766,8 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.setOpacity(self.transp)
         # Draw the overlay image
         qp.drawImage(self.xoff,self.yoff,overlay)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
         return overlay
 
@@ -868,8 +868,8 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.setOpacity(self.transp)
         # Draw the overlay image
         qp.drawImage(self.xoff,self.yoff,overlay)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
         return overlay
 
@@ -927,8 +927,8 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.setOpacity(1)
         # Draw the text, horizontally centered
         qp.drawText(rect,QtCore.Qt.AlignHCenter|vAlign,mouseText)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
     # Draw the zoom
     def drawZoom(self,qp,overlay):
@@ -965,7 +965,7 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.drawImage(view,self.image,sel)
         qp.setOpacity(self.transp)
         qp.drawImage(view,overlay_scaled,sel)
-        qp.reStore()
+        qp.restore()
 
     # Draw disparities
     def drawDisp( self , qp ):
@@ -978,8 +978,8 @@ class CityscapesViewer(QtGui.QMainWindow):
         qp.setOpacity(self.transp)
         # Draw the overlay image
         qp.drawImage(QtCore.QRect( self.xoff, self.yoff, self.w, self.h ),self.dispOverlay)
-        # ReStore settings
-        qp.reStore()
+        # Restore settings
+        qp.restore()
 
         return self.dispOverlay
 
@@ -1091,7 +1091,7 @@ class CityscapesViewer(QtGui.QMainWindow):
 
     def getCityFromUser(self):
         # Reset the status bar to this message when leaving
-        reStoreMessage = self.statusBar().currentMessage()
+        restoreMessage = self.statusBar().currentMessage()
 
         if 'CITYSCAPES_DATASET' in os.environ:
             csPath = os.environ['CITYSCAPES_DATASET']
@@ -1123,8 +1123,8 @@ class CityscapesViewer(QtGui.QMainWindow):
             (item, ok) = QtGui.QInputDialog.getItem(self, dlgTitle, question,
                                                     items, 0, False)
 
-            # ReStore message
-            self.statusBar().showMessage(reStoreMessage)
+            # Restore message
+            self.statusBar().showMessage(restoreMessage)
 
             if ok and item:
                 (split, gt, city) = [str(i) for i in item.split(', ')]

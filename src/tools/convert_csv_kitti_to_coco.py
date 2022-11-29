@@ -8,12 +8,12 @@ import numpy as np
 import cv2
 
 io_dic = {
-            '/Store/datasets/KITTI/left_image/train.json':
-                open('/Store/datasets/KITTI/left_image/train.csv', 'r').readlines(),
-            '/Store/datasets/KITTI/left_image/val.json':
-                open('/Store/datasets/KITTI/left_image/val.csv', 'r').readlines(),
-            '/Store/datasets/KITTI/left_image/testval.json':
-                open('/Store/datasets/KITTI/left_image/testval.csv', 'r').readlines(),
+            '/store/datasets/KITTI/left_image/train.json':
+                open('/store/datasets/KITTI/left_image/train.csv', 'r').readlines(),
+            '/store/datasets/KITTI/left_image/val.json':
+                open('/store/datasets/KITTI/left_image/val.csv', 'r').readlines(),
+            '/store/datasets/KITTI/left_image/testval.json':
+                open('/store/datasets/KITTI/left_image/testval.csv', 'r').readlines(),
          }
 
 DEBUG = False

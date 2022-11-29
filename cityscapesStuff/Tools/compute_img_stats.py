@@ -7,7 +7,7 @@ b_mean, g_mean, r_mean,  = [], [], []
 b_std, g_std, r_std,  = [], [], []
 count = 0
 for data_set in sets:
-    for filename in sorted(glob.glob('/Store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
+    for filename in sorted(glob.glob('/store/datasets/cityscapes/leftImg8bit/' + data_set + '/*/*.png', recursive=True)):
         image = cv2.imread(filename)
         b_mean.append(np.mean(image[:, :, 0]/255))
         g_mean.append(np.mean(image[:, :, 1]/255))

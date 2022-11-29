@@ -168,9 +168,9 @@ class CTDetDataset(data.Dataset):
 
     # for channel in range(hm.shape[0]):
     #   write_hm = cv2.resize(((hm[channel, :, :] - np.min(hm[channel, :, :]) / np.max(hm[channel, :, :])) * 255).astype(np.uint8), (896, 512))
-    #   cv2.imwrite(os.path.join('/Store/datasets/UA-Detrac/test_images/hm/ellipses',  file_name.replace('/', '_').replace('.jpg', '') + '_' + str(channel) + '_ellipse_gt.jpg'), write_hm)
+    #   cv2.imwrite(os.path.join('/store/datasets/UA-Detrac/test_images/hm/ellipses',  file_name.replace('/', '_').replace('.jpg', '') + '_' + str(channel) + '_ellipse_gt.jpg'), write_hm)
     #   # write_hm = cv2.resize(((hm[channel, :, :] - np.min(hm[channel, :, :]) / np.max(hm[channel, :, :])) * 255).astype(np.uint8), (1280, 384))
-    #   # cv2.imwrite(os.path.join('/Store/datasets/KITTI/example_images/gt_hm',  'inp_' + os.path.basename(file_name) + '_' + str(channel) + '_ellipse_gt.jpg'), write_hm)
+    #   # cv2.imwrite(os.path.join('/store/datasets/KITTI/example_images/gt_hm',  'inp_' + os.path.basename(file_name) + '_' + str(channel) + '_ellipse_gt.jpg'), write_hm)
 
     ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'wh': wh}  # 'seg': np.expand_dims(seg_inp, 0)}
 
@@ -191,6 +191,6 @@ class CTDetDataset(data.Dataset):
       ret['meta'] = meta
 
     # img_test = (inp.transpose(1, 2, 0) * 255).astype(np.uint8)
-    # cv2.imwrite(os.path.join("//Store/datasets/UA-Detrac/test_images/hm/ellipses", file_name.replace('/', '_')), img_test)
+    # cv2.imwrite(os.path.join("//store/datasets/UA-Detrac/test_images/hm/ellipses", file_name.replace('/', '_')), img_test)
 
     return ret
