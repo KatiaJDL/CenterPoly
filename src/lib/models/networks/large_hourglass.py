@@ -419,6 +419,12 @@ class exkp(nn.Module):
                 #module.apply(initialize_weights)
                 #print("initialized")
                 self.__setattr__(head, module)
+            elif 'centers' in head:
+                # module = nn.ModuleList([poly_module(curr_dim, heads[head]) for _ in range(nstack)])
+                module = nn.ModuleList([make_poly_layer(cnv_dim, curr_dim, heads[head]) for _ in range(nstack)])
+                #module.apply(initialize_weights)
+                #print("initialized")
+                self.__setattr__(head, module)
             else:
                 module = nn.ModuleList([
                     make_regr_layer(

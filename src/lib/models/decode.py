@@ -726,6 +726,62 @@ def diskdet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep
 
     return detections
 
+def gaussiandet_decode(heat, centers, radius, depth, reg=None, K=100):
+    batch, cat, height, width = heat.size()
+    nbr_points = int(centers.shape[-1])
+
+    # heat = torch.sigmoid(heat)
+    # perform nms on heatmaps
+    heat = _nms(heat)
+    # border_heat = _nms(border_hm)
+    scores, inds, clses, ys, xs = _topk(heat, K=K)
+    # border_scores, border_inds, border_clses, border_ys, border_xs = _topk(border_heat, K=nbr_points*K)
+
+    if reg is not None:
+      reg = _transpose_and_gather_feat(reg, inds)
+      reg = reg.view(batch, K, 2)
+      xs = xs.view(batch, K, 1) + reg[:, :, 0:1]
+      ys = ys.view(batch, K, 1) + reg[:, :, 1:2]
+    else:
+      xs = xs.view(batch, K, 1) + 0.5
+      ys = ys.view(batch, K, 1) + 0.5
+    centers = _transpose_and_gather_feat(centers, inds)
+    radius = _transpose_and_gather_feat(radius, inds)
+    depth = _transpose_and_gather_feat(depth, inds)
+    # wh = _transpose_and_gather_feat(wh, inds)
+    centers = centers.view(batch, K, centers.shape[-1])
+
+    depth = depth.view(batch, K, 1).float()
+    radius = radius.view(batch, K, 1).float()
+    clses  = clses.view(batch, K, 1).float()
+    scores = scores.view(batch, K, 1)
+
+    centers[..., 0::2] += xs
+    centers[..., 1::2] += ys
+
+
+    ###########################################
+    poly_xs = centers[..., 0::2].clone().detach()
+    poly_ys = centers[..., 1::2].clone().detach()
+
+    poly_xs_min = torch.min(poly_xs, dim=2, keepdim=True)[0]
+    poly_xs_max = torch.max(poly_xs, dim=2, keepdim=True)[0]
+    poly_ys_min = torch.min(poly_ys, dim=2, keepdim=True)[0]
+    poly_ys_max = torch.max(poly_ys, dim=2, keepdim=True)[0]
+
+    # might need that for nms
+    bboxes = torch.cat([poly_xs_min,
+                        poly_ys_min,
+                        poly_xs_max,
+                        poly_ys_max], dim=2)
+    #############################################
+
+    #print('centers', centers[0][0])
+
+    detections = torch.cat([bboxes, scores, clses, centers, radius, depth], dim=2)
+
+    return detections
+
 def multi_pose_decode(
     heat, wh, kps, reg=None, hm_hp=None, hp_offset=None, K=100):
   batch, cat, height, width = heat.size()

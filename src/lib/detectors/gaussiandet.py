@@ -28,15 +28,16 @@ class GaussianDetector(BaseDetector):
       hm = output['hm'].sigmoid_()
       # fg = output['fg'].sigmoid_()
       # border_hm = output['border_hm'].sigmoid_()
-      gaussian_param = output['gaussian_param']
+      centers = output['centers']
       pseudo_depth = output['pseudo_depth']
+      radius = output['radius']
       reg = output['reg'] if self.opt.reg_offset else None
       if self.opt.flip_test:
         hm = (hm[0:1] + flip_tensor(hm[1:2])) / 2
         reg = reg[0:1] if reg is not None else None
       torch.cuda.synchronize()
       forward_time = time.time()
-      dets = gaussiandet_decode(hm, gaussian_param, pseudo_depth, reg=reg, cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K, rep = self.opt.rep)
+      dets = gaussiandet_decode(hm, centers, radius, pseudo_depth, reg=reg, K=self.opt.K)
     if return_time:
       return output, dets, forward_time
     else:
@@ -86,14 +87,14 @@ class GaussianDetector(BaseDetector):
       debugger.add_img(img, img_id='out_pred_{:.1f}'.format(scale))
       for k in range(len(dets[i])):
         if detection[i, k, 4] > self.opt.center_thresh:
-          debugger.add_coco_bbox(detection[i, k, :4], detection[i, k, -1],
+          debugger.add_gaussiandet(detection[i, k, 5:-3], detection[i, k, -2], detection[i, k, -1],
                                  detection[i, k, 4],
                                  img_id='out_pred_{:.1f}'.format(scale))
 
   def show_results(self, debugger, image, results):
-    debugger.add_img(image, img_id='ctdet')
+    debugger.add_img(image, img_id='gaussiandet')
     for j in range(1, self.num_classes + 1):
       for bbox in results[j]:
         if bbox[4] > self.opt.vis_thresh:
-          debugger.add_coco_bbox(bbox[:4], j - 1, bbox[4], img_id='ctdet')
+          debugger.add_gaussiandet(bbox[5:-2], 1.5* bbox[-2], j - 1, bbox[4], img_id='gaussiandet')
     debugger.show_all_imgs(pause=self.pause)

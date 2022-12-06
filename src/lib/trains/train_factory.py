@@ -4,6 +4,7 @@ from __future__ import print_function
 
 from .ctdet import CtdetTrainer
 from .polydet import PolydetTrainer
+from .gaussiandet import GaussianTrainer
 from .ddd import DddTrainer
 from .exdet import ExdetTrainer
 from .multi_pose import MultiPoseTrainer
@@ -15,5 +16,6 @@ train_factory = {
   'ctdet': CtdetTrainer,
   'multi_pose': MultiPoseTrainer,
   'polydet': PolydetTrainer,
-  'diskdet': PolydetTrainer
+  'diskdet': PolydetTrainer,
+  'gaussiandet': GaussianTrainer
 }

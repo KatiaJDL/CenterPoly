@@ -51,7 +51,7 @@ def find_points_from_box(box, n_points):
     points.append((x0, round(y1 - i * y_interval)))
   return points
 
-class PolydetDataset(data.Dataset):
+class GaussiandetDataset(data.Dataset):
   def _coco_box_to_bbox(self, box):
     bbox = np.array([box[0], box[1], box[0] + box[2], box[1] + box[3]],
                     dtype=np.float32)
@@ -81,6 +81,7 @@ class PolydetDataset(data.Dataset):
     img = cv2.imread(img_path)
     height, width = img.shape[0], img.shape[1]
     instance_img = cv2.resize(cv2.imread(instance_path, 0), (width, height))
+    mask_img =  cv2.resize(cv2.imread(instance_path, 0), (width, height))
 
     c = np.array([img.shape[1] / 2., img.shape[0] / 2.], dtype=np.float32)
     if self.opt.keep_res:
@@ -110,6 +111,7 @@ class PolydetDataset(data.Dataset):
         flipped = True
         img = img[:, ::-1, :]
         instance_img = instance_img[:, ::-1]
+        mask_img = mask_img[:, ::-1]
         c[0] =  width - c[0] - 1
 
     trans_input = get_affine_transform(
@@ -118,6 +120,7 @@ class PolydetDataset(data.Dataset):
                          (input_w, input_h),
                          flags=cv2.INTER_LINEAR)
     instance_img = cv2.warpAffine(instance_img, trans_input, (input_w, input_h), flags=cv2.INTER_LINEAR)
+    mask_img = cv2.warpAffine(mask_img, trans_input, (input_w, input_h), flags=cv2.INTER_LINEAR)
 
     if DRAW:
       old_inp = inp.copy()
@@ -132,6 +135,7 @@ class PolydetDataset(data.Dataset):
     output_h = input_h // self.opt.down_ratio
     output_w = input_w // self.opt.down_ratio
     instance_img = cv2.resize(instance_img, (output_w, output_h))
+    mask_img = cv2.resize(mask_img, (output_w, output_h))
     num_classes = self.num_classes
     trans_output = get_affine_transform(c, s, 0, [output_w, output_h])
 
@@ -139,14 +143,13 @@ class PolydetDataset(data.Dataset):
     wh = np.zeros((self.max_objs, 2), dtype=np.float32)
     border_hm = np.zeros((1, output_h, output_w), dtype=np.float32)
     pseudo_depth = np.zeros((self.max_objs, 1), dtype=np.float32)
-    poly = np.zeros((self.max_objs, num_points*2), dtype=np.float32)
-    dense_poly = np.zeros((num_points*2, output_h, output_w), dtype=np.float32)
-    cat_spec_poly = np.zeros((self.max_objs, num_classes * num_points*2), dtype=np.float32)
-    cat_spec_mask_poly = np.zeros((self.max_objs, num_classes * num_points*2), dtype=np.uint8)
     reg = np.zeros((self.max_objs, 2), dtype=np.float32)
     ind = np.zeros((self.max_objs), dtype=np.int64)
+    peak = np.zeros((self.max_objs, 2), dtype=np.int64)
     reg_mask = np.zeros((self.max_objs), dtype=np.uint8)
     freq_mask = np.zeros((self.max_objs), dtype=np.float32)
+
+    masks = np.zeros((self.max_objs, output_h, output_w), dtype=np.float32)
 
     fg = np.zeros((1, output_h, output_w), dtype=np.float32)
     fg[0, :, :] = instance_img
@@ -160,6 +163,10 @@ class PolydetDataset(data.Dataset):
     gt_det = []
     for k in range(num_objs):
       ann = anns[k]
+
+      seg_img = seg_img = Image.new('1', (output_w, output_h), 0)
+
+      #print(ann.keys())
       bbox = self._coco_box_to_bbox(ann['bbox'])
 
       pseudo_depth[k] = ann['pseudo_depth']
@@ -176,13 +183,14 @@ class PolydetDataset(data.Dataset):
         not_flipped = copy.deepcopy(points_on_border)
         first_angle = len(points_on_border)//4
 
-        if not self.opt.no_reorder_flip:
-          for i in range(0, len(points_on_border)//4 + 2, 2):
-            points_on_border[i] = not_flipped[first_angle - i]
-            points_on_border[i+1] = not_flipped[first_angle - i + 1]
-          for i in range(2, 3*len(points_on_border)//4, 2):
-            points_on_border[first_angle + i] = not_flipped[len(points_on_border) - i]
-            points_on_border[first_angle + i+1] = not_flipped[len(points_on_border) - i + 1]
+        #if not self.opt.no_reorder_flip:
+        #  for i in range(0, len(points_on_border)//4 + 2, 2):
+        #    points_on_border[i] = not_flipped[first_angle - i]
+        #    points_on_border[i+1] = not_flipped[first_angle - i + 1]
+        #  for i in range(2, 3*len(points_on_border)//4, 2):
+        #    points_on_border[first_angle + i] = not_flipped[len(points_on_border) - i]
+        #    points_on_border[first_angle + i+1] = not_flipped[len(points_on_border) - i + 1]
+
 
       for i in range(0, len(points_on_border), 2):
         points_on_border[i], points_on_border[i+1] = affine_transform([points_on_border[i], points_on_border[i+1]], trans_output)
@@ -216,7 +224,7 @@ class PolydetDataset(data.Dataset):
           pts = pts.reshape((-1, 1, 2))
           old_inp = cv2.resize(old_inp, (output_w, output_h))
           old_inp = cv2.polylines(old_inp, [pts], True, (0, 255, 255))
-          old_inp = cv2.rectangle(old_inp, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 0, 255))
+          #old_inp = cv2.rectangle(old_inp, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 0, 255))
           old_inp = cv2.circle(old_inp, tuple(ct_int), 1, (0, 255, 255), 1)
 
         if self.opt.elliptical_gt:
@@ -230,25 +238,29 @@ class PolydetDataset(data.Dataset):
 
         # points_on_border = np.array(points_on_border).astype(np.float32)
         #exp
-        points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
+        #points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
         for i in range(0, len(points_on_border), 2):
           draw_umich_gaussian(border_hm[0], (int(points_on_border[i]), int(points_on_border[i+1])), radius)
 
 
-
+        peak[k] = ct_int
         ind[k] = ct_int[1] * output_w + ct_int[0]
         reg[k] = ct - ct_int
 
         reg_mask[k] = 1
         freq_mask[k] = self.class_frequencies[cls_name]
 
+        ImageDraw.Draw(seg_img).polygon(points_on_border, fill=1, outline=1)
+        #print(points_on_border)
 
+        masks[k] = np.array(seg_img)
 
         gt_det.append([ct[0] - w / 2, ct[1] - h / 2,
                        ct[0] + w / 2, ct[1] + h / 2, 1, cls_id])
     if DRAW:
       # cv2.imwrite(os.path.join('/store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_').replace('.jpg', '_instance.jpg')), cv2.resize(instance_img, (input_w, input_h)))
       cv2.imwrite(os.path.join('/store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_')), cv2.resize(old_inp,  (input_w, input_h)))
+      cv2.imwrite(os.path.join('/store/datasets/cityscapes/test_images/masks/', img_path.replace('/', '_')), cv2.resize(seg_img,  (input_w, input_h)))
 
     if np.count_nonzero(freq_mask) == 0:
       freq_mean = 1.0  # don't boost loss if no objects
@@ -256,7 +268,7 @@ class PolydetDataset(data.Dataset):
       freq_mean = np.sum(freq_mask) / (np.count_nonzero(freq_mask))
 
 
-    ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'gaussian_param': gaussian_param, 'pseudo_depth':pseudo_depth, 'freq_mask':freq_mean, 'wh':wh, 'fg':fg}
+    ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'masks': masks, 'pseudo_depth':pseudo_depth, 'freq_mask':freq_mean, 'wh':wh, 'fg':fg, 'peak':peak}
 
     if self.opt.debug > 0 or not self.split == 'train':
       gt_det = np.array(gt_det, dtype=np.float32) if len(gt_det) > 0 else \

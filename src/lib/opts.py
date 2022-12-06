@@ -110,6 +110,8 @@ class opts(object):
                              help='run nms in testing.')
     self.parser.add_argument('--K', type=int, default=128,
                              help='max number of output objects.')
+    self.parser.add_argument('--thresh', type=float, default=0.05,
+                             help='threshold for the outputs kept for evaluation')
     self.parser.add_argument('--not_prefetch_test', action='store_true',
                              help='not use parallal data pre-processing.')
     self.parser.add_argument('--fix_res', action='store_true',
@@ -237,6 +239,9 @@ class opts(object):
                                   'human joint heatmaps.')
     self.parser.add_argument('--not_reg_bbox', action='store_true',
                              help='not regression bounding box size.')
+    # gaussian det
+    self.parser.add_argument('--threshold', default=0.5,
+                             help='threshold for pixel selection in gaussian detection')
 
     # ground truth validation
     self.parser.add_argument('--eval_oracle_hm', action='store_true',
@@ -393,6 +398,15 @@ class opts(object):
                    # 'wh': 2 ,
                    #'border_hm': 1,
                    }
+    elif opt.task == 'gaussiandet':
+      opt.heads = {'hm': opt.num_classes,
+                   'centers': opt.nbr_points*2,
+                   'radius': 1,
+                   'pseudo_depth': 1,
+                   # 'fg': 1,
+                   # 'wh': 2 ,
+                   #'border_hm': 1,
+                   }
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
     elif opt.task == 'ctdetVid':
@@ -431,6 +445,9 @@ class opts(object):
         'polydet': {'default_resolution': [512, 1024], 'num_classes': 11,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
+        'gaussiandet': {'default_resolution': [512, 1024], 'num_classes': 8,
+                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
+                          'dataset': 'cityscapes_gaussian'},
         'diskdet': {'default_resolution': [512, 1024], 'num_classes': 11,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},

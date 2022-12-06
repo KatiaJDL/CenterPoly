@@ -15,7 +15,12 @@ import torch.nn.functional as F
 from PIL import Image, ImageDraw
 import numpy as np
 import math
+import matplotlib.pyplot as plt
+import seaborn as sns
 import time
+from utils.image import draw_ellipse_gaussian
+
+DRAW = False
 
 def _slow_neg_loss(pred, gt):
   '''focal loss from CornerNet'''
@@ -114,6 +119,13 @@ def _reg_loss(regr, gt_regr, mask):
   regr_loss = regr_loss / (num + 1e-4)
   return regr_loss
 
+def dice_score(inputs, targets):
+    inputs = inputs.sigmoid()
+    numerator = 2*torch.matmul(inputs, targets.t())
+    denominator = (inputs * inputs).sum(-1)[:, None] + (targets * targets).sum(-1)
+    score = numerator / (denominator + 1e-4)
+    return score
+
 def create_mask(output, pred, target, batch, num_object, rep):
 
 
@@ -168,6 +180,114 @@ def create_mask(output, pred, target, batch, num_object, rep):
 
   return polygon_mask_pred, polygon_mask_gt
 
+def individual_gaussian(heatmap, centers, radius):
+
+  device = heatmap.device
+
+  H, W = heatmap.shape
+
+
+  for k in range(0,centers.shape[0],2):
+
+    #print(centers[k], centers[k+1])
+
+    heatmap += torch.exp( -(torch.pow(torch.FloatTensor([[centers[k]-i for i in range(W)]]).to(device), 2) \
+               + torch.pow(torch.FloatTensor([[centers[k+1]-j] for j in range(H)]).to(device), 2))/(2*radius**2))
+
+    """
+    for y, line in enumerate(heatmap):
+          for x, value in enumerate(line):
+              value = ((x - centers[k])**2 + (y-centers[k+1])**2) / ((2*radius)**2)
+              #if abs(x-centers[k]) < 10 and abs(y-centers[k+1]) < 10:
+              #  print(value)
+              #  print(centers[k], centers[k+1])
+              #  print(x, y, torch.exp(-value))
+              heatmap[y,x] = torch.exp(-value)
+              #if torch.exp(-value) >0.1:
+              #  print(x, y, torch.exp(-value))
+    """
+
+  #ax = sns.heatmap(heatmap.detach().cpu().numpy())
+  #plt.show()
+
+
+
+  return heatmap
+
+def display_gaussian_image(heatmap, centers, radius):#, peak):
+
+  device = heatmap.device
+
+  #sigma = torch.unsqueeze(torch.unsqueeze(parameters[:,:,-1], 2), 3)
+  #print('radius', radius.shape)
+  #print('peak', peak.shape)
+  sigma = torch.unsqueeze(radius, 2)
+  #print(sigma.shape)
+
+  #print(radius)
+
+  B, N, H, W = heatmap.shape
+
+  #data = torch.zeros_like(heatmap)
+
+  #print(data.shape)
+
+  new_data_x = torch.FloatTensor([[-i for i in range(W)]]).to(device)
+  new_data_x = torch.unsqueeze(torch.unsqueeze(new_data_x, 0), 0)
+  new_data_x = new_data_x.repeat((B, N, H, 1)) #+ torch.unsqueeze(torch.unsqueeze(peak[:,:,1], 2), 3)
+
+  new_data_y = torch.FloatTensor([[-j] for j in range(H)]).to(device)
+  new_data_y = torch.unsqueeze(torch.unsqueeze(new_data_y, 0), 0)
+  new_data_y = new_data_y.repeat((B, N, 1, W)) #+ torch.unsqueeze(torch.unsqueeze(peak[:,:,0], 2), 3)
+
+  #print(new_data_x[0][0])
+  #print("--------")
+  #print(new_data_x.shape)
+  #print("--------")
+
+
+  #print(new_data_y[0][0])
+  #print("--------")
+  #print(new_data_y.shape)
+  #print("--------")
+
+
+
+  for k in range(0,centers.shape[-1]-1,2):
+
+    #print(torch.unsqueeze(torch.unsqueeze(parameters[:,:,k], 2), 3).shape)
+
+    ##### TO DO : expérimenter avec numpy pour créer mon array de manière bien
+    new_data = torch.pow(torch.add(new_data_x,torch.unsqueeze(torch.unsqueeze(centers[:,:,k], 2), 3)), 2) \
+               + torch.pow(torch.add(new_data_y,torch.unsqueeze(torch.unsqueeze(centers[:,:,k+1], 2), 3)), 2)
+
+    #print(new_data.shape)
+    #print(sigma.shape)
+
+    heatmap += torch.exp(-new_data/(2*sigma**2))
+
+    print(new_data.shape)
+
+    del new_data
+
+  heatmap = (heatmap<=1)*heatmap + (heatmap>1)
+
+  #print(data[0][5])
+
+  if DRAW:
+    #max_score = torch.max(src_iou_scores_gaussian,0)
+    #print(max_score)
+    #print(max_score[1].item())
+    ax = sns.heatmap(heatmap.detach().cpu().numpy()[0][0])
+    plt.show()
+
+  del new_data_x
+  del new_data_y
+  del sigma
+
+  return heatmap
+
+
 class FocalLoss(nn.Module):
   '''nn.Module warpper for focal loss'''
   def __init__(self):
@@ -218,22 +338,27 @@ class PolyLoss(nn.Module):
         """
         Parameters:
             output: output of polygon head
-              [batch_size, 2*nb_vertices, nb_max_objects, nb_heads]
+              [batch_size, 2*nb_vertices, height, width]
             mask: selected objects
               [batch_size, nb_max_objects]
             ind:
               [batch_size, nb_max_objects]
             target: ground-truth for the polygons
-              [batch_size, 2*nb_vertices, nb_max_objects]
+              [batch_size, nb_max_objects, 2*nb_vertices]
             hm: output of heatmap head
               [batch_size, nb_categories, height, width]
         Returns:
             loss: scalar
         """
 
+        #print('output', output.shape)
+        #print('target', target.shape)
+
         device = mask.device
 
         pred = _transpose_and_gather_feat(output, ind)
+
+        #print('pred', pred.shape)
 
         #predictions = False
 
@@ -475,6 +600,125 @@ class DiskLoss(nn.Module):
         loss_repulsion = loss_repulsion/(mask.sum() + 1e-6)
 
         return loss, loss_repulsion
+
+class GaussianLoss(nn.Module):
+    def __init__(self, opt):
+        super(GaussianLoss, self).__init__()
+        self.opt = opt
+
+    def forward(self, centers, radius, mask, ind, target, peak):
+        """
+        Parameters:
+            centers: output of gaussian centers head
+              [batch_size, 2*nb_vertices, height, width]
+            radius: output of gaussian std head
+              [batch_size, 1, height, width]
+            mask: selected objects
+              [batch_size, nb_max_objects]
+            ind: peak of heatmap (encoded)
+              [batch_size, nb_max_objects]
+            target: ground-truth for the segmentation mask
+              [batch_size, nb_max_objects, height, width]
+            peak: ground-truth for the peaks of heatmap
+              [batch_size, nb_max_objects, 2]
+        Returns:
+            loss: scalar
+        """
+
+        #print('peak', peak.shape)
+        #print('centers', centers.shape)
+        #print('radius', radius.shape)
+        #print('target', target.shape)
+
+
+        pred = _transpose_and_gather_feat(centers, ind)
+        pred_radius = _transpose_and_gather_feat(radius, ind)#+10 #.detach().cpu().numpy() +10
+        #pred_radius = np.squeeze(pred_radius)
+
+
+        # Recenter
+        pred[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
+        pred[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
+
+        iou_loss = 0.0
+        bce_loss = 0.0
+
+
+        #pred_gaussian_tensor = torch.zeros_like(target)
+        #pred_gaussian_tensor = display_gaussian_image(pred_gaussian_tensor, pred, pred_radius)#, peak)
+
+        #print(pred_gaussian_tensor.shape)
+        #print(pred_radius)
+
+        for batch in range(target.shape[0]):
+
+              for i in range(0, pred[batch].shape[0]):  # nbr objects
+
+                  if mask[batch][i]:
+
+                      pred_gaussian_tensor = torch.zeros_like(target[batch][i], dtype=torch.float)
+
+                      pred_gaussian_tensor = individual_gaussian(pred_gaussian_tensor, pred[batch][i], pred_radius[batch][i])
+
+                      #print(pred[batch][i])
+
+                      pred_gaussian_tensor = (pred_gaussian_tensor<=1)*pred_gaussian_tensor + (pred_gaussian_tensor>1)
+
+
+                      #ax = sns.heatmap(pred_gaussian_tensor.detach().cpu().numpy())
+                      #plt.show()
+
+                      #print(len(pred[batch][i]))
+
+                      #for k in range(0,len(pred[batch][i]),2):
+                      #  print(k)
+                      #  pred_gaussian_tensor = draw_ellipse_gaussian(pred_gaussian_tensor,
+                      #                                                         pred[batch][i][k:k+2], pred_radius[batch][i],pred_radius[batch][i])
+
+                      #  ax = sns.heatmap(pred_gaussian_tensor)
+                      #  plt.show()
+
+                      #DRAW = True
+
+                      if DRAW:
+                        data = pred_gaussian_tensor.detach().cpu().numpy()
+
+                        ax = sns.heatmap(data)
+                        plt.show()
+
+                        ax = sns.heatmap(target[batch][i].detach().cpu().numpy())
+                        #print('plot complete data')
+                        plt.show()
+
+                      intersection = torch.sum(((pred_gaussian_tensor>self.opt.threshold) + target[batch][i]) == 2)
+                      union = torch.sum(pred_gaussian_tensor>self.opt.threshold) + torch.sum(target[batch][i] != 0) - intersection
+
+                      iou_loss += 1 - intersection/(union+ 1e-6)
+
+                      bce_loss += F.binary_cross_entropy_with_logits(pred_gaussian_tensor, target[batch][i], reduction='mean')
+
+
+                      #print(intersection/(union+ 1e-6))
+
+                      #Gradient augmentation
+                      #loss += (1-intersection/(union+ 1e-6))*torch.sum(polygon_mask_gt != 0)
+
+                      #print("Aire ", torch.sum(polygon_mask_gt != 0))
+                      #print(intersection/(union+ 1e-6))#*torch.sum(polygon_mask_gt != 0))
+                      #time.sleep(5)
+
+
+
+        iou_loss = iou_loss / (mask.sum() + 1e-6)
+
+        #bce_loss += F.binary_cross_entropy_with_logits(pred_gaussian_tensor*mask, target*mask, reduction='mean')
+
+
+
+
+        bce_loss = bce_loss/(mask.sum() + 1e-6)
+
+        return iou_loss, bce_loss
 
 
 class AreaPolyLoss(nn.Module):
