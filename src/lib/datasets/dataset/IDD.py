@@ -140,7 +140,7 @@ class IDD(data.Dataset):
                 param_list = []
                 to_remove_mask = Image.new('L', (w, h), 1)
                 for bbox in all_bboxes[image_id][cls_ind]:
-                    if bbox[4] >= 0.10:
+                    if bbox[4] >= self.opt.thresh:
                         score = str(bbox[4])
                         depth = bbox[-1]
                         label = self.class_name[cls_ind]
