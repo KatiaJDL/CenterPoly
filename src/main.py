@@ -18,11 +18,12 @@ from datasets.dataset_factory import get_dataset
 from trains.train_factory import train_factory
 
 import wandb
+import tracemalloc
 
 
 def main(opt):
 
-  wandb.init(project="CenterPoly", entity="kjdl")
+  wandb.init(project="CenterPoly", entity="kjdl", mode='disabled')
 
   random.seed(opt.seed)
   np.random.seed(opt.seed)
@@ -46,7 +47,7 @@ def main(opt):
     model, optimizer, start_epoch = load_model(
       model, opt.load_model, optimizer, opt.resume, opt.lr, opt.lr_step)
 
-  wandb.config = {
+  wandb.config.update({
   "learning_rate": opt.lr,
   "epochs": opt.batch_size,
   "batch_size": 128,
@@ -59,7 +60,7 @@ def main(opt):
   "dataset": opt.dataset,
   "backbone": opt.arch,
   "model": opt.load_model
-}
+  })
 
   Trainer = train_factory[opt.task]
   trainer = Trainer(opt, model, optimizer)
@@ -144,4 +145,28 @@ def main(opt):
 
 if __name__ == '__main__':
   opt = opts().parse()
+  #tracemalloc.start()
+
   main(opt)
+
+  #snapshot = tracemalloc.take_snapshot()
+  #top_stats = snapshot.statistics('traceback')
+  #stat = top_stats[0]
+  #print("%s memory blocks: %.1f KiB" % (stat.count, stat.size/1024))
+  #for line in stat.traceback.format():
+  #  print(line)
+
+  """
+  tracemalloc.start()
+  try:
+    main(opt)
+  except:
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics('lineno')
+
+    print('')
+    print('[ Top 10 ]')
+    for stat in top_stats[:10]:
+      print(stat)
+  """
+
