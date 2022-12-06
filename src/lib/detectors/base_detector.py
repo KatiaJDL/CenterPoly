@@ -100,11 +100,11 @@ class BaseDetector(object):
   def show_results(self, debugger, image, results):
    raise NotImplementedError
 
-  def run(self, image_or_path_or_tensor, id, meta=None):
+  def run(self, image_or_path_or_tensor, id = 1, meta=None):
     load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
     merge_time, tot_time = 0, 0
     debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug==3),
-                        theme=self.opt.debugger_theme)
+                        theme=self.opt.debugger_theme, num_classes=self.num_classes)
     start_time = time.time()
     pre_processed = False
     if isinstance(image_or_path_or_tensor, np.ndarray):
