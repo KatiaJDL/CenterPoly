@@ -8,6 +8,8 @@ from progress.bar import Bar
 from models.data_parallel import DataParallel
 from utils.utils import AverageMeter
 
+import wandb
+
 
 class ModelWithLoss(torch.nn.Module):
   def __init__(self, model, loss):
@@ -74,6 +76,10 @@ class BaseTrainer(object):
         if k != 'meta':
           batch[k] = batch[k].to(device=opt.device, non_blocking=True)    
       output, loss, loss_stats = model_with_loss(batch)
+
+      wandb.log(loss_stats)
+      #wandb.watch(model_with_loss)
+
       loss = loss.mean()
       if phase == 'train':
         self.optimizer.zero_grad()
@@ -106,6 +112,7 @@ class BaseTrainer(object):
         self.save_result(output, batch, results)
       del output, loss, loss_stats
     
+
     bar.finish()
     ret = {k: v.avg for k, v in avg_loss_stats.items()}
     ret['time'] = bar.elapsed_td.total_seconds() / 60.

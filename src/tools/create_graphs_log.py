@@ -50,6 +50,8 @@ def main():
   plt.savefig("loss_train.png")
   plt.show()
 
+  plt.figure()
+
   plt.plot(glob_loss_val, label = "glob_loss_val")
   plt.plot(hm_l_val, label = "hm_l_val")
   plt.plot(off_l_val, label = "off_l_val")

@@ -7,7 +7,7 @@ import numpy as np
 import os
 
 
-results = open('/Store/dev/CenterPoly/cityscapesStuff/BBoxes/train16_regular_interval_fg3.csv', 'r').readlines()
+results = open('/store/dev/CenterPoly/cityscapesStuff/BBoxes/train16_regular_interval_fg3.csv', 'r').readlines()
 
 
 image_to_boxes = {}

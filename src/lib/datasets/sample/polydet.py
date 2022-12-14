@@ -15,6 +15,8 @@ from utils.image import draw_dense_reg
 import math
 import bresenham
 from PIL import Image, ImageDraw
+import time
+import copy
 
 
 def find_first_non_zero_pixel(points, instance_image):
@@ -165,10 +167,23 @@ class PolydetDataset(data.Dataset):
       cls_name = self.class_name[ann['category_id']]
 
       points_on_border = ann['poly']
+      #old_points = copy.deepcopy(points_on_border)
+
       if flipped:
         bbox[[0, 2]] = width - bbox[[2, 0]] - 1
         for i in range(0, len(points_on_border), 2):
           points_on_border[i] = width - points_on_border[i] - 1
+        not_flipped = copy.deepcopy(points_on_border)
+        first_angle = len(points_on_border)//4
+
+        if not self.opt.no_reorder_flip:
+          for i in range(0, len(points_on_border)//4 + 2, 2):
+            points_on_border[i] = not_flipped[first_angle - i]
+            points_on_border[i+1] = not_flipped[first_angle - i + 1]
+          for i in range(2, 3*len(points_on_border)//4, 2):
+            points_on_border[first_angle + i] = not_flipped[len(points_on_border) - i]
+            points_on_border[first_angle + i+1] = not_flipped[len(points_on_border) - i + 1]
+
       for i in range(0, len(points_on_border), 2):
         points_on_border[i], points_on_border[i+1] = affine_transform([points_on_border[i], points_on_border[i+1]], trans_output)
         points_on_border[i] = np.clip(points_on_border[i], 0, output_w - 1)
@@ -214,7 +229,6 @@ class PolydetDataset(data.Dataset):
         wh[k] = 1. * w, 1. * h
 
         # points_on_border = np.array(points_on_border).astype(np.float32)
-        # print(points_on_border)
         #exp
         points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
         for i in range(0, len(points_on_border), 2):
@@ -232,15 +246,38 @@ class PolydetDataset(data.Dataset):
               cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = points_on_border[i+1] - ct[1]
               cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
 
-          elif self.opt.rep == 'polar' :
+          elif self.opt.rep == 'polar' or 'polar_fixed' :
+
+            #print(points_on_border[i])
+            #print(points_on_border[i+1])
 
             x = points_on_border[i] - ct[0]
             y = points_on_border[i+1] - ct[1]
 
             r = math.sqrt(x*x+y*y)
-            theta = math.atan(y/(x+1e-8))
+            theta = math.atan((y+1e-8)/(x+1e-8))
             if x < 0 :
                 theta = theta + math.pi
+            elif y < 0 :
+                theta = theta + 2*math.pi
+
+            #ang = math.degrees(math.atan2(y,x) - math.atan2(ct[1],ct[0]))
+            #ang = ang + 360 if ang < 0 else ang
+            #theta = ang if ang < 180 else 360 - ang
+            """"
+            print("--start--")
+            print("cartesien")
+            print(x)
+            print(y)
+            print("center")
+            print(ct[0])
+            print(ct[1])
+            print("polar")
+            print(r)
+            print(theta)
+
+            #print(r)
+            #print(theta)"""
 
             poly[k][i] = r
             poly[k][i+1] = theta
@@ -252,18 +289,112 @@ class PolydetDataset(data.Dataset):
               cat_spec_poly[k][(cls_id * (num_points*2)) + (i+1)] = theta
               cat_spec_mask_poly[k][(cls_id * (num_points*2)) + i: (cls_id * (num_points*2)) + (i + 2)] = 1
 
+            #print('poly radius: ', poly[k][0::2])
+            #print('poly angle: ', poly[k][1::2])
+
           else :
             raise NotImplementedError
-
         # print('h: ', output_h, ' w: ', output_w, ' 0: ', np.max(poly[0::2]), ' 1: ', np.max(poly[1::2]), ' ct: ', ct)
         # poly[k][0::2] /= output_w
         # poly[k][1::2] /= output_h
         # poly[k] *= 1000
         # print('poly: ', poly[k])
 
+        angles = poly[0][1::2]
+
+        #print(angles)
+
+        # Détection des inversions
+
+        """
+
+        if poly[k][1]>poly[k][5]:
+          print(points_on_border)
+          print(old_points)
+          print(poly[k])
+          print(img_id)
+          print(ann['id'])
+          print("----------")
+
+        loss_order=0
+
+        angles = poly[0][1::2]
+
+        #print(angles)
+
+        zero = False
+        for j in range(0, len(points_on_border)//2):
+            if angles[j] > 0 :
+                zero = True
+            if angles[j] < 0 and zero:
+                angles[j] += 2*3.14
+
+        #print(angles)
+        #print(points_on_border[1::2])
+        print("--------")
+
+        for j in range(0, len(points_on_border)//2 -1): # points
+            for p in range(j, len(points_on_border) //2):
+                if angles[j]-angles[p] > 0 :
+                    loss_order += angles[j]-angles[p]
+                    #print(j)
+                    #print(p)
+                    #print(angles[j]-angles[p])
+                if angles[j]-angles[p] < -7:
+                    loss_order += angles[p]-angles[j]
+                    #print(j)
+                    #print(p)
+                    #print(angles[j]-angles[p])
+        if loss_order>0.5:
+          print("loss order")
+          print(loss_order)
+          #print(poly[0][1::2])
+          print(angles)
+        #  print(points_on_border)
+        #  print("------")
+
+
+        poly_cart = []
+        poly_polar = []
+        for i in range(0, len(points_on_border), 2):
+          poly_cart.append(points_on_border[i]*5)
+          poly_cart.append(points_on_border[i+1]*5)
+
+          poly_polar.append(poly[0][i]*math.cos(poly[0][i+1]) + ct[0])
+          poly_polar.append(poly[0][i]*math.sin(poly[0][i+1]) + ct[1])
+
+        if cls_name=="car":
+
+          polygon_mask_gt = Image.new('L', (input_w, input_h), 0)
+          polygon_mask_gt_half = Image.new('L', (input_w, input_h), 0)
+
+          ImageDraw.Draw(polygon_mask_gt).polygon(poly_cart, outline=0, fill=255)
+          polygon_mask_gt.show()
+
+          ImageDraw.Draw(polygon_mask_gt_half).polygon(poly_cart[:16], outline=0, fill=255)
+          polygon_mask_gt_half.show()
+
+          #polygon_mask_polar = Image.new('L', (input_w, input_h), 0)
+
+          #ImageDraw.Draw(polygon_mask_polar).polygon(poly_polar, outline=0, fill=255)
+          #polygon_mask_polar.show()
+
+          time.sleep(5)
+
+          """
+
+
+
+
+
         ind[k] = ct_int[1] * output_w + ct_int[0]
         reg[k] = ct - ct_int
-        reg_mask[k] = 1
+
+        if self.opt.rep == "polar" and poly[k][1]>poly[k][5]:
+          reg_mask[k] = 0
+          #print("mask")
+        else:
+          reg_mask[k] = 1
         freq_mask[k] = self.class_frequencies[cls_name]
 
         if self.opt.dense_poly:
@@ -277,8 +408,8 @@ class PolydetDataset(data.Dataset):
         gt_det.append([ct[0] - w / 2, ct[1] - h / 2,
                        ct[0] + w / 2, ct[1] + h / 2, 1, cls_id])
     if DRAW:
-      # cv2.imwrite(os.path.join('/Store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_').replace('.jpg', '_instance.jpg')), cv2.resize(instance_img, (input_w, input_h)))
-      cv2.imwrite(os.path.join('/Store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_')), cv2.resize(old_inp,  (input_w, input_h)))
+      # cv2.imwrite(os.path.join('/store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_').replace('.jpg', '_instance.jpg')), cv2.resize(instance_img, (input_w, input_h)))
+      cv2.imwrite(os.path.join('/store/datasets/cityscapes/test_images/polygons/', img_path.replace('/', '_')), cv2.resize(old_inp,  (input_w, input_h)))
 
     if np.count_nonzero(freq_mask) == 0:
       freq_mean = 1.0  # don't boost loss if no objects

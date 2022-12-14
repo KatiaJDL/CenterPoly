@@ -140,7 +140,7 @@ class IDD(data.Dataset):
                 param_list = []
                 to_remove_mask = Image.new('L', (w, h), 1)
                 for bbox in all_bboxes[image_id][cls_ind]:
-                    if bbox[4] >= 0.10:
+                    if bbox[4] >= self.opt.thresh:
                         score = str(bbox[4])
                         depth = bbox[-1]
                         label = self.class_name[cls_ind]
@@ -174,7 +174,7 @@ class IDD(data.Dataset):
         return self.num_samples
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet':
+        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
@@ -208,7 +208,7 @@ class IDD(data.Dataset):
             for f in files:
                 os.remove(f)
             self.format_and_write_to_IDD(results, res_dir)
-            os.environ['IDD_DATASET'] = '/Store/datasets/IDD'
+            os.environ['IDD_DATASET'] = '/store/datasets/IDD'
             os.environ['IDD_RESULTS'] = res_dir
             from datasets.evaluation.IDDscripts.evaluation import evaluate_instance_segmentation
             AP = evaluate_instance_segmentation.getAP()

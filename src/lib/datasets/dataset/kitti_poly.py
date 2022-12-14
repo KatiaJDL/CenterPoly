@@ -22,7 +22,7 @@ class KITTIPOLY(data.Dataset):
 
     def __init__(self, opt, split):
         super(KITTIPOLY, self).__init__()
-        self.data_dir = '/Store/datasets/KITTI/left_image'
+        self.data_dir = '/store/datasets/KITTI/left_image'
         self.img_dir = self.data_dir
         self.split = split
         self.opt = opt
@@ -108,7 +108,7 @@ class KITTIPOLY(data.Dataset):
                 param_list = []
                 to_remove_mask = Image.new('L', (w, h), 1)
                 for bbox in all_bboxes[image_id][cls_ind]:
-                    if bbox[4] > 0.05:
+                    if bbox[4] > self.opt.thresh:
                         score = str(bbox[4])
                         depth = bbox[-1]
                         label = self.class_name[cls_ind]
@@ -165,7 +165,7 @@ class KITTIPOLY(data.Dataset):
 
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet':
+        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
@@ -199,7 +199,7 @@ class KITTIPOLY(data.Dataset):
             for f in files:
                 os.remove(f)
             self.format_and_write_to_kitti(results, res_dir)
-            os.environ['KITTI_DATASET'] = '/Store/datasets/KITTIPoly'
+            os.environ['KITTI_DATASET'] = '/store/datasets/KITTIPoly'
             os.environ['KITTI_RESULTS'] = res_dir
             from datasets.evaluation.kittiscripts.evaluation import evalInstanceLevelSemanticLabeling
             AP = evalInstanceLevelSemanticLabeling.getAP()

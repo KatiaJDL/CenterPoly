@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+import math
 import cv2
 from .ddd_utils import compute_box_3d, project_to_image, draw_box_3d
 
@@ -42,6 +43,8 @@ class Debugger(object):
         (255, 0, 0), (0, 0, 255), (255, 0, 0), (0, 0, 255),
         (255, 0, 0), (0, 0, 255), (255, 0, 0), (0, 0, 255),
         (255, 0, 0), (0, 0, 255)]
+    elif num_classes == 8 or 'cityscapes_gaussian' in dataset:
+        self.names = cityscapes_class_name
     elif num_classes == 80 or dataset == 'coco':
       self.names = coco_class_name
     elif num_classes == 1 or ('uadetrac' in dataset and '_b' in dataset) or 'uav':
@@ -72,6 +75,7 @@ class Debugger(object):
     # for bird view
     self.world_size = 64
     self.out_size = 384
+    print(self.names)
 
   def add_img(self, img, img_id='default', revert_color=False):
     if revert_color:
@@ -173,6 +177,9 @@ class Debugger(object):
       cv2.circle(self.imgs[img_id], (rect1[0], rect2[1]), int(10 * conf), c, 1)
       cv2.circle(self.imgs[img_id], (rect2[0], rect1[1]), int(10 * conf), c, 1)
 
+  def _to_float(self, x):
+    return float("{:.2f}".format(x))
+
   def add_coco_bbox(self, bbox, cat, conf=1, show_txt=True, img_id='default'): 
     bbox = np.array(bbox, dtype=np.int32)
     # cat = (int(cat) + 1) % 80
@@ -184,6 +191,7 @@ class Debugger(object):
     txt = '{}{:.1f}'.format(self.names[cat], conf)
     font = cv2.FONT_HERSHEY_SIMPLEX
     cat_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
+    print(bbox)
     cv2.rectangle(
       self.imgs[img_id], (bbox[0], bbox[1]), (bbox[2], bbox[3]), c, 2)
     if show_txt:
@@ -203,6 +211,32 @@ class Debugger(object):
         cv2.line(self.imgs[img_id], (points[e[0], 0], points[e[0], 1]),
                       (points[e[1], 0], points[e[1], 1]), self.ec[j], 2,
                       lineType=cv2.LINE_AA)
+
+  def add_gaussiandet(self, centers, radius,  cat, conf=1, show_txt=True, img_id='default'):
+    bbox = np.array(centers, dtype=np.int32)
+    # cat = (int(cat) + 1) % 80
+    cat = int(cat)
+    # print('cat', cat, self.names[cat])
+    c = self.colors[cat][0][0].tolist()
+    if self.theme == 'white':
+      c = (255 - np.array(c)).tolist()
+    txt = '{}{:.1f}'.format(self.names[cat], conf)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cat_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
+    centers = list(map(self._to_float, bbox))
+    centers = [(int(x), int(y)) for x, y in zip(centers[0::2], centers[1::2])]
+    print(centers)
+    radius = math.ceil(abs(radius))
+    print(radius)
+    for coord in centers:
+      cv2.circle(self.imgs[img_id], coord, radius, c, 2)
+    if show_txt:
+      cv2.rectangle(self.imgs[img_id],
+                    (bbox[0], bbox[1] - cat_size[1] - 2),
+                    (bbox[0] + cat_size[0], bbox[1] - 2), c, -1)
+      cv2.putText(self.imgs[img_id], txt, (bbox[0], bbox[1] - 2),
+                  font, 0.5, (0, 0, 0), thickness=1, lineType=cv2.LINE_AA)
+
 
   def add_points(self, points, img_id='default'):
     num_classes = len(points)
@@ -463,6 +497,9 @@ coco_class_name = [
 
 uadetrac_class_name = [
      'bus', 'car', 'others', 'van'
+]
+cityscapes_class_name = [
+  'person', 'rider', 'car', 'truck', 'bus', 'train', 'motorcycle', 'bicycle'
 ]
 uadetrac_b_class_name = [
      'object'

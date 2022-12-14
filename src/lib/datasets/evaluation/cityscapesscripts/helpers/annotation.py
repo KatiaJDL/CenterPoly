@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #
-# Classes to Store, read, and write annotations
+# Classes to store, read, and write annotations
 #
 
 from __future__ import print_function, absolute_import, division

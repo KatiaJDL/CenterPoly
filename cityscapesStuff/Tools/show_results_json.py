@@ -15,8 +15,8 @@ from shapely.geometry import Polygon
 
 TRESH = 0.5
 
-base_dir = '/Store/datasets/cityscapes'
-# anno = json.load(open('/Store/datasets/UA-Detrac/COCO-format/test-1-on-200_b.json', 'r'))
+base_dir = '/store/datasets/cityscapes'
+# anno = json.load(open('/store/datasets/UA-Detrac/COCO-format/test-1-on-200_b.json', 'r'))
 # anno = json.load(open('../BBoxes/val16_regular_interval.json', 'r'))
 # anno = json.load(open('../BBoxes/test.json', 'r'))
 anno = json.load(open('../../KITTIPolyStuff/BBoxes/test.json', 'r'))

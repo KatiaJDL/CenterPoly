@@ -6,8 +6,7 @@ import torch
 import numpy as np
 
 from models.losses import FocalLoss
-from models.losses import RegL1Loss, RegLoss, RegL1PolyLoss, RegL1PolyPolarLoss, AreaPolyLoss, IoUPolyLoss, \
-    IoUPolyPolarLoss, NormRegL1Loss, RegWeightedL1Loss, IoURegL1PolyLoss, IoURegL1PolyPolarLoss
+from models.losses import RegL1Loss, RegLoss, PolyLoss, DiskLoss, NormRegL1Loss, RegWeightedL1Loss, AreaPolyLoss
 from models.decode import polydet_decode
 from models.utils import _sigmoid
 from utils.debugger import Debugger
@@ -23,20 +22,11 @@ class PolydetLoss(torch.nn.Module):
         self.crit = torch.nn.MSELoss() if opt.mse_loss else FocalLoss()
         self.crit_reg = RegL1Loss() if opt.reg_loss == 'l1' else \
             RegLoss() if opt.reg_loss == 'sl1' else None
-        if opt.rep == 'cartesian':
-            if opt.poly_loss == 'iou':
-                self.crit_poly = IoUPolyLoss()
-            elif opt.poly_loss == 'l1':
-                self.crit_poly = RegL1PolyLoss()
-            elif opt.poly_loss == 'l1+iou':
-                self.crit_poly = IoURegL1PolyLoss()
-        if opt.rep == 'polar':
-            if opt.poly_loss == 'iou':
-                self.crit_poly = IoUPolyPolarLoss()
-            elif opt.poly_loss == 'l1':
-                self.crit_poly = RegL1PolyPolarLoss()
-            elif opt.poly_loss == 'l1+iou':
-                self.crit_poly = IoURegL1PolyPolarLoss()
+
+        self.crit_poly = PolyLoss(opt)
+
+        self.crit_disks = DiskLoss(opt)
+
         self.crit_dense_poly = torch.nn.L1Loss(reduction='sum')
         self.crit_wh = torch.nn.L1Loss(reduction='sum') if opt.dense_wh else \
             NormRegL1Loss() if opt.norm_wh else \
@@ -45,9 +35,9 @@ class PolydetLoss(torch.nn.Module):
         self.opt = opt
 
     def forward(self, outputs, batch):
-        # print(batch.keys())
+        #print(batch.keys())
         opt = self.opt
-        hm_loss, off_loss, poly_loss, depth_loss, wh_loss, fg_loss = 0, 0, 0, 0, 0, 0
+        hm_loss, off_loss, poly_loss, depth_loss, wh_loss, fg_loss, disk_loss, rep_loss, order_loss, iou_loss = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         # hm_loss, off_loss, poly_loss, depth_loss, border_hm_loss = 0, 0, 0, 0, 0
         for s in range(opt.num_stacks):
             output = outputs[s]
@@ -92,22 +82,37 @@ class PolydetLoss(torch.nn.Module):
 
             hm_loss += self.crit(output['hm'], batch['hm']) / opt.num_stacks
             # fg_loss += self.crit(output['fg'], batch['fg']) / opt.num_stacks
-            # border_hm_loss += self.crit(output['border_hm'], batch['border_hm']) / opt.num_stacks
-            # area_loss += self.area_poly(output['poly'], batch['reg_mask'], batch['ind'], batch['instance'], batch['centers']) / opt.num_stacks
-            # print(output['poly'].shape)
-            if opt.cat_spec_poly:
-                poly_loss += self.crit_poly(
-                    output['poly'], batch['cat_spec_mask'],
-                    batch['ind'], batch['cat_spec_poly'], hm = output['hm']) / opt.num_stacks
-            elif opt.dense_poly:
-                mask_weight = batch['dense_poly_mask'].sum() + 1e-4
-                poly_loss += (self.crit_dense_poly(output['poly'] * batch['dense_poly_mask'],
-                                                   batch['dense_poly'] * batch['dense_poly_mask']) / mask_weight)\
-                             / opt.num_stacks
-            else:
-                poly_loss += self.crit_poly(output['poly'], batch[
-                    'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm']) / opt.num_stacks
-                # poly_loss += self.crit_poly(output['poly'], batch['reg_mask'],  # batch['freq_mask'],batch['ind'], batch['poly']) / opt.num_stacks
+
+            if opt.task == 'diskdet':
+                disks, repulsion = self.crit_disks(output['poly'], batch[
+                    'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm'])
+                disk_loss += disks / opt.num_stacks
+                rep_loss += repulsion / opt.num_stacks
+
+
+            elif opt.task == 'polydet':
+                # border_hm_loss += self.crit(output['border_hm'], batch['border_hm']) / opt.num_stacks
+                # area_loss += self.area_poly(output['poly'], batch['reg_mask'], batch['ind'], batch['instance'], batch['centers']) / opt.num_stacks
+                # print(output['poly'].shape)
+                if opt.cat_spec_poly:
+                    poly_loss += self.crit_poly(
+                        output['poly'], batch['cat_spec_mask'],
+                        batch['ind'], batch['cat_spec_poly'], hm = output['hm']) / opt.num_stacks
+                elif opt.dense_poly:
+                    mask_weight = batch['dense_poly_mask'].sum() + 1e-4
+                    poly_loss += (self.crit_dense_poly(output['poly'] * batch['dense_poly_mask'],
+                                                       batch['dense_poly'] * batch['dense_poly_mask']) / mask_weight)\
+                                 / opt.num_stacks
+                else:
+                    if opt.poly_order :
+                        poly, order = self.crit_poly(output['poly'], batch[
+                            'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm'])
+                        poly_loss += poly / opt.num_stacks
+                        order_loss += order /opt.num_stacks
+                    else:
+                        poly_loss += self.crit_poly(output['poly'], batch[
+                            'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm']) / opt.num_stacks
+                        # poly_loss += self.crit_poly(output['poly'], batch['reg_mask'],  # batch['freq_mask'],batch['ind'], batch['poly']) / opt.num_stacks
 
             if opt.reg_offset and opt.off_weight > 0:
                 off_loss += self.crit_reg(output['reg'], batch['reg_mask'],
@@ -119,22 +124,46 @@ class PolydetLoss(torch.nn.Module):
         # # print(write_depth.shape)
         # write_depth = (((write_depth - np.min(write_depth)) / np.max(write_depth)) * 255).astype(np.uint8)
         # count = 0
-        # write_name = '/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
+        # write_name = '/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
         # while os.path.exists(write_name):
         #     count += 1
-        #     write_name = '/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
-        # cv2.imwrite('/Store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg', write_depth)
+        #     write_name = '/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg'
+        # cv2.imwrite('/store/datasets/cityscapes/test_images/depth/depth' + str(count) + '.jpg', write_depth)
         # exit()
 
         # loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss + opt.depth_weight * depth_loss
         loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss \
                + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
         # loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'off_loss': off_loss, 'poly_loss': poly_loss, 'depth_loss': depth_loss, 'border_hm_loss': border_hm_loss}
-        loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': poly_loss,
-                      'depth_l': depth_loss,
-                      #  'fg_l': fg_loss,
-                      # 'wh_l': wh_loss,
-                      }
+
+        if opt.task == 'diskdet' :
+            loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * (disk_loss + rep_loss) \
+                   + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
+
+            loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'disk_l': disk_loss, 'rep_l': rep_loss,
+                          'depth_l': depth_loss,
+                          #  'fg_l': fg_loss,
+                          # 'wh_l': wh_loss,
+                          }
+        else:
+
+            if opt.poly_order :
+                loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * (poly_loss + order_loss) \
+                   + opt.depth_weight * depth_loss
+                loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': poly_loss, 'order_l': order_loss,
+                          'depth_l': depth_loss}
+
+            else :
+                # loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss + opt.depth_weight * depth_loss
+                loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * poly_loss \
+                       + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
+                # loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'off_loss': off_loss, 'poly_loss': poly_loss, 'depth_loss': depth_loss, 'border_hm_loss': border_hm_loss}
+
+                loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'poly_l': poly_loss,
+                              'depth_l': depth_loss,
+                              #  'fg_l': fg_loss,
+                              # 'wh_l': wh_loss,
+                              }
         return loss, loss_stats
 
 
@@ -145,7 +174,15 @@ class PolydetTrainer(BaseTrainer):
     def _get_losses(self, opt):
         # loss_states = ['loss', 'hm_loss', 'off_loss', 'poly_loss', 'depth_loss', 'border_hm_loss']
         # loss_states = ['loss', 'hm_l', 'off_l', 'poly_l', 'depth_l', 'wh_l']
-        loss_states = ['loss', 'hm_l', 'off_l', 'poly_l', 'depth_l']
+        if opt.task == 'polydet':
+            if opt.poly_order:
+                loss_states = ['loss', 'hm_l', 'off_l', 'poly_l', 'order_l', 'depth_l']
+            else :
+                loss_states = ['loss', 'hm_l', 'off_l', 'poly_l', 'depth_l']
+        elif opt.task == 'diskdet':
+            loss_states = ['loss', 'hm_l', 'off_l', 'disk_l', 'rep_l', 'depth_l']
+        else:
+            raise NotImplementedError
         loss = PolydetLoss(opt)
         return loss_states, loss
 
@@ -154,7 +191,8 @@ class PolydetTrainer(BaseTrainer):
         reg = output['reg'] if opt.reg_offset else None
         dets = polydet_decode(
             output['hm'], output['wh'], reg=reg,
-            cat_spec_poly=opt.cat_spec_poly, K=opt.K)
+            cat_spec_poly=opt.cat_spec_poly, K=opt.K,
+            rep = opt.rep)
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets[:, :, :4] *= opt.down_ratio
         dets_gt = batch['meta']['gt_det'].numpy().reshape(1, -1, dets.shape[2])
@@ -191,7 +229,7 @@ class PolydetTrainer(BaseTrainer):
         dets = polydet_decode(
             output['hm'], output['poly'], output['pseudo_depth'], reg=reg,
             cat_spec_poly=self.opt.cat_spec_poly, K=self.opt.K, 
-            polar = self.opt.rep == 'polar')
+            rep = self.opt.rep)
         dets = dets.detach().cpu().numpy().reshape(1, -1, dets.shape[2])
         dets_out = polydet_post_process(
             dets.copy(), batch['meta']['c'].cpu().numpy(),

@@ -7,6 +7,8 @@ import _init_paths
 import os
 
 import torch
+import random
+import numpy as np
 import torch.utils.data
 from opts import opts
 from models.model import create_model, load_model, save_model
@@ -15,9 +17,18 @@ from logger import Logger
 from datasets.dataset_factory import get_dataset
 from trains.train_factory import train_factory
 
+import wandb
+import tracemalloc
+
 
 def main(opt):
+
+  wandb.init(project="CenterPoly", entity="kjdl", mode='disabled')
+
+  random.seed(opt.seed)
+  np.random.seed(opt.seed)
   torch.manual_seed(opt.seed)
+  torch.cuda.manual_seed(opt.seed)
   torch.backends.cudnn.benchmark = not opt.not_cuda_benchmark and not opt.test
   Dataset = get_dataset(opt.dataset, opt.task)
   opt = opts().update_dataset_info_and_set_heads(opt, Dataset)
@@ -35,6 +46,21 @@ def main(opt):
   if opt.load_model != '':
     model, optimizer, start_epoch = load_model(
       model, opt.load_model, optimizer, opt.resume, opt.lr, opt.lr_step)
+
+  wandb.config.update({
+  "learning_rate": opt.lr,
+  "epochs": opt.batch_size,
+  "batch_size": 128,
+  "lr_step": opt.lr_step,
+  "repesentation": opt.rep,
+  "poly_loss": opt.poly_loss,
+  "poly_order": opt.poly_order,
+  "task": opt.task,
+  "nbr_points": opt.nbr_points,
+  "dataset": opt.dataset,
+  "backbone": opt.arch,
+  "model": opt.load_model
+  })
 
   Trainer = train_factory[opt.task]
   trainer = Trainer(opt, model, optimizer)
@@ -84,7 +110,7 @@ def main(opt):
                  epoch, model, optimizer)
       with torch.no_grad():
         log_dict_val, preds = trainer.val(epoch, val_loader)
-        if True and opt.dataset == 'cityscapes' and opt.task == 'polydet':
+        if True and opt.dataset == 'cityscapes' and (opt.task == 'polydet' or opt.task == 'diskdet'):
             AP = val_loader.dataset.run_eval(preds, opt.save_dir)
             print('AP: ', AP)
       logger.write('\n')
@@ -92,9 +118,9 @@ def main(opt):
       for k, v in log_dict_val.items():
         logger.scalar_summary('val_{}'.format(k), v, epoch)
         logger.write('{} {:8f} | '.format(k, v))
-      if True and opt.dataset == 'cityscapes' and opt.task == 'polydet':
+      if True and opt.dataset == 'cityscapes' and (opt.task == 'polydet' or opt.task == 'diskdet'):
         logger.scalar_summary('AP', AP, epoch)
-      if True and opt.dataset == 'cityscapes' and opt.task == 'polydet':
+      if True and opt.dataset == 'cityscapes' and (opt.task == 'polydet' or opt.task == 'diskdet'):
           if AP > best_AP:
               best_AP = AP
               save_model(os.path.join(opt.save_dir, 'model_best.pth'),
@@ -119,4 +145,28 @@ def main(opt):
 
 if __name__ == '__main__':
   opt = opts().parse()
+  #tracemalloc.start()
+
   main(opt)
+
+  #snapshot = tracemalloc.take_snapshot()
+  #top_stats = snapshot.statistics('traceback')
+  #stat = top_stats[0]
+  #print("%s memory blocks: %.1f KiB" % (stat.count, stat.size/1024))
+  #for line in stat.traceback.format():
+  #  print(line)
+
+  """
+  tracemalloc.start()
+  try:
+    main(opt)
+  except:
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics('lineno')
+
+    print('')
+    print('[ Top 10 ]')
+    for stat in top_stats[:10]:
+      print(stat)
+  """
+

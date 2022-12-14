@@ -3,7 +3,9 @@ import pandas as pd
 import json
 import seaborn as sns
 
-with open("/Store/travail/kajoda/CenterPoly/CenterPoly/exp/cityscapes/polydet/from_ctdet_smhg_1cnv_16_pw1_B/results/evaluationResults/resultInstanceLevelSemanticLabeling.json") as json_file:
+path = "/store/travail/kajoda/CenterPoly/CenterPoly/exp/cityscapes/polydet/from_ctdet_smhg_1cnv_16_pw1_B/results/evaluationResults/"
+
+with open(path + "resultInstanceLevelSemanticLabeling.json") as json_file:
             # print(json_file)
             results = json.load(json_file)
 
@@ -23,5 +25,6 @@ print(df.head)
 
 ax = sns.catplot(data = df, kind = 'bar', x = 'classe', y = 'metric', hue = 'type')
 plt.xticks(rotation=45)
+plt.savefig(path + "results_classes.png")
 plt.show()
 

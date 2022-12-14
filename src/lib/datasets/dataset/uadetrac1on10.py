@@ -27,11 +27,11 @@ class UADETRAC1ON10(data.Dataset):
         self.img_dir = os.path.join(self.data_dir, '{}2017'.format(split))
 
         if split == 'test':
-            self.annot_path = '/Store/datasets/UA-Detrac/COCO-format/test-1-on-30.json'
+            self.annot_path = '/store/datasets/UA-Detrac/COCO-format/test-1-on-30.json'
         elif split == 'val':
-            self.annot_path = '/Store/datasets/UA-Detrac/COCO-format/val-1-on-10.json'
+            self.annot_path = '/store/datasets/UA-Detrac/COCO-format/val-1-on-10.json'
         else:
-            self.annot_path = '/Store/datasets/UA-Detrac/COCO-format/train-1-on-10.json'
+            self.annot_path = '/store/datasets/UA-Detrac/COCO-format/train-1-on-10.json'
 
         self.max_objs = 50  # 128
         self.class_name = [

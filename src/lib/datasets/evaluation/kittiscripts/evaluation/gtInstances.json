@@ -1,5 +1,5 @@
 {
-    "/Store/datasets/KITTIPoly/training/instance/000019_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000019_10.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -182,7 +182,7 @@
             }
         ]
     },
-    "/Store/datasets/KITTIPoly/training/instance/000039_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000039_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -386,7 +386,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000059_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000059_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -526,7 +526,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000079_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000079_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -731,7 +731,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000099_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000099_10.png": {
         "bicycle": [],
         "bridge": [
             {
@@ -913,7 +913,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000119_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000119_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -1177,7 +1177,7 @@
             }
         ]
     },
-    "/Store/datasets/KITTIPoly/training/instance/000139_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000139_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [
@@ -1437,7 +1437,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000159_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000159_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -1587,7 +1587,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000179_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000179_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],
@@ -1731,7 +1731,7 @@
         ],
         "wall": []
     },
-    "/Store/datasets/KITTIPoly/training/instance/000199_10.png": {
+    "/store/datasets/KITTIPoly/training/instance/000199_10.png": {
         "bicycle": [],
         "bridge": [],
         "building": [],

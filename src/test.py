@@ -65,12 +65,13 @@ def prefetch_test(opt):
     PrefetchDataset(opt, dataset, detector.pre_process), 
     batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
   results = {}
+  #"""
   num_iters = len(dataset)
   bar = Bar('{}'.format(opt.exp_id), max=num_iters)
   time_stats = ['tot', 'load', 'pre', 'net', 'dec', 'post', 'merge']
   avg_time_stats = {t: AverageMeter() for t in time_stats}
   for ind, (img_id, pre_processed_images) in enumerate(data_loader):
-    ret = detector.run(pre_processed_images)
+    ret = detector.run(pre_processed_images, ind)
     results[img_id.numpy().astype(np.int32)[0]] = ret['results']
     Bar.suffix = '[{0}/{1}]|Tot: {total:} |ETA: {eta:} '.format(
                    ind, num_iters, total=bar.elapsed_td, eta=bar.eta_td)
@@ -80,6 +81,7 @@ def prefetch_test(opt):
         t, tm = avg_time_stats[t])
     bar.next()
   bar.finish()
+  #"""
   dataset.run_eval(results, opt.save_dir)
 
 def test(opt):

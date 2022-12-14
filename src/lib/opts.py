@@ -11,7 +11,7 @@ class opts(object):
     self.parser = argparse.ArgumentParser()
     # basic experiment setting
     self.parser.add_argument('task', default='ctdet',
-                             help='ctdet | ddd | multi_pose | exdet | polydet')
+                             help='ctdet | ddd | multi_pose | exdet | polydet | diskdet')
     self.parser.add_argument('--dataset', default='uav',
                              help='coco | kitti |kitti2d | coco_hp | pascal | uadetrac | uadetrac1on10 | uadetrac1on10_b| uav | cityscapes | IDD')
     self.parser.add_argument('--exp_id', default='default')
@@ -71,7 +71,7 @@ class opts(object):
                              help='output stride. Currently only supports 4.')
     self.parser.add_argument('--rep', default='cartesian',
                              help='representation of the polygon vertices'
-                                  'cartesian | polar')
+                                  'cartesian | polar | polar_fixed | polar_confined')
 
     # input
     self.parser.add_argument('--input_res', type=int, default=-1,
@@ -110,6 +110,8 @@ class opts(object):
                              help='run nms in testing.')
     self.parser.add_argument('--K', type=int, default=128,
                              help='max number of output objects.')
+    self.parser.add_argument('--thresh', type=float, default=0.05,
+                             help='threshold for the outputs kept for evaluation')
     self.parser.add_argument('--not_prefetch_test', action='store_true',
                              help='not use parallal data pre-processing.')
     self.parser.add_argument('--fix_res', action='store_true',
@@ -120,6 +122,8 @@ class opts(object):
                                   ' during validation.')
 
     # dataset
+    self.parser.add_argument('--data_dir', default='/store/datasets/',
+                             help='localisation of the dataset')
     self.parser.add_argument('--not_rand_crop', action='store_true',
                              help='not use the random crop data augmentation'
                                   'from CornerNet.')
@@ -134,6 +138,8 @@ class opts(object):
                                   'apply rotation augmentation.')
     self.parser.add_argument('--flip', type = float, default=0.5,
                              help='probability of applying flip augmentation.')
+    self.parser.add_argument('--no_reorder_flip', action='store_true',
+                             help='not reorder vertices after flip augmentation')
     self.parser.add_argument('--no_color_aug', action='store_true',
                              help='not use the color augmenation '
                                   'from CornerNet')
@@ -156,7 +162,9 @@ class opts(object):
                              help='use mse loss or focal loss to train '
                                   'keypoint heatmaps.')
     self.parser.add_argument('--poly_loss', default='l1',
-                             help='polygon regression loss: l1 | iou | l1+iou')
+                             help='polygon regression loss: l1 | iou | l1+iou | bce')
+    self.parser.add_argument('--poly_order',  action='store_true',
+                             help='polygon order loss')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
                              help='use elliptical gaussians to train '
@@ -231,6 +239,9 @@ class opts(object):
                                   'human joint heatmaps.')
     self.parser.add_argument('--not_reg_bbox', action='store_true',
                              help='not regression bounding box size.')
+    # gaussian det
+    self.parser.add_argument('--threshold', default=0.5,
+                             help='threshold for pixel selection in gaussian detection')
 
     # ground truth validation
     self.parser.add_argument('--eval_oracle_hm', action='store_true',
@@ -379,6 +390,25 @@ class opts(object):
                    }
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
+    elif opt.task == 'diskdet':
+      opt.heads = {'hm': opt.num_classes,
+                   'poly': opt.nbr_points*2 if not opt.cat_spec_poly else opt.nbr_points*2 * opt.num_classes,
+                   'pseudo_depth': 1,
+                   # 'fg': 1,
+                   # 'wh': 2 ,
+                   #'border_hm': 1,
+                   }
+    elif opt.task == 'gaussiandet':
+      opt.heads = {'hm': opt.num_classes,
+                   'centers': opt.nbr_points*2,
+                   'radius': 1,
+                   'pseudo_depth': 1,
+                   # 'fg': 1,
+                   # 'wh': 2 ,
+                   #'border_hm': 1,
+                   }
+      if opt.reg_offset:
+        opt.heads.update({'reg': 2})
     elif opt.task == 'ctdetVid':
       # assert opt.dataset in ['pascal', 'coco']
       opt.heads = {'hm': opt.num_classes,
@@ -413,6 +443,12 @@ class opts(object):
                    'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                    'dataset': 'uadetrac1on10'},
         'polydet': {'default_resolution': [512, 1024], 'num_classes': 11,
+                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
+                          'dataset': 'cityscapes'},
+        'gaussiandet': {'default_resolution': [512, 1024], 'num_classes': 8,
+                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
+                          'dataset': 'cityscapes_gaussian'},
+        'diskdet': {'default_resolution': [512, 1024], 'num_classes': 11,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
         'ctdetMultiSpot': {'default_resolution': [1024, 2048], 'num_classes': 1,

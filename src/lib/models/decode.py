@@ -7,6 +7,8 @@ import torch.nn as nn
 from .utils import _gather_feat, _transpose_and_gather_feat
 import numpy as np
 import math
+from PIL import Image, ImageDraw
+import time
 
 def _nms(heat, kernel=3):
     pad = (kernel - 1) // 2
@@ -77,6 +79,16 @@ def _h_aggregate(heat, aggr_weight=0.1):
 def _v_aggregate(heat, aggr_weight=0.1):
     return aggr_weight * _top_aggregate(heat) + \
            aggr_weight * _bottom_aggregate(heat) + heat
+
+def order_angles(polygon):
+    angles = polygon[1::2]
+    transition = False
+    for i in range(len(angles)-1):
+        if angles[i]>angles[i+1]:
+            if angles[i]<0 or angles[i+1]>0 or transition:
+                return False
+            transition = True
+    return True
 
 '''
 # Slow for large number of categories
@@ -497,7 +509,7 @@ def ctdet_decode(heat, wh, reg=None, cat_spec_wh=False, K=100):
 
     return detections
 
-def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, polar = False):
+def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep = 'cartesian'):
     batch, cat, height, width = heat.size()
     nbr_points = int(polys.shape[-1])
 
@@ -565,20 +577,53 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
     #                     bboxes[..., 3] - 2 * y_intervals,
     #                     bboxes[..., 3] - 3 * y_intervals,
     #                    ])
-
-    if polar :
-        for batch in polys:
+    #print('décode')
+    #print(scores.shape)
+    if rep == 'polar' or rep == 'polar_fixed' :
+        for k, batch in enumerate(polys):
+            #print(batch.shape)
+            #print(batch[0])
+            bad_order = 0
             for i in range(polys.shape[1]):
+                #print("----")
+                #print(i)
+
+                #order = order_angles(batch[i])
+                #print(order)
+                #if not order and scores[k][i][0] > 0.1:
+                #    bad_order +=1
                 for j in range(0, polys.shape[-1] - 1, 2):  # points
                         #print(j)
-                        r = batch[i][j]
-                        theta = batch[i][j+1]
+                        r = batch[i][j].clone()
+                        theta = batch[i][j+1].clone()
+                        #print("polar")
+                        #print(r)
+                        #print(theta)
 
-                        batch[i][j] = r*math.cos(theta)
-                        batch[i][j+1] = r*math.sin(theta)
+                        if rep == 'polar_fixed':
+
+                            fixed_angle = 2*3.14 - 2*3.14/polys.shape[-1]*j
+                            #print(fixed_angle)
+
+                            batch[i][j] = r*math.cos(fixed_angle)
+                            batch[i][j+1] = r*math.sin(fixed_angle)
+
+                        else:
+
+                            batch[i][j] = r*math.cos(theta)
+                            batch[i][j+1] = r*math.sin(theta)
+
+                        #print("cartesien")
+                        #print(batch[i][j])
+                        #print(batch[i][j+1])
+            #print('cartésien')
+            #print(batch[0])
+            #print('Bad order angles: ', bad_order, ' out of ', polys.shape[1])
+                #print("----")
 
     polys[..., 0::2] += xs
     polys[..., 1::2] += ys
+
     # print(polys[..., 0::2].shape, x_boxes.transpose(1, 0).shape)
 
     # polys[..., 0::2] += x_boxes.transpose(1, 0)
@@ -624,6 +669,118 @@ def polydet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, pol
 
     return detections
 
+def diskdet_decode(heat, polys, depth, reg=None, cat_spec_poly=False, K=100, rep = 'cartesian'):
+    batch, cat, height, width = heat.size()
+    nbr_points = int(polys.shape[-1])
+
+    # heat = torch.sigmoid(heat)
+    # perform nms on heatmaps
+    heat = _nms(heat)
+    # border_heat = _nms(border_hm)
+    scores, inds, clses, ys, xs = _topk(heat, K=K)
+    # border_scores, border_inds, border_clses, border_ys, border_xs = _topk(border_heat, K=nbr_points*K)
+
+    if reg is not None:
+      reg = _transpose_and_gather_feat(reg, inds)
+      reg = reg.view(batch, K, 2)
+      xs = xs.view(batch, K, 1) + reg[:, :, 0:1]
+      ys = ys.view(batch, K, 1) + reg[:, :, 1:2]
+    else:
+      xs = xs.view(batch, K, 1) + 0.5
+      ys = ys.view(batch, K, 1) + 0.5
+    polys = _transpose_and_gather_feat(polys, inds)
+    depth = _transpose_and_gather_feat(depth, inds)
+    # wh = _transpose_and_gather_feat(wh, inds)
+    if cat_spec_poly:
+        polys = polys.view(batch, K, cat, nbr_points)
+        clses_ind = clses.view(batch, K, 1, 1).expand(batch, K, 1, nbr_points).long()
+        polys = polys.gather(2, clses_ind).view(batch, K, nbr_points)
+    else:
+        polys = polys.view(batch, K, polys.shape[-1])
+
+    depth = depth.view(batch, K, 1).float()
+    clses  = clses.view(batch, K, 1).float()
+    scores = scores.view(batch, K, 1)
+
+    polys[..., 0::2] += xs
+    polys[..., 1:-1:2] += ys
+
+
+    ###########################################
+    poly_xs = polys[..., 0::2].clone().detach()
+    poly_ys = polys[..., 1::2].clone().detach()
+
+    poly_xs_min = torch.min(poly_xs, dim=2, keepdim=True)[0]
+    poly_xs_max = torch.max(poly_xs, dim=2, keepdim=True)[0]
+    poly_ys_min = torch.min(poly_ys, dim=2, keepdim=True)[0]
+    poly_ys_max = torch.max(poly_ys, dim=2, keepdim=True)[0]
+
+    # might need that for nms
+    bboxes = torch.cat([poly_xs_min,
+                        poly_ys_min,
+                        poly_xs_max,
+                        poly_ys_max], dim=2)
+    #############################################
+
+    detections = torch.cat([bboxes, scores, clses, polys, depth], dim=2)
+
+    return detections
+
+def gaussiandet_decode(heat, centers, radius, depth, reg=None, K=100):
+    batch, cat, height, width = heat.size()
+    nbr_points = int(centers.shape[-1])
+
+    # heat = torch.sigmoid(heat)
+    # perform nms on heatmaps
+    heat = _nms(heat)
+    # border_heat = _nms(border_hm)
+    scores, inds, clses, ys, xs = _topk(heat, K=K)
+    # border_scores, border_inds, border_clses, border_ys, border_xs = _topk(border_heat, K=nbr_points*K)
+
+    if reg is not None:
+      reg = _transpose_and_gather_feat(reg, inds)
+      reg = reg.view(batch, K, 2)
+      xs = xs.view(batch, K, 1) + reg[:, :, 0:1]
+      ys = ys.view(batch, K, 1) + reg[:, :, 1:2]
+    else:
+      xs = xs.view(batch, K, 1) + 0.5
+      ys = ys.view(batch, K, 1) + 0.5
+    centers = _transpose_and_gather_feat(centers, inds)
+    radius = _transpose_and_gather_feat(radius, inds)
+    depth = _transpose_and_gather_feat(depth, inds)
+    # wh = _transpose_and_gather_feat(wh, inds)
+    centers = centers.view(batch, K, centers.shape[-1])
+
+    depth = depth.view(batch, K, 1).float()
+    radius = radius.view(batch, K, 1).float()
+    clses  = clses.view(batch, K, 1).float()
+    scores = scores.view(batch, K, 1)
+
+    centers[..., 0::2] += xs
+    centers[..., 1::2] += ys
+
+
+    ###########################################
+    poly_xs = centers[..., 0::2].clone().detach()
+    poly_ys = centers[..., 1::2].clone().detach()
+
+    poly_xs_min = torch.min(poly_xs, dim=2, keepdim=True)[0]
+    poly_xs_max = torch.max(poly_xs, dim=2, keepdim=True)[0]
+    poly_ys_min = torch.min(poly_ys, dim=2, keepdim=True)[0]
+    poly_ys_max = torch.max(poly_ys, dim=2, keepdim=True)[0]
+
+    # might need that for nms
+    bboxes = torch.cat([poly_xs_min,
+                        poly_ys_min,
+                        poly_xs_max,
+                        poly_ys_max], dim=2)
+    #############################################
+
+    #print('centers', centers[0][0])
+
+    detections = torch.cat([bboxes, scores, clses, centers, radius, depth], dim=2)
+
+    return detections
 
 def multi_pose_decode(
     heat, wh, kps, reg=None, hm_hp=None, hp_offset=None, K=100):

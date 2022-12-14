@@ -52,11 +52,11 @@ class CtdetLoss(torch.nn.Module):
 
             # write_hmgt = np.array(batch['hm'].detach().squeeze(0).squeeze(0))
             # write_hmgt = ((write_hmgt - np.min(write_hmgt) / np.max(write_hmgt)) * 255).astype(np.uint8)
-            # cv2.imwrite('/Store/datasets/UA-Detrac/exp/tensors/HM/HM_GT.jpg', write_hmgt)
+            # cv2.imwrite('/store/datasets/UA-Detrac/exp/tensors/HM/HM_GT.jpg', write_hmgt)
 
             # write_hmre = np.array(output['hm'].detach().squeeze(0).squeeze(0))
             # write_hmre = ((write_hmre - np.min(write_hmre) / np.max(write_hmre)) * 255).astype(np.uint8)
-            # cv2.imwrite('/Store/datasets/UA-Detrac/exp/tensors/HM/HM_RE.jpg', write_hmre)
+            # cv2.imwrite('/store/datasets/UA-Detrac/exp/tensors/HM/HM_RE.jpg', write_hmre)
 
             # exit()
 

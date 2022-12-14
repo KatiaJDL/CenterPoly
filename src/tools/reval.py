@@ -36,11 +36,11 @@ def parse_args():
                       default='voc_2007_test', type=str)
   parser.add_argument('--matlab', dest='matlab_eval',
                       help='use matlab for evaluation',
-                      action='Store_true')
+                      action='store_true')
   parser.add_argument('--comp', dest='comp_mode', help='competition mode',
-                      action='Store_true')
+                      action='store_true')
   parser.add_argument('--nms', dest='apply_nms', help='apply nms',
-                      action='Store_true')
+                      action='store_true')
 
   if len(sys.argv) == 1:
     parser.print_help()
