@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import torch
 import numpy as np
+from PIL import Image
 
 from models.losses import FocalLoss
 from models.losses import RegL1Loss, RegLoss, PolyLoss, DiskLoss, NormRegL1Loss, RegWeightedL1Loss, AreaPolyLoss
@@ -82,6 +83,19 @@ class PolydetLoss(torch.nn.Module):
 
             hm_loss += self.crit(output['hm'], batch['hm']) / opt.num_stacks
             # fg_loss += self.crit(output['fg'], batch['fg']) / opt.num_stacks
+
+            # Remplaçons la heat map par une image de cette même heatmap pour voir si le grad a une influence
+            #print(output['hm'].detach().cpu().numpy())
+
+            #print(output['hm'].shape)
+
+            #for i in range(output['hm'].shape[0]):
+            #    for j in range(output['hm'].shape[1]):
+            #        im = Image.fromarray(output['hm'][i][j].detach().cpu().numpy())
+            #        im_tensor = torch.Tensor(np.array(im)).cuda()
+            #        hm_loss += self.crit(im_tensor, batch['hm']) / opt.num_stacks
+            #hm_loss /= output['hm'].shape[0]*output['hm'].shape[1]
+
 
             if opt.task == 'diskdet':
                 disks, repulsion = self.crit_disks(output['poly'], batch[

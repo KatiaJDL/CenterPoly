@@ -192,7 +192,7 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     depth = bbox[-1]
                     label = self.class_name[cls_ind]
                     disks = list(map(self._to_float, bbox[5:-3]))
-                    r = self._to_float(bbox[-])
+                    r = self._to_float(bbox[-2])
                     detection = {
                         "image_id": int(image_id),
                         "category_id": int(category_id),

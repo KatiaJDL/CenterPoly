@@ -180,11 +180,75 @@ def create_mask(output, pred, target, batch, num_object, rep):
 
   return polygon_mask_pred, polygon_mask_gt
 
+def differentiable_gaussian(H, W, centers, radius):
+
+  device = centers.device
+
+  N = centers.shape[-1]//2
+
+  centers = centers.view(centers.shape[0], centers.shape[1], N, 2)
+  # batch_size, nb_max_obj, nb_points, 2
+  #print(centers.shape)
+
+  centers = centers.unsqueeze(2).unsqueeze(2)
+  # batch_size, nb_max_obj, 1, 1, nb_points, 2
+  #print(centers.shape)
+
+  centers = centers.repeat(1, 1, H, W, 1, 1)
+  # batch_size, nb_max_obj, H, W, nb_points, 2
+  #print(centers.shape)
+
+  indexes = torch.FloatTensor([[[i,j] for i in range(W)] for j in range(H)]).to(device)
+  #print(indexes.shape)
+  indexes = indexes.unsqueeze(-2)
+  # batch_size, nb_max_obj, H, W, nb_points, 2
+  indexes = indexes.expand(centers.shape[0], centers.shape[1], H, W, N, 2)
+  #print(indexes.shape)
+
+  #print(indexes[0,0,:,:,1,1])
+  #print(indexes[0,0,:,:,1,0])
+
+  centers = centers - indexes
+
+  #print(centers.grad_fn)
+
+  centers = - torch.pow(centers,2)
+
+  centers = centers.sum(-1)
+  # batch_size, nb_max_obj, H, W, nb_points
+  #print(centers.shape)
+
+  radius = radius.unsqueeze(-1).unsqueeze(-1)
+  # batch_size, nb_max_obj, H, W, nb_points, 2
+  radius = radius.expand(radius.shape[0], radius.shape[1], H, W,N)
+  #print(radius.shape)
+
+  centers = torch.exp(centers/(2*torch.pow(radius,2)))
+
+  #print(centers.grad_fn)
+
+  centers = centers.sum(-1)
+  # batch_size, nb_max_obj, H, W
+  #print(centers.shape)
+
+  return centers
+
+
 def individual_gaussian(heatmap, centers, radius):
 
   device = heatmap.device
 
   H, W = heatmap.shape
+
+  centers = centers.view(centers.shape[0], centers.shape[1], centers.shape[-1]//2, 2)
+  # batch_size, nb_max_obj, nb_points, 2
+  print(centers.shape)
+
+  centers = centers.unsqueeze(2).unsqueeze(2)
+  # batch_size, nb_max_obj, 1, 1, nb_points, 2
+  print(centers.shape)
+
+  centers = centers.repeat(1, 1, H, W, 1, 1)
 
 
   for k in range(0,centers.shape[0],2):
@@ -623,7 +687,7 @@ class GaussianLoss(nn.Module):
               [batch_size, nb_max_objects, 2]
         Returns:
             loss: scalar
-        """
+        """        
 
         #print('peak', peak.shape)
         #print('centers', centers.shape)
@@ -650,6 +714,12 @@ class GaussianLoss(nn.Module):
         #print(pred_gaussian_tensor.shape)
         #print(pred_radius)
 
+        H, W = target[0][0].shape
+
+        pred = differentiable_gaussian(H,W, pred, pred_radius)
+
+
+        """
         for batch in range(target.shape[0]):
 
               for i in range(0, pred[batch].shape[0]):  # nbr objects
@@ -695,6 +765,9 @@ class GaussianLoss(nn.Module):
 
                       iou_loss += 1 - intersection/(union+ 1e-6)
 
+
+                      print('differentiable' ,pred_gaussian_tensor.grad_fn)
+
                       bce_loss += F.binary_cross_entropy_with_logits(pred_gaussian_tensor, target[batch][i], reduction='mean')
 
 
@@ -708,17 +781,21 @@ class GaussianLoss(nn.Module):
                       #time.sleep(5)
 
 
+        """
+        #iou_loss = iou_loss / (mask.sum() + 1e-6)
 
-        iou_loss = iou_loss / (mask.sum() + 1e-6)
+        #print(pred.shape)
+        #print(target.shape)
+        #print(mask.shape)
 
-        #bce_loss += F.binary_cross_entropy_with_logits(pred_gaussian_tensor*mask, target*mask, reduction='mean')
+        mask = mask.unsqueeze(-1).unsqueeze(-1)
+        # batch_size, nb_max_obj, H, W, nb_points, 2
+        mask = mask.expand(mask.shape[0], mask.shape[1], H, W)
 
+        bce_loss += F.binary_cross_entropy_with_logits(pred*mask, target*mask, reduction='mean')
+        #bce_loss = bce_loss/(mask.sum() + 1e-6)
 
-
-
-        bce_loss = bce_loss/(mask.sum() + 1e-6)
-
-        return iou_loss, bce_loss
+        return bce_loss, bce_loss
 
 
 class AreaPolyLoss(nn.Module):

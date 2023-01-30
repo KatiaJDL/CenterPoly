@@ -73,11 +73,15 @@ class GaussiandetLoss(torch.nn.Module):
                + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
         # loss_stats = {'loss': loss, 'hm_loss': hm_loss, 'off_loss': off_loss, 'poly_loss': poly_loss, 'depth_loss': depth_loss, 'border_hm_loss': border_hm_loss}
 
-        loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * (dice_loss + bce_loss) \
-               + opt.depth_weight * depth_loss # + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
+        #loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * (dice_loss + bce_loss) \
+        #       + opt.depth_weight * depth_loss #
+        loss = opt.hm_weight * hm_loss + opt.off_weight * off_loss + opt.poly_weight * bce_loss \
+               + opt.depth_weight * depth_loss ##  + fg_loss #  + opt.wh_weight * wh_loss #  + opt.border_hm_weight * border_hm_loss
 
         loss_stats = {'loss': loss, 'hm_l': hm_loss, 'off_l': off_loss, 'bce_l': bce_loss, 'iou_l': dice_loss,
                       'depth_l': depth_loss}
+
+        #print(loss_stats)
 
         return loss, loss_stats
 
