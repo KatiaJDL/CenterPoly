@@ -62,6 +62,56 @@ def main(opt):
   "model": opt.load_model
   })
 
+  #Size
+  SIZE = True
+  if SIZE :
+    bits = 32
+    print("Input size: {:.3f} MB".format(opt.batch_size * opt.input_h*opt.input_w*bits/ 1024**2))
+
+    total_param = 0
+    param_size = 0
+    buffer_size = 0
+
+    mods = list(model.modules())
+    for m in mods:
+
+      #total_param += m.num_parameters()
+
+      for param in m.parameters():
+        param_size += param.nelement() * param.element_size()
+        total_param += param.nelement()
+
+      for buffer in m.buffers():
+        buffer_size += buffer.nelement() * buffer.element_size()
+        total_param += buffer.nelement()
+
+
+    print('Num of parameters:', total_param)
+
+    size_all_gb = (param_size + buffer_size) / 1024 /1024 **2
+
+    print('Size model parameters: {:.3f} GB'.format(size_all_gb))
+
+    # input_ = torch.autograd.Variable(torch.FloatTensor(*(opt.batch_size, 3, opt.input_h, opt.input_w)))
+    #
+    # total_bits = 0
+    # with torch.no_grad():
+    #   for m in mods:
+    #     try:
+    #       #print(m)
+    #       out = m(input_)
+    #
+    #       total_bits += np.prod(np.array(out).shape)*bits
+    #       input_ = out
+    #     except (ValueError,RuntimeError, TypeError, AttributeError):
+    #       pass
+    #
+    #
+    # size_all_gb = total_bits*2 / 1024 /1024 **2
+    # print('Size intermediate variables: {:.3f} GB'.format(size_all_gb))
+
+
+
   Trainer = train_factory[opt.task]
   trainer = Trainer(opt, model, optimizer)
   trainer.set_device(opt.gpus, opt.chunk_sizes, opt.device)
