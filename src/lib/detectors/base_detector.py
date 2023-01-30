@@ -28,6 +28,8 @@ class BaseDetector(object):
     self.model = self.model.to(opt.device)
     self.model.eval()
 
+    print('Num of parameters:', self.model.num_parameters())
+
     self.mean = np.array(opt.mean, dtype=np.float32).reshape(1, 1, 3)
     self.std = np.array(opt.std, dtype=np.float32).reshape(1, 1, 3)
     self.max_per_image = opt.K
