@@ -22,6 +22,18 @@ class ModelWithLoss(torch.nn.Module):
     #   batch['input'] = batch['input'][:, 6:9, :, :]
     outputs = self.model(batch['input'])
     loss, loss_stats = self.loss(outputs, batch)
+
+    # print(loss_stats['order_l'].grad_fn)
+    # loss_stats['bce_l'].backward()
+    # loss.backward()
+    # debug_params = list(self.model.centers.parameters())
+    # for param in debug_params:
+    #   print(param.grad)
+    # debug_params = list(self.model.radius.parameters())
+    # for param in debug_params:
+    #   print(param.grad)
+
+
     return outputs[-1], loss, loss_stats
 
 class BaseTrainer(object):

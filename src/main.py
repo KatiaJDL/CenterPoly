@@ -62,6 +62,10 @@ def main(opt):
   "model": opt.load_model
   })
 
+  #Names of model
+  #for name, module in model.named_modules():
+  #  print(name)
+
   #Size
   SIZE = True
   if SIZE :
