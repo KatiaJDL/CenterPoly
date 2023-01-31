@@ -180,7 +180,7 @@ def create_mask(output, pred, target, batch, num_object, rep):
 
   return polygon_mask_pred, polygon_mask_gt
 
-def differentiable_gaussian(H, W, centers, radius):
+def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid'):
 
   device = centers.device
 
@@ -230,6 +230,11 @@ def differentiable_gaussian(H, W, centers, radius):
   centers = centers.sum(-1)
   # batch_size, nb_max_obj, H, W
   #print(centers.shape)
+
+  if ceiling == 'sigmoid':
+    centers = torch.sigmoid(centers)
+  elif ceiling == 'clamp':
+    centers = torch.clamp(centers, 0, 1)
 
   return centers
 
@@ -670,6 +675,8 @@ class GaussianLoss(nn.Module):
         super(GaussianLoss, self).__init__()
         self.opt = opt
 
+        self.bce = torch.nn.BCELoss(reduction='mean')
+
     def forward(self, centers, radius, mask, ind, target, peak):
         """
         Parameters:
@@ -704,10 +711,6 @@ class GaussianLoss(nn.Module):
         pred[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
         pred[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
 
-        iou_loss = 0.0
-        bce_loss = 0.0
-
-
         #pred_gaussian_tensor = torch.zeros_like(target)
         #pred_gaussian_tensor = display_gaussian_image(pred_gaussian_tensor, pred, pred_radius)#, peak)
 
@@ -716,7 +719,7 @@ class GaussianLoss(nn.Module):
 
         H, W = target[0][0].shape
 
-        pred = differentiable_gaussian(H,W, pred, pred_radius)
+        pred = differentiable_gaussian(H,W, pred, pred_radius, self.opt.gaussian_ceiling)
 
 
         """
@@ -792,10 +795,23 @@ class GaussianLoss(nn.Module):
         # batch_size, nb_max_obj, H, W, nb_points, 2
         mask = mask.expand(mask.shape[0], mask.shape[1], H, W)
 
-        bce_loss += F.binary_cross_entropy_with_logits(pred*mask, target*mask, reduction='mean')
+        #bce_loss += F.binary_cross_entropy_with_logits(pred*mask, target*mask, reduction='mean')
         #bce_loss = bce_loss/(mask.sum() + 1e-6)
 
-        return bce_loss, bce_loss
+        if self.opt.gaussian_loss == 'bce':
+          loss = self.bce(pred*mask, target*mask)
+        elif self.opt.gaussian_loss == 'dice':
+
+          inputs = (pred*mask).view(-1)
+          targets = (target*mask).view(-1)
+
+          intersection = (inputs * targets).sum()
+          dice = (2.*intersection)/(inputs.sum() + targets.sum() + 1e-9)
+          loss = 1 - dice
+        else :
+          raise(NotImplementedError)
+
+        return loss, loss
 
 
 class AreaPolyLoss(nn.Module):
