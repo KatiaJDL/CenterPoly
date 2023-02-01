@@ -75,7 +75,6 @@ class Debugger(object):
     # for bird view
     self.world_size = 64
     self.out_size = 384
-    print(self.names)
 
   def add_img(self, img, img_id='default', revert_color=False):
     if revert_color:
