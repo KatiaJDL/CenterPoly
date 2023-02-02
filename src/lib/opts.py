@@ -168,7 +168,7 @@ class opts(object):
     self.parser.add_argument('--gaussian_loss', default='bce',
                              help='gaussian disks loss: bce | dice')
     self.parser.add_argument('--gaussian_ceiling', default='sigmoid',
-                             help='gaussian disks ceiling is 1: sigmoid | clamp')
+                             help='gaussian disks ceiling is 1: sigmoid | clamp | tanh')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
                              help='use elliptical gaussians to train '

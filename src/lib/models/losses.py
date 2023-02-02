@@ -235,6 +235,8 @@ def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid'):
     centers = torch.sigmoid(centers)
   elif ceiling == 'clamp':
     centers = torch.clamp(centers, 0, 1)
+  elif ceiling == 'tanh':
+    centers = torch.tanh(centers)
 
   return centers
 
