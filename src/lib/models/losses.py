@@ -25,13 +25,99 @@ DRAW = False
 
 def area(poly_tensor):
   nb_points = poly_tensor.shape[0]
-  #print(poly_tensor.shape)
-  double = poly_tensor.repeat((2,1))
-  #print(double)
-  polyleft = torch.mul(poly_tensor[:,0],double[1:nb_points+1,1])
-  polyright = torch.mul(poly_tensor[:,1],double[1:nb_points+1,0])
 
-  return 0.5*(torch.sum(polyright)-torch.sum(polyleft))
+  POLAR = False
+
+  poly_tensor_polar = poly_tensor.clone()
+
+  if POLAR:
+    poly_tensor_polar[:,0], poly_tensor_polar[:,1] = torch.mul(poly_tensor[:,0], torch.cos(poly_tensor[:,1])), torch.mul(poly_tensor[:,0], torch.sin(poly_tensor[:,1]))
+  #print(poly_tensor.shape)
+  double = poly_tensor_polar.repeat((2,1))
+
+  #print(double)
+  polyleft = torch.mul(double[0:nb_points+1,0],double[1:nb_points+2,1])
+  polyright = torch.mul(double[0:nb_points+1,1],double[1:nb_points+2,0])
+
+  return torch.abs(0.5*(torch.sum(polyright)-torch.sum(polyleft)))
+
+def is_convex_polygon(polygon):
+    """Return True if the polynomial defined by the sequence of 2D
+    points is 'strictly convex': points are valid, side lengths non-
+    zero, interior angles are strictly between zero and a straight
+    angle, and the polygon does not intersect itself.
+
+    NOTES:  1.  Algorithm: the signed changes of the direction angles
+                from one side to the next side must be all positive or
+                all negative, and their sum must equal plus-or-minus
+                one full turn (2 pi radians). Also check for too few,
+                invalid, or repeated points.
+            2.  No check is explicitly done for zero internal angles
+                (180 degree direction-change angle) as this is covered
+                in other ways, including the `n < 3` check.
+    """
+    try:  # needed for any bad points or direction changes
+        # Check for too few points
+        if len(polygon) < 3:
+            return False
+        # Get starting information
+        old_x, old_y = polygon[-2]
+        new_x, new_y = polygon[-1]
+        new_direction = atan2(new_y - old_y, new_x - old_x)
+        angle_sum = 0.0
+        # Check each point (the side ending there, its angle) and accum. angles
+        for ndx, newpoint in enumerate(polygon):
+            # Update point coordinates and side directions, check side length
+            old_x, old_y, old_direction = new_x, new_y, new_direction
+            new_x, new_y = newpoint
+            new_direction = math.atan2(new_y - old_y, new_x - old_x)
+            if old_x == new_x and old_y == new_y:
+                return False  # repeated consecutive points
+            # Calculate & check the normalized direction-change angle
+            angle = new_direction - old_direction
+            if angle <= -pi:
+                angle += TWO_PI  # make it in half-open interval (-Pi, Pi]
+            elif angle > pi:
+                angle -= TWO_PI
+            if ndx == 0:  # if first time through loop, initialize orientation
+                if angle == 0.0:
+                    return False
+                orientation = 1.0 if angle > 0.0 else -1.0
+            else:  # if other time through loop, check orientation is stable
+                if orientation * angle <= 0.0:  # not both pos. or both neg.
+                    return False
+            # Accumulate the direction-change angle
+            angle_sum += angle
+        # Check that the total number of full turns is plus-or-minus 1
+        return abs(round(angle_sum / TWO_PI)) == 1
+    except (ArithmeticError, TypeError, ValueError):
+        return False  # any exception means not a proper convex polygon
+
+def convex_hull_graham(points):
+    '''
+    Returns points on convex hull in CCW order according to Graham's scan algorithm.
+    By Tom Switzer thomas.switzer@gmail.com.
+    '''
+    TURN_LEFT, TURN_RIGHT, TURN_NONE = (1, -1, 0)
+
+    def cmp(a, b):
+        return (a > b) - (a < b)
+
+    def turn(p, q, r):
+        return cmp((q[0] - p[0])*(r[1] - p[1]) - (r[0] - p[0])*(q[1] - p[1]), 0)
+
+    def _keep_left(hull, r):
+        while len(hull) > 1 and turn(hull[-2], hull[-1], r) != TURN_LEFT:
+            hull.pop()
+        if not len(hull) or hull[-1] != r:
+            hull.append(r)
+        return hull
+
+    points = sorted(points)
+
+    l = reduce(_keep_left, points, [])
+    u = reduce(_keep_left, reversed(points), [])
+    return l.extend(u[i] for i in range(1, len(u) - 1)) or l
 
 def _slow_neg_loss(pred, gt):
   '''focal loss from CornerNet'''
@@ -369,19 +455,129 @@ def display_gaussian_image(heatmap, centers, radius):#, peak):
 
   return heatmap
 
-class PolygonClipper:
+def is_convex(polygon):
+    zcrossproduct_A = 1
+    zcrossproduct_B = 1
+
+    # iterate over each vertex in the polygon 
+    for i in range(len(polygon)): 
+        p1 = polygon[i-1] 
+        p2 = polygon[i] 
+        p3 = polygon[(i+1) % len(polygon)] 
+ 
+        # compute cross-product of each triplet
+        dx1 = p2[0]-p1[0]
+        dy1 = p2[1]-p1[1]
+        dx2 = p3[0]-p2[0]
+        dy2 = p3[1]-p2[1]
+        cross = dx1*dy2 - dy1*dx2
+        zcrossproduct_A *= cross + torch.abs(cross)
+        zcrossproduct_B *= torch.abs(cross) - cross
+    
+    return zcrossproduct_A != 0.0 or zcrossproduct_B != 0.0
+
+def isInTriangle(p1, p2, p3, x):
+    denominator = ((p2[1]-p3[1])*(p1[0]-p3[0])+(p3[0]-p2[0])*(p1[1]-p3[1]))  
+    a = ((p2[1]-p3[1])*(x[0]-p3[0])+(p3[0]-p2[0])*(x[1]-p3[1]))/denominator
+    b = ((p3[1]-p1[1])*(x[0]-p3[0])+(p1[0]-p3[0])*(x[1]-p3[1]))/denominator
+    c = 1 - a - b
+
+    return 0 <= a and a <= 1 and 0 <= b and b <= 1 and 0 <= c and c <= 1
+
+def is_ear(p1, p2, p3, polygon, i):
+    boolean = True
+    for p in range(len(polygon)):
+      if p != i and p != (i+1) % len(polygon) and p != (i-1) % len(polygon):
+        boolean= boolean and not isInTriangle(p1, p2, p3, polygon[p])
+    return boolean
+
+def find_ear(polygon, poly_tensor_polar): 
+    # initialize the output ear 
+    ear = None 
+ 
+    # iterate over each vertex in the polygon 
+    for i in range(len(polygon)): 
+        p1 = poly_tensor_polar[i-1] 
+        p2 = poly_tensor_polar[i] 
+        p3 = poly_tensor_polar[(i+1) % len(polygon)] 
+
+        #print('new', p1)
+ 
+        # check if the vertex is an ear 
+        if is_ear(p1, p2, p3, poly_tensor_polar, i): 
+            #print(p1)
+            return torch.cat((torch.cat((polygon[i-1], polygon[i])), polygon[(i+1) % len(polygon)])).view(-1,2), i
+
+def ear_clipping(polygon, poly_tensor_polar): 
+    # initialize the output list of convex subpolygons 
+    convex_polygons = [] 
+    # loop until all ears are clipped 
+    while len(polygon) > 3: 
+        # find an ear 
+        try :
+            ear, i = find_ear(polygon) 
+            # clip the ear 
+            
+            #polygon = polygon[:i]+ polygon[(i+1) % len(polygon):]
+            convex_polygons.append(ear)
+
+            if i == 0 or i == len(polygon)-1:
+                polygon = polygon[1:]
+            elif i == len(polygon)-1:
+                polygon = polygon[:i]
+            else:
+                polygon = np.vstack((polygon[:i], polygon[(i+1) % len(polygon):]))
+        except TypeError: 
+            break        
+    convex_polygons.append(polygon)
+    return convex_polygons
+
+def divide_concave_polygon(polygon): 
+ 
+    # check if the polygon is already convex 
+    if is_convex(polygon): 
+        return[polygon] 
+    else: 
+        # use the Ear Clipping algorithm to divide the polygon into convex subpolygons 
+      POLAR = True
+
+      poly_tensor_polar = polygon.clone()
+
+      if POLAR:
+          poly_tensor_polar = torch.cat((torch.mul(polygon[:,0], torch.cos(polygon[:,1])).view(-1,1), torch.mul(polygon[:,0], torch.sin(polygon[:,1])).view(-1,1)), 1)
+          #poly_tensor_polar[:,0], poly_tensor_polar[:,1] = torch.mul(polygon[:,0], torch.cos(polygon[:,1])), torch.mul(polygon[:,0], torch.sin(polygon[:,1]))
+          
+      return ear_clipping(polygon, poly_tensor_polar)
+
+class WeilPolygonClipper:
     
     def __init__(self,warn_if_empty=True):
         self.warn_if_empty = warn_if_empty
     
-    def is_inside(self,p1,p2,q):
+    def is_inside(self,c1,c2,c):
+
+        POLAR = False
+
+        if POLAR:
+          p1 = c1[0]*torch.cos(c1[1]), c1[0]*torch.sin(c1[1])
+          p2 = c2[0]*torch.cos(c2[1]), c2[0]*torch.sin(c2[1])
+          q = c[0]*torch.cos(c[1]), c[0]*torch.sin(c[1])
+          #R = (p2[0]*torch.cos(p2[1]) - p1[0]*torch.cos(p1[1])) * (q[0]*torch.sin(q[1]) - p1[0]*torch.sin(p1[1])) - (p2[0]*torch.sin(p2[1]) - p1[0]*torch.sin(p1[1])) * (q[0]*torch.cos(q[1]) - p1[0]*torch.cos(p1[1]))
+
+        else :
+          p1, p2, q = c1, c2, c
         R = (p2[0] - p1[0]) * (q[1] - p1[1]) - (p2[1] - p1[1]) * (q[0] - p1[0])
-        if R <= 0:
-            return True
-        else:
-            return False
+
+        # if R < 0:
+        #     return 1
+        # elif R ==0:
+        #     return 2
+        # else :
+        #     return 0
+
+        return (R <= 0)
     
-    def compute_intersection(self,p1,p2,p3,p4):
+    def compute_intersection(self,c1,c2,c3,c4):
         
         """
         given points p1 and p2 on line L1, compute the equation of L1 in the
@@ -401,6 +597,16 @@ class PolygonClipper:
         there is no need to check if both lines are vertical (parallel), since
         this function is only called if we know that the lines intersect.
         """
+        POLAR = False
+
+        if POLAR:
+          p1 = c1[0]*torch.cos(c1[1]), c1[0]*torch.sin(c1[1])
+          p2 = c2[0]*torch.cos(c2[1]), c2[0]*torch.sin(c2[1])
+          p3 = c3[0]*torch.cos(c3[1]), c3[0]*torch.sin(c3[1])
+          p4 = c4[0]*torch.cos(c4[1]), c4[0]*torch.sin(c4[1])
+
+        else :
+          p1, p2, p3, p4 = c1, c2, c3,c4
         
         # if first line is vertical
         if p2[0] - p1[0] == 0:
@@ -438,9 +644,23 @@ class PolygonClipper:
         
             # y-coordinate of intersection
             y = m1 * x + b1
-        
-        # need to unsqueeze so torch.cat doesn't complain outside func
-        intersection = torch.stack((x,y)).unsqueeze(0)
+
+        if POLAR:
+          r = torch.sqrt(x*x+y*y)
+          theta = torch.atan((y+1e-8)/(x+1e-8))
+
+          if x < 0:
+            theta = theta + math.pi
+          elif y < 0: 
+            theta = theta + 2*math.pi
+
+          # need to unsqueeze so torch.cat doesn't complain outside func
+          intersection = torch.stack((r,theta)).unsqueeze(0)
+
+        else:
+      
+          # need to unsqueeze so torch.cat doesn't complain outside func
+          intersection = torch.stack((x,y)).unsqueeze(0)
         
         return intersection
     
@@ -448,18 +668,235 @@ class PolygonClipper:
         # it is assumed that requires_grad = True only for clipping_polygon
         # subject_polygon and clipping_polygon are N x 2 and M x 2 torch
         # tensors respectively
+
+        device = clipping_polygon.device
+
+        final_polygon = torch.empty((0,2)).to(device)
+
+        #subject_polygon, indices = torch.sort(subject_polygon, 0)
+
+
+        inters = torch.empty((0,2)).to(device)
+
+        # list of places for intersections (first subject then clipping then intersection)
+        inbounds = []
+        outbounds = []
+
+        for i in range(len(clipping_polygon)):
+
+            c_edge_start = clipping_polygon[i - 1]
+            c_edge_end = clipping_polygon[i]
+
+            #print('tgt', c_edge_start, c_edge_end)
+
+            for j in range(len(subject_polygon)):
+
+                s_edge_start = subject_polygon[j - 1]
+                s_edge_end = subject_polygon[j]
+
+                #print('pred', s_edge_start, s_edge_end)
+              
+                if self.is_inside(c_edge_start,c_edge_end,s_edge_end):
+                    #print('s_end inside c')
+                    if not self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                        #print('s_start outside c')
+                        # Test actual intersection
+                        c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                        if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          outbounds.append([j,i, len(inters)-1])
+
+                elif self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                    #print('s_start inside c')
+                    if not self.is_inside(c_edge_start,c_edge_end,s_edge_end):
+                        #print('s_end outside c')
+                        # Test actual intersection
+                        c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                        if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          inbounds.append([j,i, len(inters)-1])
+
+        outbounds = np.array(outbounds)
+        inbounds = np.array(inbounds)
+
+       # print(outbounds)
+       # print(inbounds)
+       # print(inters)
+
+        used_inters = []
+
+        while len(used_inters) < len(inbounds) :
+          new_inter = 0
+          stop = inbounds[new_inter][0:2]
+          j = inbounds[new_inter][0]# j -> là où on en est dans le polygone sujet
+          i = inbounds[new_inter][1]# i -> là où on en est dans le polygone clipping
+
+          start = True
+
+          # Tant qu'on a pas retrouvé l'intersection de départ (aka la coord de l'intersection dans le poly sujet)
+          while j != stop[0] or i != stop[1] or start:
+            start = False
+            # Tant qu'on atteint pas une intersection out (aka la coord de l'intersection dans )
+            while j not in outbounds[:,0]:
+              final_polygon = torch.cat((final_polygon, subject_polygon[j].unsqueeze(0)),dim=0)
+              j= (j+1)%len(subject_polygon)
+
+            new_inter = np.where(outbounds[:,0]==j)[0][0]
+            final_polygon = torch.cat((final_polygon, inters[outbounds[new_inter][2]].unsqueeze(0)),dim=0)
+            i = outbounds[new_inter][1]
+            
+            while i not in inbounds[:,1]:
+              final_polygon = torch.cat((final_polygon, clipping_polygon[i].unsqueeze(0)),dim=0)
+              i= (i+1)%len(clipping_polygon)
+            new_inter = np.where(inbounds[:,1] == i)[0][0]
+            j = inbounds[new_inter][0]
+            final_polygon = torch.cat((final_polygon, inters[inbounds[new_inter][2]].unsqueeze(0)),dim=0)
+            inbounds = np.vstack((inbounds[:new_inter], inbounds[new_inter +1:]))
+            used_inters.append(new_inter)
+
+
+        return final_polygon
+
+          
+    def __call__(self,A,B):
+        clipped_polygon = self.clip(A,B)
+        if len(clipped_polygon) == 0 and self.warn_if_empty:
+            warnings.warn("No intersections found. Are you sure your polygon coordinates are in clockwise order?")
         
-        final_polygon = torch.clone(subject_polygon)
+        return clipped_polygon
+
+class PolygonClipper:
+    
+    def __init__(self,warn_if_empty=True):
+        self.warn_if_empty = warn_if_empty
+    
+    def is_inside(self,p1,p2,q):
+
+        POLAR = False
+
+        if POLAR:
+          R = (p2[0]*torch.cos(p2[1]) - p1[0]*torch.cos(p1[1])) * (q[0]*torch.sin(q[1]) - p1[0]*torch.sin(p1[1])) - (p2[0]*torch.sin(p2[1]) - p1[0]*torch.sin(p1[1])) * (q[0]*torch.cos(q[1]) - p1[0]*torch.cos(p1[1]))
+
+        else :
+          R = (p2[0] - p1[0]) * (q[1] - p1[1]) - (p2[1] - p1[1]) * (q[0] - p1[0])
+        
+        
+        if R <= 0:
+            return True
+        else:
+            return False
+    
+    def compute_intersection(self,c1,c2,c3,c4):
+        
+        """
+        given points p1 and p2 on line L1, compute the equation of L1 in the
+        format of y = m1 * x + b1. Also, given points p3 and p4 on line L2,
+        compute the equation of L2 in the format of y = m2 * x + b2.
+        
+        To compute the point of intersection of the two lines, equate
+        the two line equations together
+        
+        m1 * x + b1 = m2 * x + b2
+        
+        and solve for x. Once x is obtained, substitute it into one of the
+        equations to obtain the value of y.    
+        
+        if one of the lines is vertical, then the x-coordinate of the point of
+        intersection will be the x-coordinate of the vertical line. Note that
+        there is no need to check if both lines are vertical (parallel), since
+        this function is only called if we know that the lines intersect.
+        """
+
+        POLAR = False
+
+        if POLAR:
+          p1 = c1[0]*torch.cos(c1[1]), c1[0]*torch.sin(c1[1])
+          p2 = c2[0]*torch.cos(c2[1]), c2[0]*torch.sin(c2[1])
+          p3 = c3[0]*torch.cos(c3[1]), c3[0]*torch.sin(c3[1])
+          p4 = c4[0]*torch.cos(c4[1]), c4[0]*torch.sin(c4[1])
+
+        else : 
+          p1, p2, p3, p4 = c1, c2, c3, c4
+
+        #print(p1, p2, p3, p4)
+        
+        # if first line is vertical
+        if p2[0] - p1[0] == 0:
+            x = p1[0]
+            
+            # slope and intercept of second line
+            m2 = (p4[1] - p3[1]) / (p4[0] - p3[0])
+            b2 = p3[1] - m2 * p3[0]
+            
+            # y-coordinate of intersection
+            y = m2 * x + b2
+        
+        # if second line is vertical
+        elif p4[0] - p3[0] == 0:
+            x = p3[0]
+            
+            # slope and intercept of first line
+            m1 = (p2[1] - p1[1]) / (p2[0] - p1[0])
+            b1 = p1[1] - m1 * p1[0]
+            
+            # y-coordinate of intersection
+            y = m1 * x + b1
+        
+        # if neither line is vertical
+        else:
+            m1 = (p2[1] - p1[1]) / (p2[0] - p1[0])
+            b1 = p1[1] - m1 * p1[0]
+            
+            # slope and intercept of second line
+            m2 = (p4[1] - p3[1]) / (p4[0] - p3[0])
+            b2 = p3[1] - m2 * p3[0]
+        
+            # x-coordinate of intersection
+            x = (b2 - b1) / (m1 - m2)
+        
+            # y-coordinate of intersection
+            y = m1 * x + b1
+
+        if POLAR:
+          r = torch.sqrt(x*x+y*y)
+          theta = torch.atan((y+1e-8)/(x+1e-8))
+
+          if x < 0:
+            theta = theta + math.pi
+          elif y < 0: 
+            theta = theta + 2*math.pi
+
+          # need to unsqueeze so torch.cat doesn't complain outside func
+          intersection = torch.stack((r,theta)).unsqueeze(0)
+
+        else:
+      
+          # need to unsqueeze so torch.cat doesn't complain outside func
+          intersection = torch.stack((x,y)).unsqueeze(0)
+        
+        return intersection
+    
+    def clip(self,subject_polygon,clipping_polygon):
+        # it is assumed that requires_grad = True only for clipping_polygon
+        # subject_polygon and clipping_polygon are N x 2 and M x 2 torch
+        # tensors respectively
+        device = clipping_polygon.device
+
+        final_polygon = torch.clone(subject_polygon).to(device)
         
         for i in range(len(clipping_polygon)):
             
             # stores the vertices of the next iteration of the clipping procedure
             # final_polygon consists of list of 1 x 2 tensors 
-            next_polygon = torch.clone(final_polygon)
+            next_polygon = torch.clone(final_polygon).to(device)
             
             # stores the vertices of the final clipped polygon. This will be
             # a K x 2 tensor, so need to initialize shape to match this
-            final_polygon = torch.empty((0,2))
+            final_polygon = torch.empty((0,2)).to(device)
             
             # these two vertices define a line segment (edge) in the clipping
             # polygon. It is assumed that indices wrap around, such that if
@@ -540,7 +977,7 @@ class PolyLoss(nn.Module):
         super(PolyLoss, self).__init__()
         self.opt = opt
 
-    def forward(self, output, mask, ind, target, freq_mask, hm = None):
+    def forward(self, output, mask, ind, target, freq_mask = None, peak = None, hm = None):
         """
         Parameters:
             output: output of polygon head
@@ -564,6 +1001,15 @@ class PolyLoss(nn.Module):
 
         pred = _transpose_and_gather_feat(output, ind)
 
+        # Recenter
+        # centered_pred = torch.clone(pred).to(device)
+        # centered_pred[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
+        # centered_pred[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
+
+        # centered_tgt = torch.clone(target).to(device)
+        # centered_tgt[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
+        # centered_tgt[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
+
         #print('pred', pred.shape)
 
         #predictions = False
@@ -574,32 +1020,90 @@ class PolyLoss(nn.Module):
 
         sum = 0
 
+        #clip = WeilPolygonClipper()
+        clip = PolygonClipper()
+
         for batch in range(output.shape[0]):
 
             for i in range(0, pred[batch].shape[0]):  # nbr objects
 
                 if mask[batch][i]:
 
-                    #print(pred[batch][i])
+                    #print(pred[batch][i].view(-1,2))
+                    #print(target[batch][i].view(-1,2))
 
                     sum+=1
 
                     #predictions = True
 
-                    polygon_mask_pred, polygon_mask_gt = create_mask(output, pred, target, batch, i, self.opt.rep)
+                    #polygon_mask_pred, polygon_mask_gt = create_mask(output, pred, target, batch, i, self.opt.rep)
 
                     if self.opt.poly_loss == 'bce':
                         loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
                     elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
                         #print("iou object")
 
-                        clip = PolygonClipper()
-                        clipped_polygon = clip(target[batch][i].view(-1,2), pred[batch][i].view(-1,2))
-                        intersection = area(clipped_polygon)
-                        union = area(target[batch][i].view(-1,2)) + area(pred[batch][i].view(-1,2)) - union
-                        #intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
-                        #union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                        #print(target[batch][i].view(-1,2))
+                        #print(pred[batch][i].view(-1,2))
+
+                        pred_cartesian = pred[batch][i].view(-1,2)
+
+                        #How to sort
+                        #sorted_pred = torch.sort(pred[batch][i].view(-1,2),0)[0]
+
+                        #pred_tensor_polar = torch.cat((torch.mul(pred_cartesian[:,0], torch.cos(pred_cartesian[:,1])).view(-1,1), torch.mul(pred_cartesian[:,0], torch.sin(pred_cartesian[:,1])).view(-1,1)), 1)
+                        #indices_sorted = torch.sort(pred_tensor_polar[:,1],0)[1]
+                        #pred_cartesian = pred_cartesian[indices_sorted]
+
+                        #clippings = divide_concave_polygon(target[batch][i].view(-1,2))
+
+                        #intersection = 0
+
+                        clipped_polygon = clip(pred_cartesian, target[batch][i].view(-1,2)) #.flip(0))
+
+                        area_intersection = area(clipped_polygon)
+
+                        intersection = (area_intersection.item() == 0.)*torch.min(area(pred_cartesian),area(target[batch][i].view(-1,2)))+area_intersection
+                        #print('-------------')
+
+                        #for poly in clippings:
+                          #clipped_polygon = clip(sorted_pred, poly.flip(0))
+                          #area_intersection = area(clipped_polygon)
+                          #print(area_intersection)
+                          #print(area(poly))
+                          #print(area(centered_pred[batch][i].view(-1,2)))
+                          #intersection += (area_intersection.item() == 0.)*torch.min(area(centered_pred[batch][i].view(-1,2)),area(poly))+area_intersection     
+                          #print(intersection)     
+                        #print('area target', area(centered_tgt[batch][i].view(-1,2)))              
+
+                        # clipped_polygon = clip(centered_tgt[batch][i].view(-1,2), centered_pred[batch][i].view(-1,2))
+                        # area_intersection = area(clipped_polygon)
+                        # intersection = (area_intersection.item() == 0.)*torch.min(area(centered_tgt[batch][i].view(-1,2)),area(centered_pred[batch][i].view(-1,2)))+area_intersection
+                        # union = area(centered_tgt[batch][i].view(-1,2)) + area(centered_pred[batch][i].view(-1,2)) - intersection
+                        # intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
+                        # union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
+                        # print('-------------')
+                        # print(area_intersection.item() == 0.)
+                        # print(area(centered_tgt[batch][i].view(-1,2)))
+                        # print(area(centered_pred[batch][i].view(-1,2)))
+                        # print(peak[batch][i])
+                        # print(pred[batch][i].view(-1,2))
+                        # print(centered_pred[batch][i].view(-1,2))
+                        # print(target[batch][i].view(-1,2))
+                        # print(centered_tgt[batch][i].view(-1,2))
+                        # print(clipped_polygon)
+                        # print('u:',union)
+                        # print(intersection)
+                        union = area(target[batch][i].view(-1,2)) + area(pred_cartesian) - intersection
+                        #union = area(target[batch][i].view(-1,2)) + area(pred[batch][i].view(-1,2)) - intersection
+                        #print('union', union)
                         loss += intersection/(union+ 1e-6)
+                        #print(intersection/(union+ 1e-6))
+
+                        #print(area(sorted_pred) - area(target[batch][i].view(-1,2)))
+
+                        # Area loss
+                        #loss += torch.abs(area(sorted_pred) - area(target[batch][i].view(-1,2)))
 
                         #Gradient augmentation for IoU loss ?
                         #loss += intersection/(union+ 1e-6)*torch.sum(polygon_mask_gt != 0)
@@ -654,6 +1158,8 @@ class PolyLoss(nn.Module):
 
         if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
             loss = 1 - loss / (mask.sum() + 1e-6)
+            # Area loss
+            #loss = 0.03 * loss / (mask.sum() + 1e-6)
         if self.opt.poly_loss == 'l1' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu' :
             mask = mask.unsqueeze(2).expand_as(pred).float()
 
