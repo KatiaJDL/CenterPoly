@@ -17,6 +17,33 @@ import bresenham
 from PIL import Image, ImageDraw
 import time
 import copy
+from functools import reduce
+
+def convex_hull_graham(points):
+    '''
+    Returns points on convex hull in CCW order according to Graham's scan algorithm.
+    By Tom Switzer thomas.switzer@gmail.com.
+    '''
+    TURN_LEFT, TURN_RIGHT, TURN_NONE = (1, -1, 0)
+
+    def cmp(a, b):
+        return float(a > b) - float(a < b)
+
+    def turn(p, q, r):
+        return cmp((q[0] - p[0])*(r[1] - p[1]) - (r[0] - p[0])*(q[1] - p[1]), 0)
+
+    def _keep_left(hull, r):
+        while len(hull) > 1 and turn(hull[-2], hull[-1], r) != TURN_LEFT:
+            hull.pop()
+        if not len(hull) or hull[-1] != r:
+            hull.append(r)
+        return hull
+
+    points = sorted(points)
+
+    l = reduce(_keep_left, points, [])
+    u = reduce(_keep_left, reversed(points), [])
+    return l.extend(u[i] for i in range(1, len(u) - 1)) or l
 
 
 def find_first_non_zero_pixel(points, instance_image):
@@ -145,6 +172,7 @@ class PolydetDataset(data.Dataset):
     cat_spec_mask_poly = np.zeros((self.max_objs, num_classes * num_points*2), dtype=np.uint8)
     reg = np.zeros((self.max_objs, 2), dtype=np.float32)
     ind = np.zeros((self.max_objs), dtype=np.int64)
+    peak = np.zeros((self.max_objs, 2), dtype=np.float32)
     reg_mask = np.zeros((self.max_objs), dtype=np.uint8)
     freq_mask = np.zeros((self.max_objs), dtype=np.float32)
 
@@ -231,6 +259,24 @@ class PolydetDataset(data.Dataset):
         # points_on_border = np.array(points_on_border).astype(np.float32)
         #exp
         points_on_box = find_points_from_box(bbox, self.opt.nbr_points)
+
+        #print('starting point', points_on_border)
+        #print(len(points_on_border))
+        #print(len([[points_on_border[2*i], points_on_border[2*i+1]] for i in range(len(points_on_border)//2)]))
+
+        #make polygons concave
+        convex_hull = convex_hull_graham([[points_on_border[2*i], points_on_border[2*i+1]] for i in range(len(points_on_border)//2)])
+        points_on_border = []
+        #print(len(convex_hull))
+        #print(convex_hull)
+        for sub in convex_hull:
+            points_on_border.append(sub[0])
+            points_on_border.append(sub[1])
+
+        #print(points_on_border)
+        #print(len(points_on_border))
+
+        
         for i in range(0, len(points_on_border), 2):
           draw_umich_gaussian(border_hm[0], (int(points_on_border[i]), int(points_on_border[i+1])), radius)
 
@@ -386,7 +432,7 @@ class PolydetDataset(data.Dataset):
 
 
 
-
+        peak[k] = ct
         ind[k] = ct_int[1] * output_w + ct_int[0]
         reg[k] = ct - ct_int
 
@@ -421,9 +467,9 @@ class PolydetDataset(data.Dataset):
     # print('x: ', np.mean(np.abs(poly[0::2])), 'y: ', np.mean(np.abs(poly[1::2])))
 
     if self.opt.cat_spec_poly:
-      ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'poly': poly, 'cat_spec_poly': cat_spec_poly, 'cat_spec_mask': cat_spec_mask_poly, 'pseudo_depth':pseudo_depth}
+      ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'poly': poly, 'cat_spec_poly': cat_spec_poly, 'cat_spec_mask': cat_spec_mask_poly, 'pseudo_depth':pseudo_depth, 'peak':peak}
     else:
-      ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'poly': poly, 'pseudo_depth':pseudo_depth, 'freq_mask':freq_mean, 'border_hm': border_hm, 'wh':wh, 'fg':fg}
+      ret = {'input': inp, 'hm': hm, 'reg_mask': reg_mask, 'ind': ind, 'poly': poly, 'pseudo_depth':pseudo_depth, 'freq_mask':freq_mean, 'border_hm': border_hm, 'wh':wh, 'fg':fg, 'peak':peak}
 
     if self.opt.dense_poly:
       # hm_a = hm.max(axis=0, keepdims=True)
