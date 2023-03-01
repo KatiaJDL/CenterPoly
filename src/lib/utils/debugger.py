@@ -236,6 +236,28 @@ class Debugger(object):
       cv2.putText(self.imgs[img_id], txt, (bbox[0], bbox[1] - 2),
                   font, 0.5, (0, 0, 0), thickness=1, lineType=cv2.LINE_AA)
 
+  def add_polydet(self, vertices,  cat, conf=1, show_txt=True, img_id='default'):
+    bbox = np.array(vertices, dtype=np.int32)
+    # cat = (int(cat) + 1) % 80
+    cat = int(cat)
+    # print('cat', cat, self.names[cat])
+    c = self.colors[cat][0][0].tolist()
+    if self.theme == 'white':
+      c = (255 - np.array(c)).tolist()
+    txt = '{}{:.1f}'.format(self.names[cat], conf)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cat_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
+    vertices = list(map(self._to_float, bbox))
+    vertices = np.array([[int(x), int(y)] for x, y in zip(vertices[0::2], vertices[1::2])])
+    vertices.reshape((-1,1,2))
+    cv2.polylines(self.imgs[img_id], [vertices], True, (0,255,255),4)
+    if show_txt:
+      cv2.rectangle(self.imgs[img_id],
+                    (bbox[0], bbox[1] - cat_size[1] - 2),
+                    (bbox[0] + cat_size[0], bbox[1] - 2), c, -1)
+      cv2.putText(self.imgs[img_id], txt, (bbox[0], bbox[1] - 2),
+                  font, 0.5, (0, 0, 0), thickness=1, lineType=cv2.LINE_AA)
+
 
   def add_points(self, points, img_id='default'):
     num_classes = len(points)
