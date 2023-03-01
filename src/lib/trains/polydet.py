@@ -120,12 +120,12 @@ class PolydetLoss(torch.nn.Module):
                 else:
                     if opt.poly_order :
                         poly, order = self.crit_poly(output['poly'], batch[
-                            'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm'])
+                            'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], peak = batch['peak'], hm = output['hm'])
                         poly_loss += poly / opt.num_stacks
                         order_loss += order /opt.num_stacks
                     else:
                         poly_loss += self.crit_poly(output['poly'], batch[
-                            'reg_mask'], batch['ind'], batch['poly'], freq_mask = batch['freq_mask'], hm = output['hm']) / opt.num_stacks
+                            'reg_mask'], batch['ind'], batch['poly'],  freq_mask = batch['freq_mask'], peak =batch['peak'], hm = output['hm']) / opt.num_stacks
                         # poly_loss += self.crit_poly(output['poly'], batch['reg_mask'],  # batch['freq_mask'],batch['ind'], batch['poly']) / opt.num_stacks
 
             if opt.reg_offset and opt.off_weight > 0:

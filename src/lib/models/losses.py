@@ -26,7 +26,7 @@ DRAW = False
 def area(poly_tensor):
   nb_points = poly_tensor.shape[0]
 
-  POLAR = False
+  POLAR = True
 
   poly_tensor_polar = poly_tensor.clone()
 
@@ -556,7 +556,7 @@ class WeilPolygonClipper:
     
     def is_inside(self,c1,c2,c):
 
-        POLAR = False
+        POLAR = True
 
         if POLAR:
           p1 = c1[0]*torch.cos(c1[1]), c1[0]*torch.sin(c1[1])
@@ -568,14 +568,14 @@ class WeilPolygonClipper:
           p1, p2, q = c1, c2, c
         R = (p2[0] - p1[0]) * (q[1] - p1[1]) - (p2[1] - p1[1]) * (q[0] - p1[0])
 
-        # if R < 0:
-        #     return 1
-        # elif R ==0:
-        #     return 2
-        # else :
-        #     return 0
+        if R < 0:
+            return 1
+        elif R ==0:
+            return 2
+        else :
+            return 0
 
-        return (R <= 0)
+        #return (R <= 0)
     
     def compute_intersection(self,c1,c2,c3,c4):
         
@@ -597,7 +597,7 @@ class WeilPolygonClipper:
         there is no need to check if both lines are vertical (parallel), since
         this function is only called if we know that the lines intersect.
         """
-        POLAR = False
+        POLAR = True
 
         if POLAR:
           p1 = c1[0]*torch.cos(c1[1]), c1[0]*torch.sin(c1[1])
@@ -694,11 +694,14 @@ class WeilPolygonClipper:
                 s_edge_start = subject_polygon[j - 1]
                 s_edge_end = subject_polygon[j]
 
+                to_end = self.is_inside(c_edge_start,c_edge_end,s_edge_end)
+                to_start = self.is_inside(c_edge_start,c_edge_end,s_edge_start)
+
                 #print('pred', s_edge_start, s_edge_end)
               
-                if self.is_inside(c_edge_start,c_edge_end,s_edge_end):
+                if to_end == 1:
                     #print('s_end inside c')
-                    if not self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                    if to_start == 0:
                         #print('s_start outside c')
                         # Test actual intersection
                         c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
@@ -708,9 +711,9 @@ class WeilPolygonClipper:
                           inters = torch.cat((inters,intersection),dim=0)
                           outbounds.append([j,i, len(inters)-1])
 
-                elif self.is_inside(c_edge_start,c_edge_end,s_edge_start):
+                elif to_start == 1:
                     #print('s_start inside c')
-                    if not self.is_inside(c_edge_start,c_edge_end,s_edge_end):
+                    if to_end == 0:
                         #print('s_end outside c')
                         # Test actual intersection
                         c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
@@ -719,6 +722,40 @@ class WeilPolygonClipper:
                           intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
                           inters = torch.cat((inters,intersection),dim=0)
                           inbounds.append([j,i, len(inters)-1])
+
+                elif to_end == 2:
+                  if to_start == 0:
+                    c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                    if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          outbounds.append([j,i, len(inters)-1])
+
+                  elif to_start == 1:
+                    c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                    if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          inbounds.append([j,i, len(inters)-1])
+                    
+                elif to_start == 2:
+                  if to_end == 0:
+                    c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                    if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          inbounds.append([j,i, len(inters)-1])
+                    
+                  elif to_end == 1:
+                    c_in_start, c_in_end = self.is_inside(s_edge_start,s_edge_end,c_edge_end), self.is_inside(s_edge_start,s_edge_end,c_edge_start)
+                    if c_in_start !=  c_in_end :
+                          #print('intersect')
+                          intersection = self.compute_intersection(s_edge_start,s_edge_end,c_edge_start,c_edge_end)
+                          inters = torch.cat((inters,intersection),dim=0)
+                          outbounds.append([j,i, len(inters)-1])
 
         outbounds = np.array(outbounds)
         inbounds = np.array(inbounds)
@@ -994,25 +1031,9 @@ class PolyLoss(nn.Module):
             loss: scalar
         """
 
-        #print('output', output.shape)
-        #print('target', target.shape)
-
         device = mask.device
 
         pred = _transpose_and_gather_feat(output, ind)
-
-        # Recenter
-        # centered_pred = torch.clone(pred).to(device)
-        # centered_pred[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
-        # centered_pred[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
-
-        # centered_tgt = torch.clone(target).to(device)
-        # centered_tgt[:,:,0::2]+=torch.unsqueeze(peak[:,:,0],2)
-        # centered_tgt[:,:,1::2]+=torch.unsqueeze(peak[:,:,1],2)
-
-        #print('pred', pred.shape)
-
-        #predictions = False
 
         loss = 0.0
         loss_reg = 0.0
@@ -1020,8 +1041,8 @@ class PolyLoss(nn.Module):
 
         sum = 0
 
-        #clip = WeilPolygonClipper()
-        clip = PolygonClipper()
+        clip = WeilPolygonClipper()
+        #clip = PolygonClipper()
 
         for batch in range(output.shape[0]):
 
@@ -1029,90 +1050,24 @@ class PolyLoss(nn.Module):
 
                 if mask[batch][i]:
 
-                    #print(pred[batch][i].view(-1,2))
-                    #print(target[batch][i].view(-1,2))
-
                     sum+=1
-
-                    #predictions = True
-
-                    #polygon_mask_pred, polygon_mask_gt = create_mask(output, pred, target, batch, i, self.opt.rep)
 
                     if self.opt.poly_loss == 'bce':
                         loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
                     elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
-                        #print("iou object")
 
-                        #print(target[batch][i].view(-1,2))
-                        #print(pred[batch][i].view(-1,2))
+                        #How to sort: get indices when sorting angle columns and apply it to the whole tensor
+                        sorted_pred = pred[batch][i].view(-1,2)[torch.sort(pred[batch][i].view(-1,2)[:,1],0)[1]]
+                        sorted_pred = torch.cat((torch.abs(sorted_pred[:,0]).unsqueeze(1), sorted_pred[:,1].unsqueeze(1)), 1)
 
-                        pred_cartesian = pred[batch][i].view(-1,2)
-
-                        #How to sort
-                        #sorted_pred = torch.sort(pred[batch][i].view(-1,2),0)[0]
-
-                        #pred_tensor_polar = torch.cat((torch.mul(pred_cartesian[:,0], torch.cos(pred_cartesian[:,1])).view(-1,1), torch.mul(pred_cartesian[:,0], torch.sin(pred_cartesian[:,1])).view(-1,1)), 1)
-                        #indices_sorted = torch.sort(pred_tensor_polar[:,1],0)[1]
-                        #pred_cartesian = pred_cartesian[indices_sorted]
-
-                        #clippings = divide_concave_polygon(target[batch][i].view(-1,2))
-
-                        #intersection = 0
-
-                        clipped_polygon = clip(pred_cartesian, target[batch][i].view(-1,2)) #.flip(0))
+                        clipped_polygon = clip(sorted_pred, target[batch][i].view(-1,2)) #.flip(0))
 
                         area_intersection = area(clipped_polygon)
+                        intersection = (area_intersection.item() == 0.0)*torch.min(area(sorted_pred),area(target[batch][i].view(-1,2)))+area_intersection
+                        union = area(target[batch][i].view(-1,2)) + area(sorted_pred) - intersection
 
-                        intersection = (area_intersection.item() == 0.)*torch.min(area(pred_cartesian),area(target[batch][i].view(-1,2)))+area_intersection
-                        #print('-------------')
-
-                        #for poly in clippings:
-                          #clipped_polygon = clip(sorted_pred, poly.flip(0))
-                          #area_intersection = area(clipped_polygon)
-                          #print(area_intersection)
-                          #print(area(poly))
-                          #print(area(centered_pred[batch][i].view(-1,2)))
-                          #intersection += (area_intersection.item() == 0.)*torch.min(area(centered_pred[batch][i].view(-1,2)),area(poly))+area_intersection     
-                          #print(intersection)     
-                        #print('area target', area(centered_tgt[batch][i].view(-1,2)))              
-
-                        # clipped_polygon = clip(centered_tgt[batch][i].view(-1,2), centered_pred[batch][i].view(-1,2))
-                        # area_intersection = area(clipped_polygon)
-                        # intersection = (area_intersection.item() == 0.)*torch.min(area(centered_tgt[batch][i].view(-1,2)),area(centered_pred[batch][i].view(-1,2)))+area_intersection
-                        # union = area(centered_tgt[batch][i].view(-1,2)) + area(centered_pred[batch][i].view(-1,2)) - intersection
-                        # intersection = torch.sum((polygon_mask_pred + polygon_mask_gt) == 510)
-                        # union = torch.sum(polygon_mask_pred != 0) + torch.sum(polygon_mask_gt != 0) - intersection
-                        # print('-------------')
-                        # print(area_intersection.item() == 0.)
-                        # print(area(centered_tgt[batch][i].view(-1,2)))
-                        # print(area(centered_pred[batch][i].view(-1,2)))
-                        # print(peak[batch][i])
-                        # print(pred[batch][i].view(-1,2))
-                        # print(centered_pred[batch][i].view(-1,2))
-                        # print(target[batch][i].view(-1,2))
-                        # print(centered_tgt[batch][i].view(-1,2))
-                        # print(clipped_polygon)
-                        # print('u:',union)
-                        # print(intersection)
-                        union = area(target[batch][i].view(-1,2)) + area(pred_cartesian) - intersection
-                        #union = area(target[batch][i].view(-1,2)) + area(pred[batch][i].view(-1,2)) - intersection
-                        #print('union', union)
                         loss += intersection/(union+ 1e-6)
-                        #print(intersection/(union+ 1e-6))
 
-                        #print(area(sorted_pred) - area(target[batch][i].view(-1,2)))
-
-                        # Area loss
-                        #loss += torch.abs(area(sorted_pred) - area(target[batch][i].view(-1,2)))
-
-                        #Gradient augmentation for IoU loss ?
-                        #loss += intersection/(union+ 1e-6)*torch.sum(polygon_mask_gt != 0)
-
-                        #print(torch.sum(polygon_mask_pred != 0))
-                        #print(union)
-                        #print(torch.sum(polygon_mask_gt != 0))
-                        #print(intersection/(union+ 1e-6)*torch.sum(polygon_mask_gt != 0))
-                        #print(loss)
 
                     if self.opt.poly_order:
                         angles = pred[batch][i][1::2]
@@ -1124,42 +1079,15 @@ class PolyLoss(nn.Module):
                             if angles[j] < 0 and zero:
                                 angles[j] += 2*3.14
 
-                        #print(len(angles))
-                        #print(pred[batch][i][1::2])
-                        #print(angles)
-                        #print(target[batch][i][1::2])
-                        #print("--------")
-
                         for j in range(0, (pred[batch].shape[1] - 1) //2):  # points
                             for k in range(j, (pred[batch].shape[1] + 1) //2):
                                 if angles[j]-angles[k] > 0 :
                                     loss_order += angles[j]-angles[k]
-                                    #print(j)
-                                    #print(k)
-                                    #print(angles[j]-angles[k])
-                                if angles[j]-angles[k] < -7:
-                                    loss_order += angles[k]-angles[j]
-                                    #print(j)
-                                    #print(k)
-                                    #print(angles[j]-angles[k])
-                        #if loss_order>0.5:
-                        #  print(loss_order)
-                        #  print(pred[batch][i])
-                        #  print(target[batch][i])
-                        #  print("------")
 
-                        #  time.sleep(30)
-
-        #if not predictions: #no centers predicted
-        #        loss = 0.0
-
-        #print(mask.sum())
         loss_order /= (10*mask.sum() + 1e-4)
 
         if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
-            loss = 1 - loss / (mask.sum() + 1e-6)
-            # Area loss
-            #loss = 0.03 * loss / (mask.sum() + 1e-6)
+            loss = (1 - loss / (mask.sum() + 1e-6))
         if self.opt.poly_loss == 'l1' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu' :
             mask = mask.unsqueeze(2).expand_as(pred).float()
 
@@ -1197,8 +1125,8 @@ class PolyLoss(nn.Module):
             #predictions = True
             loss_reg /= (mask.sum() + 1e-6) #/ (freq_mask.mean() + 1e-4)
 
-        #print("iou ", loss)
-        #print("l1 ", loss_reg)
+        print("iou ", loss)
+        print("l1 ", loss_reg)
         loss += loss_reg #loss=0 if pure regression loss selected
 
         if self.opt.poly_order :
