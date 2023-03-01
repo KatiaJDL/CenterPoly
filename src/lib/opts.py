@@ -100,6 +100,8 @@ class opts(object):
     self.parser.add_argument('--trainval', action='store_true',
                              help='include validation in training and '
                                   'test on test set')
+    self.parser.add_argument('--clip', action='store_true')
+    self.parser.add_argument('--clip_value', default = 1.0)
 
     # test
     self.parser.add_argument('--flip_test', action='store_true',
@@ -446,13 +448,13 @@ class opts(object):
          'ctdet': {'default_resolution': [512, 512], 'num_classes': 4,
                    'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                    'dataset': 'uadetrac1on10'},
-        'polydet': {'default_resolution': [512, 1024], 'num_classes': 11,
+        'polydet': {'default_resolution': [512, 1024], 'num_classes': 8,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
         'gaussiandet': {'default_resolution': [512, 1024], 'num_classes': 8,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes_gaussian'},
-        'diskdet': {'default_resolution': [512, 1024], 'num_classes': 11,
+        'diskdet': {'default_resolution': [512, 1024], 'num_classes': 8,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
         'ctdetMultiSpot': {'default_resolution': [1024, 2048], 'num_classes': 1,

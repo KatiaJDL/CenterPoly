@@ -96,6 +96,9 @@ class BaseTrainer(object):
       if phase == 'train':
         self.optimizer.zero_grad()
         loss.backward()
+
+        if opt.clip :
+            torch.nn.utils.clip_grad_norm_(model_with_loss.parameters(), opt.clip_value)
         self.optimizer.step()
       batch_time.update(time.time() - end)
       end = time.time()
