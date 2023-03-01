@@ -100,25 +100,22 @@ class BaseDetector(object):
     raise NotImplementedError
 
   def show_results(self, debugger, image, results):
-   raise NotImplementedError
+   raise NotImplementedError 
 
-  def run(self, image_or_path_or_tensor, id = 1, batch = None, meta=None):
+  def run(self, image_or_path_or_tensor, id = 1, meta=None):
     load_time, pre_time, net_time, dec_time, post_time = 0, 0, 0, 0, 0
     merge_time, tot_time = 0, 0
     debugger = Debugger(dataset=self.opt.dataset, ipynb=(self.opt.debug==3),
                         theme=self.opt.debugger_theme, num_classes=self.num_classes)
     start_time = time.time()
-
-    #pre_processed = False
-    pre_processed = True
-
+    pre_processed = False
+    
     if isinstance(image_or_path_or_tensor, np.ndarray):
       image = image_or_path_or_tensor
     elif type(image_or_path_or_tensor) == type (''):
       image = cv2.imread(image_or_path_or_tensor)
     else:
-      #
-      #image = image_or_path_or_tensor['image'][0].numpy()
+      image = image_or_path_or_tensor['image'][0].numpy()
       pre_processed_images = image_or_path_or_tensor
       pre_processed = True
     loaded_time = time.time()
@@ -131,38 +128,15 @@ class BaseDetector(object):
         images, meta = self.pre_process(image, scale, meta)
       else:
         # import pdb; pdb.set_trace()
-
-        #images = pre_processed_images['images'][scale][0]
-        #meta = pre_processed_images['meta'][scale]
-        #meta = {k: v.numpy()[0] for k, v in meta.items()}
-
-        images = image_or_path_or_tensor
-        meta = batch['meta']
-        meta['c'] = meta['c'].numpy()
-        meta['s'] = meta['s'].numpy()[0]
-        meta['out_height'] = meta['out_height'].numpy()[0]//self.opt.down_ratio
-        meta['out_width'] = meta['out_width'].numpy()[0]//self.opt.down_ratio
-        meta.pop('gt_det')
-        meta.pop('img_id')
-
-
+        images = pre_processed_images['images'][scale][0]
+        meta = pre_processed_images['meta'][scale]
+        meta = {k: v.numpy()[0] for k, v in meta.items()}
       images = images.to(self.opt.device)
       torch.cuda.synchronize()
       pre_process_time = time.time()
       pre_time += pre_process_time - scale_start_time
 
-      # print(images.shape)
-      # print(type(images))
-      # print(images)
-
-      # print(type(meta))
-      # print(meta.keys())
-      # print(meta)
-
-      output, dets, forward_time = self.process(images, return_time=True, batch = batch)
-
-      # print(dets.shape)
-
+      output, dets, forward_time = self.process(images, return_time=True)
       torch.cuda.synchronize()
       net_time += forward_time - pre_process_time
       decode_time = time.time()
