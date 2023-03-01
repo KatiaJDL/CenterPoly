@@ -22,15 +22,28 @@ class PolydetDetector(BaseDetector):
   def __init__(self, opt):
     super(PolydetDetector, self).__init__(opt)
   
-  def process(self, images, return_time=False):
+  def process(self, images, return_time=False, batch = None):
     with torch.no_grad():
       output = self.model(images)[-1]
-      hm = output['hm'].sigmoid_()
+      # hm = output['hm'].sigmoid_()
       # fg = output['fg'].sigmoid_()
       # border_hm = output['border_hm'].sigmoid_()
       polys = output['poly']
       pseudo_depth = output['pseudo_depth']
       reg = output['reg'] if self.opt.reg_offset else None
+
+      # print(hm.shape)
+      # print(pseudo_depth.shape)
+      # print(reg.shape)
+
+      hm = batch['hm'].to(self.opt.device)
+      # pseudo_depth = batch['pseudo_depth'].to(self.opt.device)
+      # reg = batch['reg'].to(self.opt.device) if self.opt.reg_offset else None
+
+      # print(hm.shape)
+      # print(pseudo_depth.shape)
+      # print(reg.shape)
+
       if self.opt.flip_test:
         hm = (hm[0:1] + flip_tensor(hm[1:2])) / 2
         reg = reg[0:1] if reg is not None else None

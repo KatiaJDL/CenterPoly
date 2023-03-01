@@ -18,6 +18,7 @@ from logger import Logger
 from utils.utils import AverageMeter
 from datasets.dataset_factory import dataset_factory
 from detectors.detector_factory import detector_factory
+from datasets.dataset_factory import get_dataset
 
 class PrefetchDataset(torch.utils.data.Dataset):
   def __init__(self, opt, dataset, pre_process_func):
@@ -60,18 +61,35 @@ def prefetch_test(opt):
     split = 'test'
   dataset = Dataset(opt, split)
   detector = Detector(opt)
-  
+
+  Dataset = get_dataset(opt.dataset, opt.task)
   data_loader = torch.utils.data.DataLoader(
-    PrefetchDataset(opt, dataset, detector.pre_process), 
-    batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
+      Dataset(opt, 'val'), 
+      batch_size=1, 
+      shuffle=False,
+      num_workers=1,
+      pin_memory=True
+  )
+  
+  # data_loader = torch.utils.data.DataLoader(
+  #   PrefetchDataset(opt, dataset, detector.pre_process), 
+  #   batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
+
+
   results = {}
   #"""
   num_iters = len(dataset)
   bar = Bar('{}'.format(opt.exp_id), max=num_iters)
   time_stats = ['tot', 'load', 'pre', 'net', 'dec', 'post', 'merge']
   avg_time_stats = {t: AverageMeter() for t in time_stats}
-  for ind, (img_id, pre_processed_images) in enumerate(data_loader):
-    ret = detector.run(pre_processed_images, ind)
+
+  for ind, batch in enumerate(data_loader):
+  #for ind, (img_id, pre_processed_images) in enumerate(data_loader):
+
+    img_id = batch['meta']['img_id']
+    ret = detector.run(batch['input'], ind, batch)    
+    #ret = detector.run(pre_processed_images, ind)
+
     results[img_id.numpy().astype(np.int32)[0]] = ret['results']
     Bar.suffix = '[{0}/{1}]|Tot: {total:} |ETA: {eta:} '.format(
                    ind, num_iters, total=bar.elapsed_td, eta=bar.eta_td)
