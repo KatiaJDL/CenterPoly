@@ -277,7 +277,7 @@ def create_mask(output, pred, target, batch, num_object, rep):
 
   return polygon_mask_pred, polygon_mask_gt
 
-def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid'):
+def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid', r_variation = False):
 
   device = centers.device
 
@@ -313,13 +313,14 @@ def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid'):
 
   centers = centers.sum(-1)
   # batch_size, nb_max_obj, H, W, nb_points
-  #print(centers.shape)
+  print(centers.shape)
 
-  radius = radius.unsqueeze(-1).unsqueeze(-1)
-  # batch_size, nb_max_obj, H, W, nb_points, 2
+  # batch_size, nb_max_obj, nb_points
+  radius = radius.unsqueeze(-2).unsqueeze(-2)
+  # batch_size, nb_max_obj, H, W, nb_points
   radius = radius.expand(radius.shape[0], radius.shape[1], H, W,N)
-  #print(radius.shape)
-
+  # print(radius.shape)
+  
   centers = torch.exp(centers/(2*torch.pow(radius,2)))
 
   #print(centers.grad_fn)
@@ -1295,7 +1296,7 @@ class GaussianLoss(nn.Module):
 
         H, W = target[0][0].shape
 
-        pred = differentiable_gaussian(H,W, pred, pred_radius, self.opt.gaussian_ceiling)
+        pred = differentiable_gaussian(H,W, pred, pred_radius, self.opt.gaussian_ceiling, self.opt.r_variation)
 
 
         """

@@ -46,8 +46,14 @@ def individual_gaussian(heatmap, centers, radius):
     #print(centers)
     #print(radius)
 
-    heatmap += np.exp( - (np.square([[centers[k][0]-i for i in range(W)]]) \
-               + np.square([[centers[k][1]-j] for j in range(H)])) /(2*radius**2))
+    if type(radius) == list:
+        heatmap += np.exp( - (np.square([[centers[k][0]-i for i in range(W)]]) \
+                + np.square([[centers[k][1]-j] for j in range(H)])) /(2*radius[k]**2))
+
+    else: 
+
+        heatmap += np.exp( - (np.square([[centers[k][0]-i for i in range(W)]]) \
+                + np.square([[centers[k][1]-j] for j in range(H)])) /(2*radius**2))
 
     #print(np.array_equal(heatmap, np.zeros_like(heatmap)))
 
@@ -216,13 +222,18 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     score = bbox[4]
                     depth = bbox[-1]
                     label = self.class_name[cls_ind]
-                    centers = list(map(self._to_float, bbox[5:-2]))
-                    r = bbox[-2]
+                    if self.opt.r_variation :
+                        nb_points = len(bbox[5:-1])
+                        centers = list(map(self._to_float, bbox[5:5+2*nb_points//3]))
+                        r = list(map(self._to_float, bbox[5+2*nb_points//3:-1]))
+                    else:
+                        centers = list(map(self._to_float, bbox[5:-2]))
+                        r = float(bbox[-2])
                     detection = {
                         "image_id": int(image_id),
                         "category_id": int(category_id),
                         "disks": centers,
-                        "radius": float(r),
+                        "radius": r,
                         "score": float("{:.2f}".format(score)),
                         "depth": float(depth),
                     }
@@ -450,9 +461,14 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     if bbox[4] > 0.05:
                         depth = bbox[-1]
                         score = bbox[4]
-                        radius = bbox[-2]
+                        if self.opt.r_variation :
+                            nb_points = len(bbox[5:-1])
+                            centers = list(map(self._to_float, bbox[5:5+2*nb_points//3]))
+                            radius = list(map(self._to_float, bbox[5+2*nb_points//3:-1]))
+                        else: 
+                            radius = float(bbox[-2])
+                            centers = list(map(self._to_float, bbox[5:-2]))
                         label = self.class_name[cls_ind]
-                        centers = list(map(self._to_float, bbox[5:-2]))
                         centers = [(int(x), int(y)) for x, y in zip(centers[0::2], centers[1::2])]
                         param_list.append((centers, radius, score, label, depth))
 
