@@ -277,7 +277,7 @@ def create_mask(output, pred, target, batch, num_object, rep):
 
   return polygon_mask_pred, polygon_mask_gt
 
-def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid', r_variation = False):
+def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid', r_variation = 'one'):
 
   device = centers.device
 
@@ -313,14 +313,20 @@ def differentiable_gaussian(H, W, centers, radius, ceiling = 'sigmoid', r_variat
 
   centers = centers.sum(-1)
   # batch_size, nb_max_obj, H, W, nb_points
-  print(centers.shape)
+  #print(centers.shape)
 
   # batch_size, nb_max_obj, nb_points
+  #print(radius.shape)
   radius = radius.unsqueeze(-2).unsqueeze(-2)
-  # batch_size, nb_max_obj, H, W, nb_points
+  if r_variation == 'two':
+    radius = radius.repeat(1, 1, 1, 1, N//2)
+  elif r_variation == 'four':
+    radius = radius.repeat(1, 1, 1, 1, N//4)
+  #print(radius.shape)
   radius = radius.expand(radius.shape[0], radius.shape[1], H, W,N)
+  # batch_size, nb_max_obj, H, W, nb_points
   # print(radius.shape)
-  
+
   centers = torch.exp(centers/(2*torch.pow(radius,2)))
 
   #print(centers.grad_fn)
@@ -1126,8 +1132,8 @@ class PolyLoss(nn.Module):
             #predictions = True
             loss_reg /= (mask.sum() + 1e-6) #/ (freq_mask.mean() + 1e-4)
 
-        print("iou ", loss)
-        print("l1 ", loss_reg)
+        # print("iou ", loss)
+        # print("l1 ", loss_reg)
         loss += loss_reg #loss=0 if pure regression loss selected
 
         if self.opt.poly_order :
@@ -1260,7 +1266,7 @@ class GaussianLoss(nn.Module):
             centers: output of gaussian centers head
               [batch_size, 2*nb_vertices, height, width]
             radius: output of gaussian std head
-              [batch_size, 1, height, width]
+              [batch_size, nb_radius, height, width]
             mask: selected objects
               [batch_size, nb_max_objects]
             ind: peak of heatmap (encoded)
@@ -1295,6 +1301,8 @@ class GaussianLoss(nn.Module):
         #print(pred_radius)
 
         H, W = target[0][0].shape
+
+        pred_oneradius = differentiable_gaussian(H,W, pred, pred_radius[:,:,0].unsqueeze(-1), self.opt.gaussian_ceiling, 'one')
 
         pred = differentiable_gaussian(H,W, pred, pred_radius, self.opt.gaussian_ceiling, self.opt.r_variation)
 
@@ -1388,7 +1396,23 @@ class GaussianLoss(nn.Module):
         else :
           raise(NotImplementedError)
 
-        return loss, loss
+        loss_oneradius = 0.0
+
+        if self.opt.r_variation == 'composed':
+          if self.opt.gaussian_loss == 'bce':
+            loss_oneradius = self.bce(pred_oneradius*mask, target*mask)
+          elif self.opt.gaussian_loss == 'dice':
+
+            inputs = (pred_oneradius*mask).view(-1)
+            targets = (target*mask).view(-1)
+
+            intersection = (inputs * targets).sum()
+            dice = (2.*intersection)/(inputs.sum() + targets.sum() + 1e-9)
+            loss_oneradius = 1 - dice
+          else :
+            raise(NotImplementedError)
+
+        return loss + loss_oneradius, loss + loss_oneradius
 
 
 class AreaPolyLoss(nn.Module):

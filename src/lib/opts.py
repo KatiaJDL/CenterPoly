@@ -248,8 +248,9 @@ class opts(object):
     # gaussian det
     self.parser.add_argument('--threshold', default=0.5,
                              help='threshold for pixel selection in gaussian detection')
-    self.parser.add_argument('--r_variation', action='store_true',
-                             help='different radius for each circle')
+    self.parser.add_argument('--r_variation', default='one',
+                             help='radius modalities for the circle: one'
+                                  ' two | four | all_different | composed')
 
     # ground truth validation
     self.parser.add_argument('--eval_oracle_hm', action='store_true',
@@ -407,24 +408,20 @@ class opts(object):
                    #'border_hm': 1,
                    }
     elif opt.task == 'gaussiandet':
-      if opt.r_variation:
-        opt.heads = {'hm': opt.num_classes,
-                    'centers': opt.nbr_points*2,
-                    'radius': opt.nbr_points,
-                    'pseudo_depth': 1,
-                    # 'fg': 1,
-                    # 'wh': 2 ,
-                    #'border_hm': 1,
-                    }
-      else:
-        opt.heads = {'hm': opt.num_classes,
-                    'centers': opt.nbr_points*2,
-                    'radius': 1,
-                    'pseudo_depth': 1,
-                    # 'fg': 1,
-                    # 'wh': 2 ,
-                    #'border_hm': 1,
-                    }
+      opt.heads = {'hm': opt.num_classes,
+                  'centers': opt.nbr_points*2,
+                  'radius': opt.nbr_points,
+                  'pseudo_depth': 1,
+                  # 'fg': 1,
+                  # 'wh': 2 ,
+                  #'border_hm': 1,
+                  }
+      if opt.r_variation == 'one':
+        opt.heads.update({'radius': 1})
+      elif opt.r_variation == 'two':
+        opt.heads.update({'radius': 2})
+      elif opt.r_variation == 'four':
+        opt.heads.update({'radius': 4})
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
     elif opt.task == 'ctdetVid':

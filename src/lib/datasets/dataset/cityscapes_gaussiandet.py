@@ -48,7 +48,7 @@ def individual_gaussian(heatmap, centers, radius):
 
     if type(radius) == list:
         heatmap += np.exp( - (np.square([[centers[k][0]-i for i in range(W)]]) \
-                + np.square([[centers[k][1]-j] for j in range(H)])) /(2*radius[k]**2))
+                + np.square([[centers[k][1]-j] for j in range(H)])) /(2*radius[k%len(radius)]**2))
 
     else: 
 
@@ -222,13 +222,14 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     score = bbox[4]
                     depth = bbox[-1]
                     label = self.class_name[cls_ind]
-                    if self.opt.r_variation :
-                        nb_points = len(bbox[5:-1])
-                        centers = list(map(self._to_float, bbox[5:5+2*nb_points//3]))
-                        r = list(map(self._to_float, bbox[5+2*nb_points//3:-1]))
-                    else:
+                    if self.opt.r_variation == 'all_different' or self.opt.r_variation == 'composed' :
+                        centers = list(map(self._to_float, bbox[5:5+2*self.opt.nb_points]))
+                        r = list(map(self._to_float, bbox[5+2*self.opt.nb_points:-1]))
+                    elif self.opt.r_variation == 'one':
                         centers = list(map(self._to_float, bbox[5:-2]))
                         r = float(bbox[-2])
+                    else:
+                        raise NotImplementedError
                     detection = {
                         "image_id": int(image_id),
                         "category_id": int(category_id),
@@ -461,13 +462,14 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     if bbox[4] > 0.05:
                         depth = bbox[-1]
                         score = bbox[4]
-                        if self.opt.r_variation :
-                            nb_points = len(bbox[5:-1])
-                            centers = list(map(self._to_float, bbox[5:5+2*nb_points//3]))
-                            radius = list(map(self._to_float, bbox[5+2*nb_points//3:-1]))
-                        else: 
+                        if self.opt.r_variation == 'all_different' or self.opt.r_variation == 'composed' :
+                            centers = list(map(self._to_float, bbox[5:5+2*self.opt.nb_points]))
+                            radius = list(map(self._to_float, bbox[5+2*self.opt.nb_points:-1]))
+                        elif self.opt.r_variation == 'one':
                             radius = float(bbox[-2])
                             centers = list(map(self._to_float, bbox[5:-2]))
+                        else:
+                            raise NotImplementedError
                         label = self.class_name[cls_ind]
                         centers = [(int(x), int(y)) for x, y in zip(centers[0::2], centers[1::2])]
                         param_list.append((centers, radius, score, label, depth))

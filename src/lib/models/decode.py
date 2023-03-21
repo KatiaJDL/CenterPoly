@@ -752,7 +752,7 @@ def gaussiandet_decode(heat, centers, radius, depth, reg=None, K=100):
     centers = centers.view(batch, K, centers.shape[-1])
 
     depth = depth.view(batch, K, 1).float()
-    radius = radius.view(batch, K, 1).float()
+    radius = radius.view(batch, K, radius.shape[-1])
     clses  = clses.view(batch, K, 1).float()
     scores = scores.view(batch, K, 1)
 
