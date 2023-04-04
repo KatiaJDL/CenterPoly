@@ -46,9 +46,16 @@ class GaussianDetector(BaseDetector):
   def post_process(self, dets, meta, scale=1, fg=None):
     dets = dets.detach().cpu().numpy()
     dets = dets.reshape(1, -1, dets.shape[2])
+    num_radius = 1
+    if self.opt.r_variation == 'two':
+        num_radius = 2
+    elif self.opt.r_variation == 'four':
+        num_radius = 4
+    elif self.opt.r_variation == 'all_different' or self.opt.r_variation == 'composed':
+        num_radius = self.opt.nbr_points
     dets = gaussiandet_post_process(
         dets.copy(), [meta['c']], [meta['s']],
-        meta['out_height'], meta['out_width'], self.opt.num_classes)
+        meta['out_height'], meta['out_width'], self.opt.num_classes, num_radius)
     # trans_input = get_affine_transform(meta['c'], meta['s'], 0, [meta['out_width'], meta['out_height']])
     # fg = cv2.warpAffine(fg, trans_input, (meta['out_width'], meta['out_height']), flags=cv2.INTER_LINEAR)
 

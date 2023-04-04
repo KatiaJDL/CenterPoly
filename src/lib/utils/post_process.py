@@ -139,7 +139,7 @@ def diskdet_post_process(dets, c, s, h, w, num_classes):
     ret.append(top_preds)
   return ret
 
-def gaussiandet_post_process(dets, c, s, h, w, num_classes):
+def gaussiandet_post_process(dets, c, s, h, w, num_classes, num_radius):
   ret = []
 
   #print('dets post process', dets.shape)
@@ -147,9 +147,9 @@ def gaussiandet_post_process(dets, c, s, h, w, num_classes):
     top_preds = {} #dic of results for each class
     dets[i, :, :2] = transform_preds(dets[i, :, 0:2], c[i], s[i], (w, h))
     dets[i, :, 2:4] = transform_preds(dets[i, :, 2:4], c[i], s[i], (w, h))
-    for j in range(6, dets.shape[-1]-2, 2):
+    for j in range(6, dets.shape[-1]-1 -num_radius, 2):
       dets[i, :, j:j+2] = transform_preds(dets[i, :, j:j+2], c[i], s[i], (w, h))
-    dets[i, :, -2] *= 8
+    dets[i, :, -1-num_radius:-1] *= 8
     classes = dets[i, :, 5]
     for j in range(num_classes):
       inds = (classes == j)

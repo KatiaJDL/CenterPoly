@@ -222,14 +222,12 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     score = bbox[4]
                     depth = bbox[-1]
                     label = self.class_name[cls_ind]
-                    if self.opt.r_variation == 'all_different' or self.opt.r_variation == 'composed' :
-                        centers = list(map(self._to_float, bbox[5:5+2*self.opt.nb_points]))
-                        r = list(map(self._to_float, bbox[5+2*self.opt.nb_points:-1]))
-                    elif self.opt.r_variation == 'one':
+                    if self.opt.r_variation == 'one':
                         centers = list(map(self._to_float, bbox[5:-2]))
                         r = float(bbox[-2])
                     else:
-                        raise NotImplementedError
+                        centers = list(map(self._to_float, bbox[5:5+2*self.opt.nbr_points]))
+                        radius = list(map(self._to_float, bbox[5+2*self.opt.nbr_points:-1]))
                     detection = {
                         "image_id": int(image_id),
                         "category_id": int(category_id),
@@ -462,14 +460,12 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     if bbox[4] > 0.05:
                         depth = bbox[-1]
                         score = bbox[4]
-                        if self.opt.r_variation == 'all_different' or self.opt.r_variation == 'composed' :
-                            centers = list(map(self._to_float, bbox[5:5+2*self.opt.nb_points]))
-                            radius = list(map(self._to_float, bbox[5+2*self.opt.nb_points:-1]))
-                        elif self.opt.r_variation == 'one':
+                        if self.opt.r_variation == 'one':
                             radius = float(bbox[-2])
                             centers = list(map(self._to_float, bbox[5:-2]))
                         else:
-                            raise NotImplementedError
+                            centers = list(map(self._to_float, bbox[5:5+2*self.opt.nbr_points]))
+                            radius = list(map(self._to_float, bbox[5+2*self.opt.nbr_points:-1]))
                         label = self.class_name[cls_ind]
                         centers = [(int(x), int(y)) for x, y in zip(centers[0::2], centers[1::2])]
                         param_list.append((centers, radius, score, label, depth))
@@ -486,6 +482,18 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                     pred_gaussian = (pred_gaussian>self.opt.threshold)
 
                     gaussian_img = Image.fromarray((pred_gaussian*255).astype(np.uint8))
+
+                    if self.opt.dp > 0:
+
+                        contours, hierarchy = cv2.findContours(gaussian_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                        gaussian_img = Image.new('L', mode=pred_gaussian.shape)
+
+                        for cnt in contours:
+                            #the smaller epsilon is, the more vertices the contours have
+                            epsilon = self.opt.dp*cv2.arcLength(cnt, True)
+                            approx = cv2.approxPolyDP(cnt, epsilon, True)
+                            #cv2.drawContours(approx_img, [approx], -1, (0,255,0), 1)
+                            ImageDraw.Draw(gaussian_img).polygon(approx, outline=255, fill=255)
 
                 if score >= 0.5:
                     to_remove_mask += np.array(gaussian_img)
