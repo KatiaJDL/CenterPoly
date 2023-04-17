@@ -1059,9 +1059,7 @@ class PolyLoss(nn.Module):
 
                     sum+=1
 
-                    if self.opt.poly_loss == 'bce':
-                        loss += F.binary_cross_entropy(polygon_mask_pred, polygon_mask_gt, reduction='sum')
-                    elif self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
+                   if self.opt.poly_loss == 'iou' or self.opt.poly_loss == 'l1+iou' or self.opt.poly_loss == 'relu':
 
                         #How to sort: get indices when sorting angle columns and apply it to the whole tensor
                         sorted_pred = pred[batch][i].view(-1,2)[torch.sort(pred[batch][i].view(-1,2)[:,1],0)[1]]

@@ -65,7 +65,7 @@ def prefetch_test(opt):
     PrefetchDataset(opt, dataset, detector.pre_process), 
     batch_size=1, shuffle=False, num_workers=1, pin_memory=True)
   results = {}
-  #"""
+  
   num_iters = len(dataset)
   bar = Bar('{}'.format(opt.exp_id), max=num_iters)
   time_stats = ['tot', 'load', 'pre', 'net', 'dec', 'post', 'merge']
@@ -81,7 +81,7 @@ def prefetch_test(opt):
         t, tm = avg_time_stats[t])
     bar.next()
   bar.finish()
-  #"""
+  
   dataset.run_eval(results, opt.save_dir)
 
 def test(opt):

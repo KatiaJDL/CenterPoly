@@ -599,7 +599,6 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
         elif self.opt.task == 'gaussiandet':
             print('run eval gaussiandet')
 
-            """
             self.save_results(results, save_dir)
             #results = json.load(open('{}/results.json'.format(save_dir), 'r'))
 
@@ -617,13 +616,7 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
             for f in files:
                 os.remove(f)
             #print("format and write")
-            self.format_and_write_to_cityscapes_gaussian(results, res_dir)
-
-            """
-
-            #######
-            res_dir = os.path.join(save_dir, 'results_DP_0.01')
-            #######    
+            self.format_and_write_to_cityscapes_gaussian(results, res_dir) 
 
             os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
             os.environ['CITYSCAPES_RESULTS'] = res_dir
