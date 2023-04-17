@@ -5,3 +5,6 @@ progress
 matplotlib
 easydict
 scipy
+pycocotools
+bresenham
+shapely
