@@ -1,54 +1,55 @@
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/centerpoly-real-time-instance-segmentation/real-time-instance-segmentation-on-cityscapes)](https://paperswithcode.com/sota/real-time-instance-segmentation-on-cityscapes?p=centerpoly-real-time-instance-segmentation) <br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/centerpoly-real-time-instance-segmentation/real-time-instance-segmentation-on-kitti)](https://paperswithcode.com/sota/real-time-instance-segmentation-on-kitti?p=centerpoly-real-time-instance-segmentation) <br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/centerpoly-real-time-instance-segmentation/real-time-instance-segmentation-on-india)](https://paperswithcode.com/sota/real-time-instance-segmentation-on-india?p=centerpoly-real-time-instance-segmentation) <br>
-# CenterPoly
-Repository for the paper CenterPoly: real-time instance segmentation using bounding polygons
-<br> by Hughes Perreault<sup>1</sup>, Guillaume-Alexandre Bilodeau<sup>1</sup>, Nicolas Saunier<sup>1</sup> and Maguelonne Héritier<sup>2</sup>.
+
+# CenterPoly v2
+Repository for the paper Real-time Instance Segmentation with polygons using an Intersection-over-Union loss (CenterPoly v2)
+<br> by Katia Jodogne-del Litto<sup>1</sup>, Guillaume-Alexandre Bilodeau<sup>1</sup>.
 <br>
 <sup>1</sup> Polytechnique Montréal
-<sup>2</sup> Genetec <br>
-Paper: https://arxiv.org/abs/2108.08923 <br>
 
 ## Abstract
-We present a novel method, called CenterPoly, for real-time instance segmentation using bounding polygons. We apply it to detect road users in dense urban environments, making it suitable for applications in intelligent transportation systems like automated vehicles. CenterPoly detects objects by their center keypoint while predicting a fixed number of polygon vertices for each object, thus performing detection and segmentation in parallel. Most of the network parameters are shared by the network heads, making it fast and lightweight enough to run at real-time speed. To properly convert mask ground-truth to polygon ground-truth, we designed a vertex selection strategy to facilitate the learning of the polygons. Additionally, to better segment overlapping objects in dense urban scenes, we also train a relative depth branch to determine which instances are closer and which are further, using available weak annotations. We propose several models with different backbones to show the possible speed / accuracy trade-offs. The models were trained and evaluated on Cityscapes, KITTI and IDD and the results are reported on their public benchmark, which are state-of-the-art at real-time speeds. Code is available at https://github.com/hu64/CenterPoly.
+Predicting a binary mask for an object is more accurate but also more computationally expensive than a bounding box. Polygonal masks as developed in CenterPoly can be a good compromise. In this paper, we improve over CenterPoly by enhancing the classical regression L1 loss with a novel region-based loss and a novel order loss, as well as with a new training process for the vertices prediction head. Moreover, the previous methods that predict polygonal masks use different coordinate systems, but it is not clear if one is better than another, if we abstract the architecture requirement. We therefore investigate their impact on the prediction. We also use a new evaluation protocol with oracle predictions for the detection head, to further isolate the segmentation process and better compare the polygonal masks with binary masks.  Our instance segmentation method is trained and tested with challenging datasets containing urban scenes, with a high density of road users. Experiments show, in particular, that using a combination of a regression loss and a region-based loss allows significant improvements on the Cityscapes and IDD test set compared to CenterPoly. Moreover the inference stage remains fast enough to reach real-time performance with an average of 0.045 s per frame for 2048x1024 images on a single RTX 2070 GPU.
 
-## Example Result
-The bounding polygons      |  The relative depthmap
+Our contributions:
+- We present a novel Intersection-over-Union loss function for polygons with Weiler-Atherton algorithm;
+- We introduce a new loss based on the vertex order;
+- We study the impact of the geometric representation of polygon vertices for mask approximation, by comparing the Cartesian and polar representations;
+- We propose a new evaluation experiments to assess more precisely the quality of the generated polygon masks by decoupling detection from the mask construction. It shows that our method improves significantly over CenterPoly.
+
+## Example results:  Comparison with CenterPoly
+The bounding polygons      |  The set covering with disks
 :-------------------------:|:-------------------------:
-![](imgs/berlin_i.png)  |  ![](imgs/berlin_d.png)
-
-## Model
-![Model](imgs/CenterPolyFigure.jpg "")
-
-An overview of the CenterPoly architecture. The image first passes through a CNN backbone, displayed here as an Hourglass network. The feature map is then shared between four network heads, the polygon regression head, the center heatmaps head used for detections, the object offset head and the relative depth map head. The sizes displayed are for illustration purposes only, please refer to the code for the detailed architecture.
+![]()  |  ![]()
 
 ## Requirements:
-- pytorch (we run 1.4.0, cuda 10.0)
-- various common packages
+- python 3.7
+- pytorch (1.4.0, cuda 10.1)
+- various common packages (opencv, numpy...)
 
 ## Folder organization:
-- experiments/: scripts used to launch our various experiments.
-- Data path expected usually is /Store/datasets/DATASET_NAME (changeable in code)
-- DATASET_NAMEStuff/ are scripts related to each specific dataset, as well as our GT files
-- src/lib/trains/polydet.py is our training file
-- src/lib/datasets/sample/polydet.py is our sampling file
-- src/lib/detectors/polydet.py is our detector file
+- experiments/: scripts for the experiments.
+- Data path expected usually is /store/datasets/DATASET_NAME (changeable in code)
+- DATASET_NAMEStuff/ are scripts related to each specific dataset, as well as GT files (GT files from [CenterPoly](https://github.com/hu64/CenterPoly)).
+- src/lib/trains/polydet.py is the training file
+- src/lib/datasets/sample/polydet.py is the sampling file
+- src/lib/detectors/polydet.py is the detector file
 
 ## Help
 For general debugging and help to run the scripts: <br>
-- This code is built upon: https://github.com/xingyizhou/CenterNet
+- This code is built upon: https://github.com/xingyizhou/CenterNet and https://github.com/hu64/CenterPoly
 - The pre-trained weights are all available at this location
 
 ## Results:
-- results on cityscapes: https://www.cityscapes-dataset.com/benchmarks/#instance-level-results
-- results on KITTI: http://www.cvlibs.net/datasets/kitti/eval_instance_seg_detail.php?benchmark=instanceSeg2015&result=37b10ad4af975da6ef9cff646935bc47dce3d0ce
-- results on IDD:(Anonymous with corresponding numbers) https://idd.insaan.iiit.ac.in/evaluation/leader-board/
 
-## Model Zoo
-https://polymtlca0-my.sharepoint.com/:f:/g/personal/hughes_perreault_polymtl_ca/ErIRGwMAd0lPvBxTtybUjWMBnvvqh8mNkWnaJLojlkyOWQ?e=yNjlDU
+| Datasets (test sets) |   AP  | AP50% | Runtime (s) | weights                                                                                                                                                 |
+|:--------------------:|:-----:|-------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| cityscapes           | 16.64 | 39.42 | 0.045       | [link](https://polymtlca0-my.sharepoint.com/:u:/g/personal/katia_jodogne--del-litto_polymtl_ca/EQIz3Vm96pFNqIZBF-BcK48BzcEXAIEK35cDupRb0uTfmw?e=3Zb7Sq) |
+| KITTI                |  8.86 | 26.86 | 0.045       | [link](https://polymtlca0-my.sharepoint.com/:u:/g/personal/katia_jodogne--del-litto_polymtl_ca/ETprojfO4-JInpakjuxcDnIBJVTLh1Oz1Pcv4JtLQTZ5HQ?e=8JBlft) |
+| IDD                  | 17.40 | 45.10 | 0.045       | [link](https://polymtlca0-my.sharepoint.com/:u:/g/personal/katia_jodogne--del-litto_polymtl_ca/EeLV5WjLXSxEqOD84_YCjmABELKItvE4uamHZOa7od3Bvw)          |
+
+## Models
+https://polymtlca0-my.sharepoint.com/:f:/g/personal/katia_jodogne--del-litto_polymtl_ca/EtvCinAQKlNJiekvaNMbAkMBwfzJd9yghBvUMIHZiL6uBw
 
 ## Acknowledgements
-The code for this paper is mainly built upon [CenterNet](https://github.com/xingyizhou/CenterNet), we would therefore like to thank the authors for providing the source code of their paper. We also acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), [RDCPJ 508883 - 17], and the support of Genetec.
+The code for this paper is mainly built upon [CenterNet](https://github.com/xingyizhou/CenterNet), we would therefore like to thank the authors for providing the source code of their paper. We also acknowledge the support of the Natural Sciences and Engineering Research Council of Canada (NSERC), and the support of IVADO [MSc-2022-4713306544].
 
 ## License
-CenterPoly is released under the MIT License. Portions of the code are borrowed from [CenterNet](https://github.com/xingyizhou/CenterNet), [CornerNet](https://github.com/princeton-vl/CornerNet) (hourglassnet, loss functions), [dla](https://github.com/ucbdrive/dla) (DLA network), [DCNv2](https://github.com/CharlesShang/DCNv2)(deformable convolutions), and [cityscapesScripts](https://github.com/mcordts/cityscapesScripts) (cityscapes dataset evaluation). Please refer to the original License of these projects (See [NOTICE](NOTICE)).
+CenterPoly is released under the MIT License. Portions of the code are borrowed from [CenterPoly](https://github.com/hu64/CenterPoly)), [CenterNet](https://github.com/xingyizhou/CenterNet), [CornerNet](https://github.com/princeton-vl/CornerNet) (hourglassnet, loss functions), [dla](https://github.com/ucbdrive/dla) (DLA network), [DCNv2](https://github.com/CharlesShang/DCNv2)(deformable convolutions), and [cityscapesScripts](https://github.com/mcordts/cityscapesScripts) (cityscapes dataset evaluation). Please refer to the original License of these projects (See [NOTICE](NOTICE)).
