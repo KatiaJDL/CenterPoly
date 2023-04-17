@@ -35,7 +35,7 @@ def write_mask_image(args):
     ImageDraw.Draw(polygon_mask).polygon(poly_points, outline=0, fill=255)
     polygon_mask.save(mask_path)
 
-def individual_gaussian(heatmap, centers, radius):
+def individual_gaussian(heatmap, centers, radius, ceiling = None):
 
   H, W = heatmap.shape
 
@@ -59,6 +59,11 @@ def individual_gaussian(heatmap, centers, radius):
 
   #ax = sns.heatmap(heatmap)
   #plt.show()
+  
+  if ceiling == 'clamp':
+    heatmap = torch.clip(heatmap, 0, 1)
+  elif ceiling == 'tanh':
+    heatmap = np.tanh(heatmap)
 
 
   return heatmap
@@ -477,7 +482,7 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                 if label != 'pole' and label != 'traffic sign' and label != 'traffic light':
 
                     pred_gaussian = np.zeros((1024, 2048))
-                    pred_gaussian = individual_gaussian(pred_gaussian, centers, r)
+                    pred_gaussian = individual_gaussian(pred_gaussian, centers, r, self.opt.gaussian_ceiling)
 
                     pred_gaussian = (pred_gaussian>self.opt.threshold)
 
@@ -593,6 +598,8 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
             return AP
         elif self.opt.task == 'gaussiandet':
             print('run eval gaussiandet')
+
+            """
             self.save_results(results, save_dir)
             #results = json.load(open('{}/results.json'.format(save_dir), 'r'))
 
@@ -611,6 +618,13 @@ class CITYSCAPES_GAUSSIAN(data.Dataset):
                 os.remove(f)
             #print("format and write")
             self.format_and_write_to_cityscapes_gaussian(results, res_dir)
+
+            """
+
+            #######
+            res_dir = os.path.join(save_dir, 'results_DP_0.01')
+            #######    
+
             os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
             os.environ['CITYSCAPES_RESULTS'] = res_dir
             #print("get AP")

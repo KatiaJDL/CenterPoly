@@ -251,7 +251,7 @@ class opts(object):
     self.parser.add_argument('--r_variation', default='one',
                              help='radius modalities for the circle: one'
                                   ' two | four | all_different | composed')
-    self.parser.add_argument('--dp', type='float', default=0.0, 
+    self.parser.add_argument('--dp', default=0.0, 
                             help='post-processing with douglas-peucker algorithm.'
                                   'Value of epsilon.')
 
