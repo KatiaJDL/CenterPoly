@@ -6,7 +6,6 @@ from .sample.ddd import DddDataset
 from .sample.exdet import EXDetDataset
 from .sample.ctdet import CTDetDataset
 from .sample.polydet import PolydetDataset
-from .sample.gaussiandet import GaussiandetDataset
 from .sample.multi_pose import MultiPoseDataset
 
 from .dataset.coco import COCO
@@ -20,7 +19,6 @@ from .dataset.uadetrac1on10 import UADETRAC1ON10
 from .dataset.uadetrac1on10_b import UADETRAC1ON10_b
 from .dataset.uav import UAV
 from .dataset.cityscapes import CITYSCAPES
-from .dataset.cityscapes_gaussiandet import CITYSCAPES_GAUSSIAN
 from .dataset.IDD import IDD
 
 
@@ -36,7 +34,6 @@ dataset_factory = {
   'uadetrac1on10_b': UADETRAC1ON10_b,
   'uav': UAV,
   'cityscapes': CITYSCAPES,
-  'cityscapes_gaussian': CITYSCAPES_GAUSSIAN,
   'IDD': IDD,
 
 }
@@ -45,8 +42,6 @@ _sample_factory = {
   'exdet': EXDetDataset,
   'ctdet': CTDetDataset,
   'polydet': PolydetDataset,
-  'diskdet': PolydetDataset,
-  'gaussiandet': GaussiandetDataset,
   'ddd': DddDataset,
   'multi_pose': MultiPoseDataset
 }

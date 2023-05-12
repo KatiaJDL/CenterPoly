@@ -12,7 +12,6 @@ import glob
 
 import torch.utils.data as data
 
-
 class KITTIPOLY(data.Dataset):
     num_classes = 8
     # default_resolution = [384, 1280]
@@ -132,10 +131,11 @@ class KITTIPOLY(data.Dataset):
                     polygon_mask = Image.new('L', (w, h), 0)
                     ImageDraw.Draw(polygon_mask).polygon(poly_points, outline=0, fill=255)
                     polygon_mask = Image.fromarray(np.array(polygon_mask) * np.array(to_remove_mask))
-                    if score >= 0.5:
+                    if float(score) >= 0.5:
                         ImageDraw.Draw(to_remove_mask).polygon(poly_points, outline=0, fill=0)
                     polygon_mask.save(os.path.join(save_dir, mask_path))
 
+    
     def convert_eval_format(self, all_bboxes):
         # import pdb; pdb.set_trace()
         detections = []
@@ -165,7 +165,7 @@ class KITTIPOLY(data.Dataset):
 
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
+        if self.opt.task == 'polydet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
@@ -185,7 +185,7 @@ class KITTIPOLY(data.Dataset):
             coco_eval.evaluate()
             coco_eval.accumulate()
             coco_eval.summarize()
-        else:
+        elif self.opt.task == 'polydet':
             self.save_results(results, save_dir)
             res_dir = os.path.join(save_dir, 'results')
             if not os.path.exists(res_dir):

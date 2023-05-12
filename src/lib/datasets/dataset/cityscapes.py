@@ -19,7 +19,6 @@ from shapely.geometry import Polygon
 import wandb
 import matplotlib.pyplot as plt
 import seaborn as sns
-from models.losses import individual_gaussian
 
 DRAW = False
 
@@ -188,31 +187,6 @@ class CITYSCAPES(data.Dataset):
                         "category_id": int(category_id),
                         "disks": disks,
                         "r": r,
-                        "score": float("{:.2f}".format(score)),
-                        "depth": float(depth),
-                    }
-                    detections.append(detection)
-        return detections
-
-    def convert_gaussian_eval_format(self, all_bboxes):
-        # import pdb; pdb.set_trace()
-        detections = []
-        for image_id in all_bboxes:
-            for cls_ind in all_bboxes[image_id]:
-                if cls_ind == 'fg':
-                    continue
-                category_id = self._valid_ids[cls_ind - 1]
-                for bbox in all_bboxes[image_id][cls_ind]:
-                    score = bbox[4]
-                    depth = bbox[-1]
-                    label = self.class_name[cls_ind]
-                    centers = list(map(self._to_float, bbox[5:-2]))
-                    r = bbox[-2]
-                    detection = {
-                        "image_id": int(image_id),
-                        "category_id": int(category_id),
-                        "disks": centers,
-                        "radius": float(r),
                         "score": float("{:.2f}".format(score)),
                         "depth": float(depth),
                     }
@@ -419,12 +393,6 @@ class CITYSCAPES(data.Dataset):
         if self.opt.task == 'polydet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
-        elif self.opt.task =='diskdet':
-            json.dump(self.convert_disks_eval_format(results),
-                      open('{}/results.json'.format(save_dir), 'w'))
-        elif self.opt.task =='gaussiandet':
-            json.dump(self.convert_gaussian_eval_format(results),
-                      open('{}/results.json'.format(save_dir), 'w'))
         else:
             json.dump(self.convert_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
@@ -463,57 +431,4 @@ class CITYSCAPES(data.Dataset):
             #wandb.log({'AP': AP})
             return AP
             # return 0
-        elif self.opt.task == 'diskdet':
-            print('run eval diskdet')
-            self.save_results(results, save_dir)
-            #results = json.load(open('{}/results.json'.format(save_dir), 'r'))
 
-            #print('saved')
-            #print(results)
-            res_dir = os.path.join(save_dir, 'results')
-            if not os.path.exists(res_dir):
-                os.mkdir(res_dir)
-            to_delete = os.path.join(save_dir, 'results/*.txt')
-            files = glob.glob(to_delete)
-            for f in files:
-                os.remove(f)
-            to_delete = os.path.join(save_dir, 'results/*/*.png')
-            files = glob.glob(to_delete)
-            for f in files:
-                os.remove(f)
-            #print("format and write")
-            self.format_and_write_to_cityscapes_disks(results, res_dir)
-            os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
-            os.environ['CITYSCAPES_RESULTS'] = res_dir
-            #print("get AP")
-            from datasets.evaluation.cityscapesscripts.evaluation import evalInstanceLevelSemanticLabeling
-            AP = evalInstanceLevelSemanticLabeling.getAP()
-            #wandb.log({'AP': AP})
-            return AP
-        elif self.opt.task == 'gaussiandet':
-            print('run eval gaussiandet')
-            self.save_results(results, save_dir)
-            #results = json.load(open('{}/results.json'.format(save_dir), 'r'))
-
-            #print('saved')
-            #print(results)
-            res_dir = os.path.join(save_dir, 'results')
-            if not os.path.exists(res_dir):
-                os.mkdir(res_dir)
-            to_delete = os.path.join(save_dir, 'results/*.txt')
-            files = glob.glob(to_delete)
-            for f in files:
-                os.remove(f)
-            to_delete = os.path.join(save_dir, 'results/*/*.png')
-            files = glob.glob(to_delete)
-            for f in files:
-                os.remove(f)
-            #print("format and write")
-            self.format_and_write_to_cityscapes_gaussian(results, res_dir)
-            os.environ['CITYSCAPES_DATASET'] = '/store/datasets/cityscapes'
-            os.environ['CITYSCAPES_RESULTS'] = res_dir
-            #print("get AP")
-            from datasets.evaluation.cityscapesscripts.evaluation import evalInstanceLevelSemanticLabeling
-            AP = evalInstanceLevelSemanticLabeling.getAP()
-            #wandb.log({'AP': AP})
-            return AP

@@ -11,7 +11,7 @@ class opts(object):
     self.parser = argparse.ArgumentParser()
     # basic experiment setting
     self.parser.add_argument('task', default='ctdet',
-                             help='ctdet | ddd | multi_pose | exdet | polydet | diskdet')
+                             help='ctdet | ddd | multi_pose | exdet | polydet')
     self.parser.add_argument('--dataset', default='uav',
                              help='coco | kitti |kitti2d | coco_hp | pascal | uadetrac | uadetrac1on10 | uadetrac1on10_b| uav | cityscapes | IDD')
     self.parser.add_argument('--exp_id', default='default')
@@ -167,10 +167,6 @@ class opts(object):
                              help='polygon regression loss: l1 | iou | l1+iou | bce')
     self.parser.add_argument('--poly_order',  action='store_true',
                              help='polygon order loss')
-    self.parser.add_argument('--gaussian_loss', default='bce',
-                             help='gaussian disks loss: bce | dice')
-    self.parser.add_argument('--gaussian_ceiling', default='sigmoid',
-                             help='gaussian disks ceiling is 1: sigmoid | clamp | tanh')
 
     self.parser.add_argument('--elliptical_gt', action='store_true',
                              help='use elliptical gaussians to train '
@@ -245,16 +241,6 @@ class opts(object):
                                   'human joint heatmaps.')
     self.parser.add_argument('--not_reg_bbox', action='store_true',
                              help='not regression bounding box size.')
-    # gaussian det
-    self.parser.add_argument('--threshold', default=0.5,
-                             help='threshold for pixel selection in gaussian detection')
-    self.parser.add_argument('--r_variation', default='one',
-                             help='radius modalities for the circle: one'
-                                  ' two | four | all_different | composed')
-    self.parser.add_argument('--dp', default=0.0, 
-                            help='post-processing with douglas-peucker algorithm.'
-                                  'Value of epsilon.')
-
     # ground truth validation
     self.parser.add_argument('--eval_oracle_hm', action='store_true',
                              help='use ground center heatmap.')
@@ -402,23 +388,6 @@ class opts(object):
                    }
       if opt.reg_offset:
         opt.heads.update({'reg': 2})
-    elif opt.task == 'diskdet':
-      opt.heads = {'hm': opt.num_classes,
-                   'poly': opt.nbr_points*2 if not opt.cat_spec_poly else opt.nbr_points*2 * opt.num_classes,
-                   'pseudo_depth': 1,
-                   # 'fg': 1,
-                   # 'wh': 2 ,
-                   #'border_hm': 1,
-                   }
-    elif opt.task == 'gaussiandet':
-      opt.heads = {'hm': opt.num_classes,
-                  'centers': opt.nbr_points*2,
-                  'radius': opt.nbr_points,
-                  'pseudo_depth': 1,
-                  # 'fg': 1,
-                  # 'wh': 2 ,
-                  #'border_hm': 1,
-                  }
       if opt.r_variation == 'one':
         opt.heads.update({'radius': 1})
       elif opt.r_variation == 'two':
@@ -461,12 +430,6 @@ class opts(object):
                    'mean': [0.408, 0.447, 0.470], 'std': [0.289, 0.274, 0.278],
                    'dataset': 'uadetrac1on10'},
         'polydet': {'default_resolution': [512, 1024], 'num_classes': 8,
-                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
-                          'dataset': 'cityscapes'},
-        'gaussiandet': {'default_resolution': [512, 1024], 'num_classes': 8,
-                          'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
-                          'dataset': 'cityscapes_gaussian'},
-        'diskdet': {'default_resolution': [512, 1024], 'num_classes': 8,
                           'mean': [0.284, 0.323, 0.282], 'std': [0.04, 0.04, 0.04],
                           'dataset': 'cityscapes'},
         'ctdetMultiSpot': {'default_resolution': [1024, 2048], 'num_classes': 1,

@@ -12,7 +12,6 @@ import glob
 from multiprocessing import Pool
 from pycocotools.cocoeval import COCOeval
 
-
 class IDD(data.Dataset):
     num_classes = 9
     # default_resolution = [1024, 2048]
@@ -174,7 +173,7 @@ class IDD(data.Dataset):
         return self.num_samples
 
     def save_results(self, results, save_dir):
-        if self.opt.task == 'polydet' or self.opt.task == 'diskdet':
+        if self.opt.task == 'polydet':
             json.dump(self.convert_polygon_eval_format(results),
                       open('{}/results.json'.format(save_dir), 'w'))
         else:
@@ -194,7 +193,7 @@ class IDD(data.Dataset):
             coco_eval.evaluate()
             coco_eval.accumulate()
             coco_eval.summarize()
-        else:
+        elif self.opt.task == 'polydet':
             self.save_results(results, save_dir)
             res_dir = os.path.join(save_dir, 'results')
             if not os.path.exists(res_dir):

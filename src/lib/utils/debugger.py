@@ -43,7 +43,7 @@ class Debugger(object):
         (255, 0, 0), (0, 0, 255), (255, 0, 0), (0, 0, 255),
         (255, 0, 0), (0, 0, 255), (255, 0, 0), (0, 0, 255),
         (255, 0, 0), (0, 0, 255)]
-    elif num_classes == 8 or 'cityscapes_gaussian' in dataset:
+    elif num_classes == 8:
         self.names = cityscapes_class_name
     elif num_classes == 80 or dataset == 'coco':
       self.names = coco_class_name
@@ -210,31 +210,6 @@ class Debugger(object):
         cv2.line(self.imgs[img_id], (points[e[0], 0], points[e[0], 1]),
                       (points[e[1], 0], points[e[1], 1]), self.ec[j], 2,
                       lineType=cv2.LINE_AA)
-
-  def add_gaussiandet(self, centers, radius,  cat, conf=1, show_txt=True, img_id='default'):
-    bbox = np.array(centers, dtype=np.int32)
-    # cat = (int(cat) + 1) % 80
-    cat = int(cat)
-    # print('cat', cat, self.names[cat])
-    c = self.colors[cat][0][0].tolist()
-    if self.theme == 'white':
-      c = (255 - np.array(c)).tolist()
-    txt = '{}{:.1f}'.format(self.names[cat], conf)
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    cat_size = cv2.getTextSize(txt, font, 0.5, 2)[0]
-    centers = list(map(self._to_float, bbox))
-    centers = [(int(x), int(y)) for x, y in zip(centers[0::2], centers[1::2])]
-    print(centers)
-    radius = math.ceil(abs(radius))
-    print(radius)
-    for coord in centers:
-      cv2.circle(self.imgs[img_id], coord, radius, c, 2)
-    if show_txt:
-      cv2.rectangle(self.imgs[img_id],
-                    (bbox[0], bbox[1] - cat_size[1] - 2),
-                    (bbox[0] + cat_size[0], bbox[1] - 2), c, -1)
-      cv2.putText(self.imgs[img_id], txt, (bbox[0], bbox[1] - 2),
-                  font, 0.5, (0, 0, 0), thickness=1, lineType=cv2.LINE_AA)
 
   def add_polydet(self, vertices,  cat, conf=1, show_txt=True, img_id='default'):
     bbox = np.array(vertices, dtype=np.int32)
